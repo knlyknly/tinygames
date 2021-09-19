@@ -1,0 +1,34 @@
+.score {
+  margin: 10px;
+  font-size: 20px;
+}
+
+table.playground {
+  margin: 200px auto;
+  cursor: url(./chuizi1.png) 25 62, auto;
+}
+
+table.playground:active {
+  cursor: url(./chuizi2.png) 25 62, auto;
+}
+
+table.playground td {
+  border: 100px solid white;
+  background-color: green;
+}
+
+table.playground .hole {
+  width: 150px;
+  height: 175px;
+  background-image: url(./dishu.png);
+  background-size: auto 100%;
+  background-position: 0 0;
+}
+
+table.playground .not-hit {
+  background-position: -160 0;
+}
+
+table.playground .hit {
+  background-position: -290 0;
+}

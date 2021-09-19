@@ -1,0 +1,176 @@
+<html>
+
+<head>
+  <title>数字炸弹</title>
+  <script>
+
+    var ROWS = 10, COLS = 10;
+    var start, end, bomb, application, board, reset;
+
+    const resized = () => {
+      var { innerWidth: width, innerHeight: height } = window;
+      var fontSize = Math.floor(Math.min(width / (COLS + 4), height / (ROWS + 4)));
+      application.style.fontSize = fontSize + "px";
+    };
+
+    const choose = (choice) => () => {
+      var boooooomb = true;
+      if (choice > bomb) {
+        end = choice - 1;
+        boooooomb = false;
+      }
+      if (choice < bomb) {
+        start = choice + 1;
+        boooooomb = false;
+      }
+      update(boooooomb);
+    };
+
+    const update = (boooooomb) => {
+      balance.innerHTML = `Remains: ${end - start + 1}`;
+      var rows = Array.prototype.slice.call(board.children);
+      rows.forEach((row, r) => {
+        var cells = Array.prototype.slice.call(row.children);
+        cells.forEach((cell, c) => {
+          var index = r * COLS + c;
+          cell.onclick = null;
+          if (index >= start && index <= end) {
+            cell.className = "active";
+            if (boooooomb && index === bomb) {
+              cell.className = "boooooomb";
+            } else {
+              cell.onclick = choose(index);
+            }
+          } else {
+            cell.className = "deactive";
+          }
+        });
+      });
+    };
+
+    window.addEventListener("resize", resized);
+
+    window.onload = function () {
+      application = document.getElementsByClassName("application")[0];
+      application.style.width = `${COLS + 2}em`;
+      application.style.height = `${ROWS + 2}em`;
+      board = document.getElementsByClassName("board")[0];
+      reset = document.getElementsByClassName("reset")[0];
+      balance = document.getElementsByClassName("balance")[0];
+      reset.onclick = () => {
+        start = 0;
+        end = COLS * ROWS - 1;
+        bomb = Math.floor(Math.random() * COLS * ROWS);
+        board.innerHTML = "";
+        Array(ROWS).fill().forEach((v, r) => {
+          var row = document.createElement("div");
+          board.appendChild(row);
+          Array(COLS).fill().forEach((v, c) => {
+            var cell = document.createElement("div");
+            var index = r * COLS + c;
+            cell.innerHTML = `${index}`;
+            row.appendChild(cell);
+          });
+        });
+        update(false);
+      };
+      resized();
+      reset.onclick();
+    };
+
+  </script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .application {
+      position: relative;
+      margin: 1em;
+      box-shadow: 0px 0px 10px #ccc;
+    }
+
+    .reset {
+      position: absolute;
+      font-size: 0.5em;
+      top: 0.2em;
+      right: 0.2em;
+      width: 1.6em;
+      height: 1.6em;
+      line-height: 1.6em;
+      text-align: center;
+      border-radius: 50%;
+      background: orange;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .balance {
+      position: absolute;
+      font-size: 0.5em;
+      bottom: 0.2em;
+      left: 2em;
+      height: 1.6em;
+      line-height: 1.6em;
+      z-index: 1;
+      text-shadow: 2px white;
+    }
+
+    .reset:hover {
+      opacity: 0.8;
+    }
+
+    .board {
+      position: absolute;
+      left: 1em;
+      right: 1em;
+      top: 1em;
+      bottom: 1em;
+      background: #ccc;
+    }
+
+    .board>div>div {
+      display: inline-block;
+      font-size: 0.5em;
+      margin: 0.2em;
+      width: 1.6em;
+      height: 1.6em;
+      line-height: 1.6em;
+      text-align: center;
+      background: white;
+      transition-property: transform background;
+      transition-duration: 0.3s;
+      transition-timing-function: ease-out;
+      user-select: none;
+    }
+
+    .board>div>div.deactive {
+      visibility: hidden;
+    }
+
+    .board>div>div.active:hover {
+      background: #00bab0;
+    }
+
+    .board>div>div.active:active {
+      opacity: 0.7;
+    }
+
+    .board>div>div.boooooomb {
+      background: red;
+      transform: rotate(780deg) scale(30);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="application">
+    <div class="reset" title="Reset">R</div>
+    <div class="balance"></div>
+    <div class="board"></div>
+  </div>
+</body>
+
+</html>
