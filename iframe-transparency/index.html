@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html {
+        background: transparent;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        background: transparent;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .inner {
+        width: 50%;
+        height: 50%;
+        background: orange;
+        margin: 25%;
+      }
+      #ifr {
+        border: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 50%;
+        height: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="inner"></div>
+    <iframe id="ifr" src="./inner.html"></iframe>
+  </body>
+</html>
