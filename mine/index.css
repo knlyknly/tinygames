@@ -15,7 +15,10 @@
 
 .board td {
   text-align: center;
-  border-width: 0px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #f0f0f0;
+  padding: 0;
   cursor: default;
 }
 
