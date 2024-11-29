@@ -150,10 +150,15 @@ const mark = (board, row, col) => {
   const tbody = document.querySelector('#board tbody');
   const tr = tbody.children[row];
   const td = tr.children[col];
-  item.marked = !item.marked;
+  item.marked = item.marked === null ? false : item.marked === true ? null : true;
   if (item.marked) {
+    td.classList.remove('questioned');
     td.classList.add('marked');
+  } else if (item.marked === null) {
+    td.classList.add('questioned');
+    td.classList.remove('marked');
   } else {
+    td.classList.remove('questioned');
     td.classList.remove('marked');
   }
   // final check if completed

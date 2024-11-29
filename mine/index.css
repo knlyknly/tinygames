@@ -47,6 +47,19 @@
   color: black;
 }
 
+.board:not(.fail) td.questioned .icon:after {
+  content: '?';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  color: black;
+}
+
 .board.cheat td:not(.detected) .icon {
   color: black !important;
   opacity: .2;
