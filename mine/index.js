@@ -164,6 +164,13 @@ const mark = (board, row, col) => {
   // final check if completed
   if (checkSuccess(board)) {
     panel.classList.add('success');
+    Array.prototype.slice.apply(tbody.children).forEach(tr => {
+      Array.prototype.slice.apply(tr.children).forEach(td => {
+        if (!td.classList.contains('mine')) {
+          td.classList.add('detected');
+        }
+      })
+    });
   }
 }
 
