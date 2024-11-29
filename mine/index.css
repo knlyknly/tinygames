@@ -3,6 +3,11 @@
   pointer-events: none;
 }
 
+.board.success {
+  background-color: #f0fff0;
+  pointer-events: none;
+}
+
 .board table {
   border-collapse: collapse;
   user-select: none;

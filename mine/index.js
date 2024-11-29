@@ -68,6 +68,7 @@ const createBoard = () => {
 const clearTable = () => {
   const panel = document.querySelector('#board');
   panel.classList.remove('fail');
+  panel.classList.remove('success');
   const children = Array.prototype.slice.apply(document.querySelector('#board tbody').children);
   children.forEach(item => item.parentNode.removeChild(item))
 }
@@ -91,10 +92,7 @@ const createTable = (board) => {
         evt.stopPropagation();
         evt.preventDefault();
       })
-      td.addEventListener('dblclick', (evt) => {
-        autoDetect(board, i, j);
-      })
-      if(item.isMine) {
+      if (item.isMine) {
         td.classList.add('mine');
       }
       tr.appendChild(td);
@@ -134,9 +132,18 @@ const detect = (board, row, col) => {
   }
 }
 
+const checkSuccess = (board) => {
+  return board.reduce((allMatch, row) => {
+    return allMatch && row.reduce((rowMatch, item) => {
+      return rowMatch && (item.isMine && item.marked || !item.isMine && !item.marked);
+    }, true);
+  }, true);
+}
+
 const mark = (board, row, col) => {
   const item = board[row] ? board[row][col] : null;
   if (!item || item.detected) {
+    autoDetect(board, row, col);
     return;
   }
   const panel = document.querySelector('#board');
@@ -148,6 +155,10 @@ const mark = (board, row, col) => {
     td.classList.add('marked');
   } else {
     td.classList.remove('marked');
+  }
+  // final check if completed
+  if (checkSuccess(board)) {
+    panel.classList.add('success');
   }
 }
 
@@ -182,28 +193,10 @@ const autoDetect = (board, row, col) => {
   }
 }
 
-const updateTable = (board) => {
-  const tbody = document.querySelector('#board tbody');
-  const [rows, cols] = [board.length, board[0]?.length];
-  for (let i = 0; i < rows; i++) {
-    const tr = tbody.children[i];
-    for (let j = 0; j < cols; j++) {
-      const item = board[i][j];
-      const td = tr.children[j];
-      if (item.detected) {
-        td.classList.add('detected');
-      } else {
-        td.classList.remove('detected');
-      }
-    }
-  }
-}
-
 const start = () => {
   clearTable();
   const board = createBoard();
   createTable(board);
-  updateTable(board);
 }
 
 const cheat = () => {
