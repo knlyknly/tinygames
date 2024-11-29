@@ -168,6 +168,7 @@ const mark = (board, row, col) => {
       Array.prototype.slice.apply(tr.children).forEach(td => {
         if (!td.classList.contains('mine')) {
           td.classList.add('detected');
+          td.classList.remove('questioned');
         }
       })
     });
