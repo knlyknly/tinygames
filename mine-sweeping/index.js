@@ -41,7 +41,7 @@ const makeNewBoard = (rows, cols, danger) => {
       if (board[i][j] === -1) {
         board[i][j] = {
           isMine: true,
-          displayText: '𖤐',
+          displayText: ' ',
           detected: false,
           marked: false,
         };
@@ -62,7 +62,7 @@ const makeNewBoard = (rows, cols, danger) => {
 const createBoard = () => {
   const rows = document.querySelector('#rowsInput').value;
   const cols = document.querySelector('#colsInput').value;
-  return makeNewBoard(rows, cols, 18);
+  return makeNewBoard(rows, cols, 16);
 }
 
 const clearTable = () => {
@@ -93,7 +93,7 @@ const createTable = (board) => {
         evt.preventDefault();
       })
       if (item.isMine) {
-        td.classList.add('mine');
+        td.classList.add('is-mine');
       }
       tr.appendChild(td);
       const icon = document.createElement('div');
@@ -166,7 +166,7 @@ const mark = (board, row, col) => {
     panel.classList.add('success');
     Array.prototype.slice.apply(tbody.children).forEach(tr => {
       Array.prototype.slice.apply(tr.children).forEach(td => {
-        if (!td.classList.contains('mine')) {
+        if (!td.classList.contains('is-mine')) {
           td.classList.add('detected');
           td.classList.remove('questioned');
         }
@@ -224,4 +224,5 @@ const cheat = () => {
 window.addEventListener('load', () => {
   document.querySelector('#startButton').addEventListener('click', start);
   document.querySelector('#cheatButton').addEventListener('click', cheat);
+  start();
 })

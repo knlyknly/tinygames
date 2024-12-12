@@ -38,7 +38,7 @@
 }
 
 .board:not(.fail) td.marked .icon:after {
-  content: '!';
+  content: ' ';
   display: block;
   position: absolute;
   left: 0;
@@ -48,6 +48,8 @@
   line-height: 1.5rem;
   text-align: center;
   color: black;
+  background-image: url(./flag.png);
+  background-size: 100%;
 }
 
 .board:not(.fail) td.questioned .icon:after {
@@ -68,11 +70,12 @@
   opacity: .2;
 }
 
-.board.fail td.mine .icon {
-  color: black;
+.board.fail td.is-mine .icon {
+  background-image: url(./mine.png);
+  background-size: 100%;
 }
 
 .board.fail td.choosed .icon {
-  background: black;
-  color: red;
+  background-color: white;
+  filter: invert();
 }
