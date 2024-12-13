@@ -37,7 +37,7 @@
   border-color: #fff #ccc #ccc #fff;
 }
 
-.board:not(.fail) td.marked .icon:after {
+.board td.marked .icon:after {
   content: ' ';
   display: block;
   position: absolute;
@@ -50,6 +50,10 @@
   color: black;
   background-image: url(./flag.png);
   background-size: 100%;
+}
+
+.board.fail td.marked:not(.is-mine) .icon {
+  background-color: #ffafaf;
 }
 
 .board:not(.fail) td.questioned .icon:after {
@@ -75,7 +79,12 @@
   background-size: 100%;
 }
 
+.board.cheat td.is-mine .icon {
+  background-image: url(./mine.png);
+  background-size: 100%;
+  opacity: .2;
+}
+
 .board.fail td.choosed .icon {
-  background-color: white;
-  filter: invert();
+  background-color: #ffafaf;
 }
