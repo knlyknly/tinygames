@@ -1,0 +1,64 @@
+@keyframes rowblinking {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.tetris {
+  border: 1px solid black;
+  padding: 1em;
+  display: flex;
+  align-items: flex-start;
+}
+
+.tetris .stack-container {
+  min-width: 1em;
+  min-height: 1em;
+  border: 1px solid black;
+}
+
+.tetris .stack-panel {
+  display: block;
+}
+
+.tetris .stack-panel .row {
+  height: 1em;
+  overflow: hidden;
+  white-space: no-wrap;
+  transition-property: height;
+  transition-duration: .15s;
+  transition-timing-function: linear;
+}
+
+.tetris .stack-panel .row.blinking {
+  animation: rowblinking .1s linear;
+  animation-iteration-count: infinite;
+}
+
+.tetris .stack-panel .row.dismissing {
+  height: 0px !important;
+}
+
+
+
+.tetris .stack-panel .row > div {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 1px solid #777777;
+}
+
+.tetris .stack-panel .row > div.brick {
+  border-color: #ffffff;
+  background-color: black;
+}
+
+.tetris .sidebar-container {
+  padding: 0 1em;
+}
