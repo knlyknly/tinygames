@@ -87,11 +87,11 @@ export class TetrisView {
         });
       });
       // draw preparing
-      preparing.form.forEach((rowModel, y) => {
-        const rowView = preparingRows[y];
+      preparingRows.forEach((rowView, y) => {
+        const rowModel = preparing.form[y];
         const cellViews = Array.prototype.slice.apply(rowView.children);
-        rowModel.forEach((cellModel, x) => {
-          const cellView = cellViews[x];
+        cellViews.forEach((cellView, x) => {
+          const cellModel = rowModel ? rowModel[x] : 0;
           // draw stack bricks
           cellView.classList.remove('brick');
           if (cellModel) {

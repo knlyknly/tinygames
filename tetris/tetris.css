@@ -62,3 +62,26 @@
 .tetris .sidebar-container {
   padding: 0 1em;
 }
+
+.tetris .preparing-panel {
+  display: block;
+  padding: 1em;
+}
+
+.tetris .preparing-panel .row {
+  height: 1em;
+  overflow: hidden;
+  white-space: no-wrap;
+}
+
+.tetris .preparing-panel .row > div {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 1px solid #777777;
+}
+
+.tetris .preparing-panel .row > div.brick {
+  border-color: #ffffff;
+  background-color: black;
+}
