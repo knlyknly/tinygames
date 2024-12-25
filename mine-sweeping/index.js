@@ -8,6 +8,11 @@ const makeNewBoard = (rows, cols, danger) => {
     let row = [];
     board[i] = row;
     for (let j = 0; j < cols; j++) {
+      // make corners always not mine
+      if ((i === 0 || i === rows - 1) && (j === 0 || j === cols - 1)) {
+        row[j] = 0;
+        continue;
+      }
       let isMine = Math.random() * 100 < danger;
       row[j] = isMine ? -1 : 0;
     }
