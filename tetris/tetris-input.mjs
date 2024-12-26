@@ -1,5 +1,5 @@
 import { Action } from './tetris-model.mjs';
-import { Dispatcher } from './dispatcher.mjs';
+import { Dispatcher } from '../_tools/dispatcher.mjs';
 
 export class TetrisTimerActionProvider extends Dispatcher {
   static INTERVAL_1 = 500;

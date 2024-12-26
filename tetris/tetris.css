@@ -51,7 +51,7 @@
   display: inline-block;
   width: 1em;
   height: 1em;
-  border: 1px solid #777777;
+  border: 1px solid #f0f0f0;
 }
 
 .tetris .stack-panel .row > div.brick {
