@@ -184,8 +184,9 @@ export const stringify = (ast) => {
       return ['(', ...ast.children.map(stringify), ')'].join('');
     case 'property':
       return ast.children.map(stringify).join('');
-    case 'token':
     case 'value':
+      return `[${ast.value}]`;
+    case 'token':
     case 'whitechar':
       return ast.value;
   }

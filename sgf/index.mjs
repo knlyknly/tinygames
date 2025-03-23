@@ -74,3 +74,5 @@ console.log(yaml.dump(ast));
 
 const backtext = stringify(ast);
 console.log(backtext===text?'match':'mismatch');
+console.log(text);
+console.log(backtext);
