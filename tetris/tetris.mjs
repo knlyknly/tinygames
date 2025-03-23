@@ -25,7 +25,7 @@ export class Tetris {
   removeActionProvider = (provider) => {
     const index = this.actionProviders.findIndex((v) => v === provider);
     if (index >= 0) {
-      provider.removeEventListener('action', this.handleAction);
+      provider.removeListener('action', this.handleAction);
       this.actionProviders.splice(index, 1);
     }
   };

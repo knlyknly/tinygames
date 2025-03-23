@@ -147,3 +147,27 @@ export class TetrisKeyboardInputActionProvider extends Dispatcher {
     }
   };
 }
+
+export class TetrisJoystickActionProvider extends Dispatcher {
+
+  toggle = (enable) => {
+    if (enable === undefined) {
+      this.toggle(!this.enable);
+      return;
+    }
+    if (enable) {
+      if (this._timer) {
+        return;
+      }
+      this._timer = setTimeout(this._trigger, this._interval - this._elapsed);
+    } else {
+      if (!this._timer) {
+        return;
+      }
+      const elapsed = this._trigger ? new Date().getTime() - this._triggered.getTime() : 0;
+      this._elapsed = 0 <= elapsed && elapsed < this._interval ? elapsed : 0;
+      clearTimeout(this._timer);
+      this._timer = null;
+    }
+  };
+}

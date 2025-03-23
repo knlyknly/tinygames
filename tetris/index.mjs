@@ -9,6 +9,7 @@ window.addEventListener('load', () => {
 const restart = (() => {
   const inputActionProvider = new TetrisKeyboardInputActionProvider(KeyMaps.Keyboard1);
   const timerActionProvider = new TetrisTimerActionProvider();
+  const joystickActionProvider = new TetrisJoystickActionProvider(KeyMaps.Joystick1);
   let tetris;
   return () => {
     const height = document.querySelector('#rowsInput').value * 1;

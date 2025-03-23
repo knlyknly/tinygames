@@ -1,6 +1,12 @@
 const MOUSE_BUTTON_LEFT = 0;
 const MOUSE_BUTTON_RIGHT = 2;
 
+const recorder = () => {
+  return {
+
+  };
+}
+
 const makeNewBoard = (rows, cols, danger) => {
   const board = [];
   // step 1: randomize all mines
@@ -111,7 +117,7 @@ const createTable = (board) => {
 
 const detect = (board, row, col) => {
   const item = board[row] ? board[row][col] : null;
-  if (!item || item.detected || item.marked) {
+  if (!item || item.detected || item.marked !== false) {
     return;
   }
   const panel = document.querySelector('#board');
@@ -190,7 +196,7 @@ const autoDetect = (board, row, col) => {
     if (i < 0 || j < 0 || i >= rows || j >= cols) {
       return 0;
     }
-    return board[i][j].marked ? 1 : 0;
+    return board[i][j].marked !== false ? 1 : 0;
   }
   const markCount = [-1, 0, 1].reduce(
     (sum, offsetRow) =>
