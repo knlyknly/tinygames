@@ -2,8 +2,15 @@ import { parse, stringify, TYPES } from "./parser-ast.mjs";
 
 const identity = v => v;
 
-const pathy = (target, path, value) => {
+const pathy = (target, path, ...values) => {
   const keys = path.split('.');
+  if (values.length === 0) {
+    while (keys.length) {
+      if (!target) return undefined;
+      target = target[keys.shift()];
+    }
+    return target;
+  }
   while (keys.length > 1) {
     const key = keys.shift();
     if (!target[key]) {
@@ -11,11 +18,8 @@ const pathy = (target, path, value) => {
     }
     target = target[key];
   }
-  if (arguments.length === 2) {
-    return target[keys[0]];
-  }
-  target[keys[0]] = value;
-  return value;
+  target[keys[0]] = values[0];
+  return values[0];
 };
 
 const pointsFromSgf = (() => {
@@ -26,7 +30,7 @@ const pointsFromSgf = (() => {
     1 + c.charCodeAt(0) - 'a'.charCodeAt(0);
   return (v) => {
     if (isPoint.test(v)) {
-      return v.split('').map(idx);
+      return [v.split('').map(idx)];
     }
     if (isArea.test(v)) {
       const [x1, y1, _, x2, y2] = v.split('').map(idx);
@@ -102,42 +106,36 @@ export const GoMeta = {
   AP: {
     path: 'additionalInfo.application',
     comment: 'the application which generated this game file',
-    defaultValue: 'uztez/sgf4',
     parse: identity,
     stringify: identity,
   },
   SZ: {
     path: 'size',
     comment: 'the size of the game board',
-    defaultValue: '19',
     parse: identity,
     stringify: identity,
   },
   PB: {
     path: 'matchInfo.blackPlayer.name',
     comment: 'name of black player',
-    defaultValue: 'B',
     parse: identity,
     stringify: identity,
   },
   PW: {
     path: 'matchInfo.whitePlayer.name',
     comment: 'name of white player',
-    defaultValue: 'W',
     parse: identity,
     stringify: identity,
   },
   BR: {
     path: 'matchInfo.blackPlayer.rank',
     comment: 'rank of black player',
-    defaultValue: '',
     parse: identity,
     stringify: identity,
   },
   WR: {
     path: 'matchInfo.whitePlayer.rank',
     comment: 'rank of white player',
-    defaultValue: '',
     parse: identity,
     stringify: identity,
   },
@@ -255,75 +253,101 @@ export const GoMeta = {
   },
 }
 
-export class GameInfo {
-  size = [19, 19];
-  rule = {
-    name: 'Chinese',
-    komidash: 0,
-    handicap: 0,
-    timeLimit: null,
-  };
-  matchInfo = {
-    date: null,
-    blackPlayer: {
-      name: '黑方玩家',
-      rank: '1级'
-    },
-    whitePlayer: {
-      name: '白方玩家',
-      rank: '1级'
-    },
-    result: '0',
-    name: '',
-  };
-  additionalInfo = {
-    gameMode: 1, // 1: GO
-  };
-}
-
-export class GameModel {
-  gameInfo;
-  gamePreset;
-  gameBranches;
-}
-
-export class SgfStep {
-  position = [-1, -1];
-  comment;
-  branches;
-}
-
 export class SgfModel {
 
+  ast;
   replays;
 
   constructor(text) {
     const ast = parse(text);
-    this.games = ast.map(this._loadGameAst);
+    this.ast = ast;
+    this.replays = ast.map(group => this._buildReplay(group));
   }
 
   toString = () => {
     const ast = this.replays.map(replay => {
-      let segment = { type: TYPES.segment, children: [] };
-      const group = { type: TYPES.group, children: [segment], };
-      Object.entries(([token, { path, stringify }]) => {
-        const pathed = pathy(replay[0]);
-        const value = stringify ? stringify(pathed) : pathed;
-
-      });
+      const group = { type: TYPES.group, children: [], };
+      this._applyAstReplay(group, replay, true);
+      return group;
     });
     return stringify(ast);
+  }
+
+  _applyAstReplay = (group, replay, isRootGroup = false) => {
+    for (let i = 0; i < replay.length; i++) {
+      const segment = { type: TYPES.segment, children: [] };
+      const step = replay[i];
+      this._applyAstStep(segment, step, isRootGroup && i === 0);
+      group.children.push(segment);
+    }
+  };
+
+  _applyAstStep = (segment, step, isMetaSegment = false) => {
+    if (isMetaSegment) {
+      // save tokens
+      Object.entries(GoMeta).forEach(([token, meta]) => {
+        const { path, stringify } = meta;
+        const pathed = pathy(step, path);
+        if (pathed === undefined) return;
+        const value = stringify ? stringify(pathed) : pathed;
+        segment.children.push({
+          type: TYPES.property,
+          children: [
+            { type: TYPES.token, value: token },
+            { type: TYPES.value, value },
+          ],
+        });
+      });
+      // save unknown tokens
+      Object.entries(step.unknown || {}).forEach(([token, value]) => {
+        segment.children.push({
+          type: TYPES.property,
+          children: [
+            { type: TYPES.token, value: token },
+            { type: TYPES.value, value },
+          ],
+        });
+      });
+    }
+    // save AW&AB or W/B
+    (step.initialState || step.state || []).forEach(({ player, point }) => {
+      const value = pointsToSgf([point]);
+      segment.children.push({
+        type: TYPES.property,
+        children: [
+          { type: TYPES.token, value: `${step.initialState ? 'A' : ''}${player}` },
+          { type: TYPES.value, value },
+        ],
+      });
+    });
+    // save comment
+    if (step.comment) {
+      segment.children.push({
+        type: TYPES.property,
+        children: [
+          { type: TYPES.token, value: `C` },
+          { type: TYPES.value, value: step.comment },
+        ],
+      });
+    }
+    // save branches
+    (step.branches || []).forEach(branch => {
+      const group = { type: TYPES.group, children: [], };
+      this._applyAstReplay(group, branch);
+      segment.children.push(group);
+    });
   }
 
   _flattenAst = ast => {
     if (!ast.children) {
       return [];
     }
-    return ast.children.reduce((items, item) => [...items, item.type === TYPES.property || item.type === TYPES.group ? item : this._flattenProperties(item)], [])
+    return ast.children.reduce((items, item) => [...items, ...(item.type === TYPES.property || item.type === TYPES.group ? [item] : this._flattenAst(item))], [])
   };
 
   _buildReplay = (ast, isRoot = true) => {
-    return this._flattenAst(ast).reduce((replay, entry) => {
+    const flatten = this._flattenAst(ast);
+    return flatten.reduce((replay, entry) => {
       const previousStep = replay[replay.length - 1];
       if (entry.type === TYPES.group) {
         if (!previousStep.branches) {
@@ -336,8 +360,10 @@ export class SgfModel {
           switch (subentry.type) {
             case TYPES.token:
               token = subentry.value;
+              break;
             case TYPES.value:
               values.push(subentry.value);
+              break;
             default:
             // ignore
           }
@@ -357,7 +383,8 @@ export class SgfModel {
           throw new SyntaxError(`Property '${token}' should placed before all W/B`);
         }
         values.forEach(value => {
-          pointsFromSgf(value).forEach(point => {
+          const points = pointsFromSgf(value);
+          points.forEach(point => {
             if (!previousStep.initialState) {
               previousStep.initialState = [];
             }
@@ -382,6 +409,7 @@ export class SgfModel {
             });
           });
         });
+        replay.push(step);
         break;
       case 'C':
         values.forEach(value => {
@@ -396,7 +424,7 @@ export class SgfModel {
         if (previousStep !== replay[0] || previousStep.initialState) {
           throw new SyntaxError(`Property '${token}' should placed before all AW/AB/W/B`);
         }
-        const meta = GoMeta[token];
+        let meta = GoMeta[token];
         if (!meta) {
           // unknown meta
           meta = {
