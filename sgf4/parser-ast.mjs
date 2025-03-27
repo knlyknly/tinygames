@@ -1,4 +1,4 @@
-const TYPES = 'root,segment,group,property,token,value,whitechar'.split(',').reduce((m, v) => ({ ...m, [v]: v }), {});
+export const TYPES = 'root,segment,group,property,token,value,whitechar'.split(',').reduce((m, v) => ({ ...m, [v]: v }), {});
 export const parse = (text) => {
   const stack = [{ type: TYPES.root, children: [] }];
   const categorize = (c) => {
@@ -60,7 +60,7 @@ export const parse = (text) => {
           case ';':
             return ['property.end', 'segment.end', 'segment.start'];
           case '(':
-            return ['group.start'];
+            return ['property.end', 'group.start'];
           case ')':
             return ['property.end', 'segment.end', 'group.end'];
           case '[':

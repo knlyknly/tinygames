@@ -40,3 +40,5 @@ export class Dispatcher {
     dispatcherize(this);
   }
 }
+
+export default Dispatcher;
