@@ -1,0 +1,10 @@
+$extend: laml.ui.Element
+children:
+  - attributes.class: laml-row
+    children:
+      - attributes.class: $(string-append "laml-width-percent-" 30)
+        children:
+          - $type: sgf4.views.treeview
+      - attributes.class: $(string-append "laml-width-percent-" 30)
+        children:
+          - $type: sgf4.views.board

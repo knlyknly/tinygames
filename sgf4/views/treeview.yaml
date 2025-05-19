@@ -1,0 +1,8 @@
+$extend: laml.ui.Element
+defaultChildType: sgf4.views.treenode
+replays: []
+attributes.style:
+    overflow-y: auto
+children:
+  - $iterate: $(ref "replays")
+    data: $(iterate)

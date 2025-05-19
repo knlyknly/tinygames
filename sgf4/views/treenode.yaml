@@ -1,0 +1,21 @@
+$extend: laml.ui.Element
+label: ''
+depth: 0
+data: []
+children:
+  - attributes.class: sgf4-tree-label-row
+    children:
+      - attributes.class: sgf4-tree-expand-icon
+        events:
+          click: $(lambda () (set! expanded (not expanded)))
+      - attributes.class: sgf4-tree-label
+        children: $(ref "label")
+  - attributes.class: sgf4-tree-expand-content
+    children:
+      - attributes.class: sgf4-tree-indentation
+      - $iterate: $(ref "data")
+        $type: sgf4.views.treenode
+        data: $(iterate)
+        depth: $(+ 1 (ref "depth" (iterate.parent)))
+        attributes.class: $(if (even? depth) "sgf4-tree-step" "sgf4-tree-branch")
+        label: $(string-append (if (even? depth) "Step " "Branch ") (iterate.order))

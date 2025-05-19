@@ -1,0 +1,1 @@
+export default str => str.replace(/-\w/g, c => c.charAt(1).toUpperCase());
