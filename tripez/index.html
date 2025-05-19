@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tripez</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/blueimp-md5/2.19.0/js/md5.min.js"
+    type="application/javascript"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABd1oqRKn4SFLs5sw0nBltqI9bvebHhMk&v=alpha&libraries=maps3d,marker"></script>
+  <script type="module" src="./index.mjs" charset="utf-8"></script>
+  <link rel="stylesheet" href="index.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://esm.run/@material/web/"
+      }
+    }
+  </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+    import { styles as brandedFabStyles } from '@material/web/fab/internal/'
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+</head>
+
+<body>
+  <div class="fullpage">
+    <div id="map-container"></div>
+
+    <md-branded-fab size="small" aria-label="Add">
+      <svg slot="icon" viewBox="0 0 36 36">
+        <path fill="#34A853" d="M16 16v14h4V20z"></path>
+        <path fill="#4285F4" d="M30 16H20l-4 4h14z"></path>
+        <path fill="#FBBC05" d="M6 16v4h10l4-4z"></path>
+        <path fill="#EA4335" d="M20 16V6h-4v14z"></path>
+        <path fill="none" d="M0 0h36v36H0z"></path>
+      </svg>
+    </md-branded-fab>
+
+    <md-dialog open>
+      <div slot="headline">
+        Dialog title
+      </div>
+      <form slot="content" id="form-id" method="dialog">
+        A simple dialog with free-form content.
+      </form>
+      <div slot="actions">
+        <md-text-button form="form-id">Ok</md-text-button>
+      </div>
+    </md-dialog>
+  </div>
+</body>
+
+</html>
