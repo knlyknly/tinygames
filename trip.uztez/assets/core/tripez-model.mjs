@@ -1,78 +1,62 @@
-const toMapPointMarkString = (mp) => `⩘ ${mp.altitude} ◑ ${mp.longitude} ◒ ${mp.latitude}`;
+/**
+ * @typedef {Object} Location
+ * @property {number} id - 唯一标识符
+ * @property {string} name - 地点名称
+ * @property {number|null} altitude - 海拔高度
+ * @property {string[]} additionDescriptions - 附加描述
+ * @property {string[]} labels - 标签
+ * @property {number[]} destinations - 目的地ID列表
+ */
 
-export class Label {
-  type;
-  key;
-  static of = ({ type, key }) => new Label({ type, key });
-  constructor({ type, key }) {
-    Object.assign(this, { type, key });
+/**
+ * @typedef {Object} Destination
+ * @property {number} id - 唯一标识符
+ * @property {string} name - 目的地名称
+ * @property {string|null} direction - 方向
+ * @property {number|null} distance - 距离
+ */
+
+/**
+ * @typedef {Object} Route
+ * @property {number} id - 唯一标识符
+ * @property {string} name - 路线名称
+ * @property {string} startPlaceName - 起点名称
+ * @property {string|null} endLocationName - 终点名称
+ * @property {number} distance - 距离
+ * @property {number} durationForward - 正向耗时
+ * @property {number} durationBackward - 反向耗时
+ */
+
+/**
+ * @typedef {Object} ScheduleDay
+ * @property {number} id - 唯一标识符
+ * @property {number} order - 顺序
+ * @property {string} date - 日期
+ * @property {number[]} scheduleStopIds - 停留点ID列表
+ * @property {number[]} scheduleRouteIds - 路线ID列表
+ */
+
+/**
+ * @typedef {Object} ScheduleItem
+ * @property {number} id - 唯一标识符
+ * @property {number} order - 顺序
+ * @property {string|null} time - 时间
+ * @property {number|null} locationId - 地点ID
+ * @property {number|null} routeId - 路线ID
+ * @property {number|null} destinationId - 目的地ID
+ * @property {string|null} description - 描述
+ * @property {number|null} stayTime - 停留时间
+ */
+
+// 数据模型类
+export class TripModel {
+  constructor() {
+    this.locations = []; // Location[]
+    this.destinations = []; // Destination[]
+    this.routes = []; // Route[]
+    this.scheduleDays = []; // ScheduleDay[]
+    this.scheduleItems = []; // ScheduleItem[]
   }
 }
 
-export class MapPoint {
-  altitude;
-  longitude;
-  latitude;
-  static of = ({ altitude, longitude, latitude }) => new MapPoint({ altitude, longitude, latitude });
-  constructor({ altitude, longitude, latitude }) {
-    Object.assign(this, { altitude, longitude, latitude, id: md5(toMapPointMarkString(this)) });
-  }
-  toMarkString = () => toMapPointMarkString(this);
-}
-
-export class Node {
-  id;
-  position;
-  name;
-  description;
-  labels = [];
-  links = [];
-}
-
-export class Link {
-  id;
-  name;
-  idNodeStart;
-  idNodeEnd;
-  nodeStart;
-  nodeEnd;
-  description;
-  distance;
-  roadType;
-  elapseForward;
-  elapseBackward;
-}
-
-export class TripPlan {
-  id;
-  name;
-  dateStart;
-  dateEnd;
-  stayPlans = [];
-  dayPlanSequence = [];
-}
-
-export class DayPlan {
-  id;
-  idTripPlan;
-  tripPlan;
-  order;
-  description;
-  stayPlanSequence = [];
-}
-
-export class StayPlan {
-  id;
-  idNode;
-  elapseStay;
-  description;
-  expectedTimeInterval; // for example, peaks or beaches may have sunrise/sunset.
-  expectedDatetimeInterval; // for example, the sun/moon position on special date/time.
-}
-
-export class ActivityPlan {
-  id;
-  name;
-  description;
-  stayPlans = [];
-}
+export default TripModel;
