@@ -11,6 +11,7 @@ export const dispatcherize = (target) => {
       if (index < 0) {
         list.push(listener);
       }
+      return { release: () => target.removeListener(key, listener) };
     },
     removeListener: (key, listener) => {
       let list = listeners[key];
@@ -33,7 +34,7 @@ export const dispatcherize = (target) => {
       }
     },
   });
-}
+};
 
 export class Dispatcher {
   constructor() {
@@ -41,4 +42,4 @@ export class Dispatcher {
   }
 }
 
-export default Dispatcher;
+export default dispatcherize;

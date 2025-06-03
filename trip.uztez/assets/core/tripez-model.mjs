@@ -28,3 +28,51 @@ export class Node {
   labels = [];
   links = [];
 }
+
+export class Link {
+  id;
+  name;
+  idNodeStart;
+  idNodeEnd;
+  nodeStart;
+  nodeEnd;
+  description;
+  distance;
+  roadType;
+  elapseForward;
+  elapseBackward;
+}
+
+export class TripPlan {
+  id;
+  name;
+  dateStart;
+  dateEnd;
+  stayPlans = [];
+  dayPlanSequence = [];
+}
+
+export class DayPlan {
+  id;
+  idTripPlan;
+  tripPlan;
+  order;
+  description;
+  stayPlanSequence = [];
+}
+
+export class StayPlan {
+  id;
+  idNode;
+  elapseStay;
+  description;
+  expectedTimeInterval; // for example, peaks or beaches may have sunrise/sunset.
+  expectedDatetimeInterval; // for example, the sun/moon position on special date/time.
+}
+
+export class ActivityPlan {
+  id;
+  name;
+  description;
+  stayPlans = [];
+}

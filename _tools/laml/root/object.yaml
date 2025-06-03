@@ -1,0 +1,4 @@
+$extend:
+  - lamlib.resource
+  - lamlib.observable
+id: $(define-final-property ((import "./object.mjs" "properties.id") (this)))

@@ -22,6 +22,6 @@ window.addEventListener('load', async () => {
     console.log(evt);
   })
 
-  const tripezStartButtonFactory = DomGenerator.defineFactoryBy(import.meta.resolve('./html/md-branded-fab.html'));
+  const tripezStartButtonFactory = DomGenerator.defineBy(import.meta.resolve('./html/md-branded-fab.html'));
   console.log({ map, tripezStartButtonFactory })
 });

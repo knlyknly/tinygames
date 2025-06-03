@@ -1,0 +1,2 @@
+bind: $(define-final-property ((import "./observable.mjs" "properties.bind") (this)))
+dispatch: $(define-final-property ((import "./observable.mjs" "properties.dispatch") (this)))

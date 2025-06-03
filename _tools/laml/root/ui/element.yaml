@@ -1,0 +1,8 @@
+$extend: ../object.yaml
+xmlns: $(define-once-final-property (parse-json "{defaultValue:'http://www.w3.org/1999/xhtml'}"))
+tag-name: $(define-once-final-property (parse-json "{defaultValue:'div'}"))
+native-element: $(define-ordered-final-property ((import "./element.mjs" "properties.native-element") (this) (ref "tag-name")))
+attributes: $(define-intercepted-structure-property ((import "./element.mjs" "properties.attributes") (this)))
+cssclass: $(define-intercepted-structure-property ((import "./element.mjs" "properties.cssclass") (this)))
+cssstyle: $(define-intercepted-structure-property ((import "./element.mjs" "properties.cssstyle") (this)))
+children: $(define-intercepted-property ((import "./element.mjs" "properties.children") (this)))

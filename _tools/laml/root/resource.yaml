@@ -1,0 +1,2 @@
+reserve: $(define-final-property ((import "./resource.mjs" "properties.reserve") (this)))
+release: $(define-final-property ((import "./resource.mjs" "properties.release") (this)))

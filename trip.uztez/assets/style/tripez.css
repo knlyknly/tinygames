@@ -1,0 +1,7 @@
+@import url(./bootstrap.min.css);
+@import url(./tripez-bootstrap.css);
+
+.tripez-searcher > div:first-child {
+  width: min(calc(100vw - 3rem), 20rem);
+}
+
