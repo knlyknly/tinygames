@@ -68,7 +68,7 @@ export class Trip {
       // 解析路线行
       if (line.startsWith('-----')) {
         const routeInfo = line.match(/\((\d+)km-(\d+(?:\.\d+)?)h\)/);
-        if (routeInfo && lastLocation) {
+        if (routeInfo) {
           const [_, distanceStr, durationStr] = routeInfo;
           const distance = parseInt(distanceStr);
           const duration = parseFloat(durationStr);
@@ -77,7 +77,8 @@ export class Trip {
             currentDayItems.push({
               type: 'route',
               distance: distance,
-              duration: duration
+              duration: duration,
+              startLocation: lastLocation ? lastLocation.name : null
             });
           }
         }
@@ -389,7 +390,66 @@ export class Trip {
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       
-      if (item.type === 'location') {
+      if (item.type === 'route') {
+        // 处理独立的路线行
+        const routeId = Trip.#generateId();
+        
+        // 获取前一个和后一个地点
+        let startLocation = null;
+        let endLocation = null;
+        
+        // 向前查找最近的地点
+        for (let j = i - 1; j >= 0; j--) {
+          if (items[j].type === 'location') {
+            startLocation = items[j];
+            break;
+          }
+        }
+        
+        // 向后查找最近的地点
+        for (let j = i + 1; j < items.length; j++) {
+          if (items[j].type === 'location') {
+            endLocation = items[j];
+            break;
+          }
+        }
+
+        // 设置路线名称
+        let routeName = "Route";
+        if (startLocation && endLocation) {
+          routeName = `${startLocation.name} → ${endLocation.name}`;
+        } else if (startLocation) {
+          routeName = `${startLocation.name} → ...`;
+        } else if (endLocation) {
+          routeName = `... → ${endLocation.name}`;
+        }
+
+        const route = {
+          id: routeId,
+          name: routeName,
+          startPlaceName: startLocation ? startLocation.name : null,
+          endLocationName: endLocation ? endLocation.name : null,
+          distance: item.distance,
+          durationForward: item.duration,
+          durationBackward: item.duration
+        };
+        this.model.routes.push(route);
+
+        // 创建ScheduleItem (route)
+        const routeScheduleItem = {
+          id: Trip.#generateId(),
+          order: i,
+          time: null,
+          locationId: null,
+          routeId: routeId,
+          destinationId: null,
+          description: null,
+          stayTime: null
+        };
+
+        scheduleDay.scheduleRouteIds.push(routeScheduleItem.id);
+        this.model.scheduleItems.push(routeScheduleItem);
+      } else if (item.type === 'location') {
         // 创建Location
         const locationId = Trip.#generateId();
         const location = {
@@ -436,11 +496,20 @@ export class Trip {
         // 如果有下一段路线，创建Route
         if (item.nextRoute) {
           const routeId = Trip.#generateId();
+          // 查找下一个地点
+          let nextLocation = null;
+          for (let j = i + 1; j < items.length; j++) {
+            if (items[j].type === 'location') {
+              nextLocation = items[j];
+              break;
+            }
+          }
+
           const route = {
             id: routeId,
-            name: `${item.name} to next`,
+            name: nextLocation ? `${item.name} → ${nextLocation.name}` : `${item.name} → ...`,
             startPlaceName: item.name,
-            endLocationName: null,
+            endLocationName: nextLocation ? nextLocation.name : null,
             distance: item.nextRoute.distance,
             durationForward: item.nextRoute.duration,
             durationBackward: item.nextRoute.duration
