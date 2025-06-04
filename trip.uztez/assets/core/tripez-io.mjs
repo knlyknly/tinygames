@@ -169,7 +169,9 @@ export class Trip {
         dayLine = `d${day.order}`;
       } else {
         // 负数天数，格式为 "-2d", "-1d", ...
-        dayLine = `${day.order}d`;
+        // 注意：这里不能直接使用 day.order，因为它可能是字符串
+        const order = parseInt(day.order);
+        dayLine = `${order}d`;
       }
       // 使用原始的星期信息
       const weekday = typeof day.weekday === 'number' ? `w${day.weekday}` : 'w0';

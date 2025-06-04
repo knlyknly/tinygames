@@ -1279,6 +1279,7 @@ scheduleDays:
   - id: 3405691583
     order: -2
     date: '0724'
+    weekday: 4
     scheduleStopIds:
       - 3405691585
       - 3405691591
@@ -1290,6 +1291,7 @@ scheduleDays:
   - id: 3405691599
     order: -1
     date: '0725'
+    weekday: 5
     scheduleStopIds:
       - 3405691601
       - 3405691605
@@ -1302,6 +1304,7 @@ scheduleDays:
   - id: 3405691614
     order: 1
     date: '0726'
+    weekday: 6
     scheduleStopIds:
       - 3405691616
       - 3405691620
@@ -1316,6 +1319,7 @@ scheduleDays:
   - id: 3405691634
     order: 2
     date: '0727'
+    weekday: 0
     scheduleStopIds:
       - 3405691636
       - 3405691640
@@ -1336,6 +1340,7 @@ scheduleDays:
   - id: 3405691666
     order: 3
     date: '0728'
+    weekday: 1
     scheduleStopIds:
       - 3405691668
       - 3405691673
@@ -1358,6 +1363,7 @@ scheduleDays:
   - id: 3405691703
     order: 4
     date: '0729'
+    weekday: 2
     scheduleStopIds:
       - 3405691705
       - 3405691710
@@ -1380,6 +1386,7 @@ scheduleDays:
   - id: 3405691740
     order: 5
     date: '0730'
+    weekday: 3
     scheduleStopIds:
       - 3405691742
       - 3405691746
@@ -1398,6 +1405,7 @@ scheduleDays:
   - id: 3405691769
     order: 6
     date: '0731'
+    weekday: 4
     scheduleStopIds:
       - 3405691771
       - 3405691775
@@ -1412,6 +1420,7 @@ scheduleDays:
   - id: 3405691789
     order: 7
     date: '0801'
+    weekday: 5
     scheduleStopIds:
       - 3405691791
       - 3405691793
@@ -1431,6 +1440,7 @@ scheduleDays:
   - id: 3405691819
     order: 8
     date: '0802'
+    weekday: 6
     scheduleStopIds:
       - 3405691821
       - 3405691825
@@ -1449,6 +1459,7 @@ scheduleDays:
   - id: 3405691846
     order: 9
     date: '0803'
+    weekday: 0
     scheduleStopIds:
       - 3405691848
       - 3405691852
@@ -1467,6 +1478,7 @@ scheduleDays:
   - id: 3405691873
     order: 10
     date: '0804'
+    weekday: 1
     scheduleStopIds:
       - 3405691875
       - 3405691877
@@ -1482,6 +1494,7 @@ scheduleDays:
   - id: 3405691894
     order: 11
     date: '0805'
+    weekday: 2
     scheduleStopIds:
       - 3405691896
       - 3405691900
@@ -1498,6 +1511,7 @@ scheduleDays:
   - id: 3405691917
     order: 12
     date: '0806'
+    weekday: 3
     scheduleStopIds:
       - 3405691919
       - 3405691924
@@ -1516,6 +1530,7 @@ scheduleDays:
   - id: 3405691946
     order: 13
     date: '0807'
+    weekday: 4
     scheduleStopIds:
       - 3405691948
       - 3405691950
@@ -1533,6 +1548,7 @@ scheduleDays:
   - id: 3405691971
     order: 14
     date: '0808'
+    weekday: 5
     scheduleStopIds:
       - 3405691973
       - 3405691977
