@@ -35,7 +35,7 @@ export class Trip {
       if (line.startsWith('=')) continue;
 
       // 解析日期行
-      if (line.match(/^[-]?\d+d\s+w\d-\d{4}/)) {
+      if (line.match(/^(?:[-]?\d+d|d\d+)\s+w\d-\d{4}/)) {
         // 如果已有当前天，先保存
         if (currentDay) {
           trip._processDay(currentDay, currentDayItems);
@@ -163,11 +163,18 @@ export class Trip {
       }
 
       // 添加日期行
-      const dayPrefix = day.order >= 0 ? '' : '-';
+      let dayLine;
+      if (day.order >= 0) {
+        // 正数天数，格式为 "d1", "d2", ...
+        dayLine = `d${day.order}`;
+      } else {
+        // 负数天数，格式为 "-2d", "-1d", ...
+        dayLine = `${day.order}d`;
+      }
       // 确保 weekday 是有效的数字，如果不是则使用默认值
       const weekday = day.weekday ? `w${day.weekday}` : 'w1';
       const date = day.date || '';
-      let dayLine = `${dayPrefix}${day.order} ${weekday}-${date}`;
+      dayLine = `${dayLine} ${weekday}-${date}`;
       if (totalDistance > 0) {
         dayLine += ` ${totalDistance}km`;
       }
