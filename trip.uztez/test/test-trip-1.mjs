@@ -1,15 +1,28 @@
 import { Trip } from '../assets/core/tripez-io.mjs';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// 获取当前模块的目录路径
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// 构建文件路径
+const inputPath = path.join(__dirname, '../assets/data-example/trip-1.txt');
+const outputTextPath = path.join(__dirname, '../assets/data-example/trip-1.generated.txt');
+const outputYamlPath = path.join(__dirname, '../assets/data-example/trip-1.yaml');
 
 // 读取原始文件
-const originalText = fs.readFileSync(path.join('assets', 'data-example', 'trip-1.txt'), 'utf-8');
+const originalText = fs.readFileSync(inputPath, 'utf-8');
 
 // 解析并生成新文件
 const trip = Trip.fromText(originalText);
-const generatedText = trip.toText();
+
+// 输出中间YAML结果
+fs.writeFileSync(outputYamlPath, trip.toYaml());
 
 // 将生成的文本写入新文件
-fs.writeFileSync(path.join('assets', 'data-example', 'trip-1.generated.txt'), generatedText);
+fs.writeFileSync(outputTextPath, trip.toText());
 
-console.log('Test completed. Please check trip-1.generated.txt for results.');
+console.log('Test completed. Please check:');
+console.log(`- ${outputYamlPath}`);
+console.log(`- ${outputTextPath}`);

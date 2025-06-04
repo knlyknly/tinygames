@@ -32,8 +32,7 @@
  * @property {number} id - 唯一标识符
  * @property {number} order - 顺序
  * @property {string} date - 日期
- * @property {number[]} scheduleStopIds - 停留点ID列表
- * @property {number[]} scheduleRouteIds - 路线ID列表
+ * @property {number[]} scheduleItemIds - 行程项ID列表
  */
 
 /**
