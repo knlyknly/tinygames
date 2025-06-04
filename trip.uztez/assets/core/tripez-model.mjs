@@ -6,6 +6,7 @@
  * @property {string[]} additionDescriptions - 附加描述
  * @property {string[]} labels - 标签
  * @property {number[]} destinationIds - 目的地ID列表
+ * @property {{longitude: string, latitude: string}|undefined} latlng - 地理坐标
  */
 
 /**

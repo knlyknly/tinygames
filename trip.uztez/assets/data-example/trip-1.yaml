@@ -1,9 +1,12 @@
 locations:
   - id: 3405691583
-    name: 成都
+    name: 成都市
     altitude: 512
+    latlng:
+      longitude: '104.050409'
+      latitude: '30.644724'
   - id: 3405691586
-    name: 崇州
+    name: 崇州市
     altitude: null
     destinationIds:
       - 3405691584
@@ -289,14 +292,14 @@ destinations:
     name: 珠峰古堡
 routes:
   - id: 3405691587
-    name: 成都 → 崇州
+    name: 成都市 → 崇州市
     startLocationId: 3405691583
     endLocationId: 3405691586
     distance: 43
     durationForward: 1
     durationBackward: 1
   - id: 3405691589
-    name: 崇州 → 雅安市
+    name: 崇州市 → 雅安市
     startLocationId: 3405691586
     endLocationId: 3405691588
     distance: 104

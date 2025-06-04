@@ -14,6 +14,40 @@ function calcHoursBetween(start, end) {
   const minutes = endMinutes - startMinutes;
   return Math.floor(hours + minutes / 60);
 }
+// 显示一个地点的详细地理信息
+function toGeolocationText(location) {
+  const items = [];
+  if (location.name) {
+    items.push(`φ ${location.name}`);
+  }
+  if (location.altitude) {
+    items.push(`⩘ ${location.altitude}`);
+  }
+  if (location.latlng) {
+    items.push(`◑ ${location.latlng.longitude}`);
+    items.push(`◒ ${location.latlng.latitude}`);
+  }
+  return items.join(' ');
+}
+// 解析一个地点的详细地理信息
+function fromGeolocationText(text) {
+  const items = text.split(' ');
+  const location = {};
+  for (let i = 0; i < items.length; i += 2) {
+    const icon = items[i];
+    const value = items[i + 1];
+    if (icon === 'φ') {
+      location.name = value;
+    } else if (icon === '⩘') {
+      location.altitude = value;
+    } else if (icon === '◑') {
+      location.latlng = { ...(location.latlng || {}), longitude: value };
+    } else if (icon === '◒') {
+      location.latlng = { ...(location.latlng || {}), latitude: value };
+    }
+  }
+  return location;
+}
 // 行程类
 export class Tripez {
   /**
@@ -25,12 +59,6 @@ export class Tripez {
     this.model = new TripModel();
   }
 
-  /**
-   * 从文本格式解析行程
-   * @param {string} text 行程文本
-   * @returns {Tripez} 行程对象
-   * @throws {Error} 如果文本格式无效
-   */
   static fromText(text) {
     if (!text || typeof text !== 'string') {
       throw new Error('Invalid input: text must be a non-empty string');
@@ -43,12 +71,22 @@ export class Tripez {
     let lastLocation = null;
     let lastRouteInfo = null;
     let lastScheduleItemOfLocationType = null;
+    const geolocations = []; // 存储解析到的地理信息
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
 
       // 跳过空行和分隔行
       if (!line || line.startsWith('=')) continue;
+
+      // 解析地理信息行
+      if (line.startsWith('φ')) {
+        const geolocation = fromGeolocationText(line);
+        if (geolocation) {
+          geolocations.push(geolocation);
+        }
+        continue;
+      }
 
       // 解析日期行
       if (line.match(/^(?:[-]?\d+d|d\d+)\s+w\d-\d{4}/)) {
@@ -239,6 +277,32 @@ export class Tripez {
       trip._processDay(currentDay, currentDayItems);
     }
 
+    // 合并地理信息到locations
+    for (const geo of geolocations) {
+      if (geo.name) {
+        // 查找同名location
+        let location = trip.model.locations.find(l => l.name === geo.name);
+        if (!location) {
+          // 创建新location
+          location = {
+            id: Tripez.generateId(),
+            name: geo.name,
+            altitude: geo.altitude || null,
+            latlng: geo.latlng || undefined
+          };
+          trip.model.locations.push(location);
+        } else {
+          // 更新现有location
+          if (geo.altitude && !location.altitude) {
+            location.altitude = geo.altitude;
+          }
+          if (geo.latlng && !location.latlng) {
+            location.latlng = geo.latlng;
+          }
+        }
+      }
+    }
+
     return trip;
   }
 
@@ -345,6 +409,22 @@ export class Tripez {
       lines.push('');
     }
 
+    // 收集并添加地理信息
+    const geoLines = [];
+    for (const loc of this.model.locations) {
+      if (loc.latlng) {
+        geoLines.push(toGeolocationText(loc));
+      }
+    }
+
+    if (geoLines.length > 0) {
+      lines.push('');
+      lines.push('');
+      lines.push('');
+      lines.push('='.repeat(20)); // 分隔线
+      lines.push(...geoLines);
+    }
+
     return lines.join('\n');
   }
 
@@ -430,9 +510,18 @@ export class Tripez {
    */
   toYaml() {
     try {
+      // 准备locations数据，确保latlng字段正确序列化
+      const locations = this.model.locations.map(loc => {
+        const { latlng, ...rest } = loc;
+        if (latlng) {
+          return { ...rest, latlng };
+        }
+        return rest;
+      });
+
       return yaml.dump(
         {
-          locations: this.model.locations,
+          locations,
           destinations: this.model.destinations,
           routes: this.model.routes,
           scheduleDays: this.model.scheduleDays,
