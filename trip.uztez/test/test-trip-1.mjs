@@ -9,6 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // 构建文件路径
 const inputPath = path.join(__dirname, '../assets/data-example/trip-1.txt');
 const outputTextPath = path.join(__dirname, '../assets/data-example/trip-1.generated.txt');
+const outputCompactPath = path.join(__dirname, '../assets/data-example/trip-1.compact.txt');
 const outputYamlPath = path.join(__dirname, '../assets/data-example/trip-1.yaml');
 
 // 读取原始文件
@@ -23,6 +24,10 @@ fs.writeFileSync(outputYamlPath, trip.toYaml());
 // 将生成的文本写入新文件
 fs.writeFileSync(outputTextPath, trip.toText());
 
+// 将紧凑模式的文本写入新文件
+fs.writeFileSync(outputCompactPath, trip.toText({compactMode: true}));
+
 console.log('Test completed. Please check:');
 console.log(`- ${outputYamlPath}`);
 console.log(`- ${outputTextPath}`);
+console.log(`- ${outputCompactPath}`);

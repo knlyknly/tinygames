@@ -266,7 +266,11 @@ export class Tripez {
           if (!lastScheduleItemOfLocationType.additionDescriptions) {
             lastScheduleItemOfLocationType.additionDescriptions = [];
           }
-          lastScheduleItemOfLocationType.additionDescriptions.push(line.trim());
+          let comment = line.trim();
+          if (!comment.startsWith('φ') && !comment.startsWith('★')) {
+            comment = '★ ' + comment;
+          }
+          lastScheduleItemOfLocationType.additionDescriptions.push(comment);
         }
         continue;
       }
@@ -281,14 +285,14 @@ export class Tripez {
     for (const geo of geolocations) {
       if (geo.name) {
         // 查找同名location
-        let location = trip.model.locations.find(l => l.name === geo.name);
+        let location = trip.model.locations.find((l) => l.name === geo.name);
         if (!location) {
           // 创建新location
           location = {
             id: Tripez.generateId(),
             name: geo.name,
             altitude: geo.altitude || null,
-            latlng: geo.latlng || undefined
+            latlng: geo.latlng || undefined,
           };
           trip.model.locations.push(location);
         } else {
@@ -308,9 +312,11 @@ export class Tripez {
 
   /**
    * 将行程转换为文本格式
+   * @param {Object} [options] 输出选项
+   * @param {boolean} [options.compactMode=false] 是否使用紧凑模式
    * @returns {string} 行程文本
    */
-  toText() {
+  toText(options = {}) {
     const lines = [];
     const detailedMap = new Map(); // 记录已显示详细信息的locationId
 
@@ -351,12 +357,27 @@ export class Tripez {
       // 添加分隔行
       lines.push('='.repeat(20));
 
-      for (const item of dayItems) {
+      for (let i = 0; i < dayItems.length; i++) {
+        const item = dayItems[i];
         if (item.locationId) {
           // 处理地点
           const location = this.model.locations.find((l) => l.id === item.locationId);
           if (location) {
             let locationLine = `${item.time} ${location.name}`;
+
+            // 检查是否满足紧凑模式条件
+            const hasNoMuchExtraInfo =
+              (location.altitude ? 1 : 0) + (location.destinationIds?.length || 0) <= 1;
+            const willHideExtraInfo = detailedMap.has(location.id);
+            let compactRouteText = '';
+
+            if (options.compactMode && (hasNoMuchExtraInfo || willHideExtraInfo)) {
+              // 紧凑模式：检查下一个项是否为route类型
+              const nextItem = dayItems[i + 1];
+              if (nextItem && nextItem.type === 'route') {
+                compactRouteText = `(${nextItem.distance}km-${nextItem.duration}h)`;
+              }
+            }
 
             // 第一次出现时显示目的地和海拔
             if (!detailedMap.has(location.id)) {
@@ -377,10 +398,10 @@ export class Tripez {
               detailedMap.set(location.id, true);
             }
 
-            // 添加路线信息（始终显示）
-            const nextRoute = this.model.routes.find((r) => r.id === item.routeId);
-            if (nextRoute) {
-              locationLine += ` (${nextRoute.distance}km-${nextRoute.durationForward}h)`;
+            if (compactRouteText) {
+              locationLine += compactRouteText;
+              // 跳过下一个route项的处理
+              i++;
             }
 
             lines.push(locationLine);
@@ -418,7 +439,6 @@ export class Tripez {
     }
 
     if (geoLines.length > 0) {
-      lines.push('');
       lines.push('');
       lines.push('');
       lines.push('='.repeat(20)); // 分隔线
@@ -511,7 +531,7 @@ export class Tripez {
   toYaml() {
     try {
       // 准备locations数据，确保latlng字段正确序列化
-      const locations = this.model.locations.map(loc => {
+      const locations = this.model.locations.map((loc) => {
         const { latlng, ...rest } = loc;
         if (latlng) {
           return { ...rest, latlng };
