@@ -171,8 +171,8 @@ export class Trip {
         // 负数天数，格式为 "-2d", "-1d", ...
         dayLine = `${day.order}d`;
       }
-      // 确保 weekday 是有效的数字，如果不是则使用默认值
-      const weekday = day.weekday ? `w${day.weekday}` : 'w1';
+      // 使用原始的星期信息
+      const weekday = typeof day.weekday === 'number' ? `w${day.weekday}` : 'w0';
       const date = day.date || '';
       dayLine = `${dayLine} ${weekday}-${date}`;
       if (totalDistance > 0) {
@@ -379,6 +379,7 @@ export class Trip {
       id: Trip.#generateId(),
       order: day.order,
       date: day.date,
+      weekday: day.weekday,
       scheduleStopIds: [],
       scheduleRouteIds: []
     };
