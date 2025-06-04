@@ -1,4 +1,4 @@
-import { Trip } from '../assets/core/tripez-io.mjs';
+import { Tripez } from '../assets/core/tripez-io.mjs';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -15,7 +15,7 @@ const outputYamlPath = path.join(__dirname, '../assets/data-example/trip-1.yaml'
 const originalText = fs.readFileSync(inputPath, 'utf-8');
 
 // 解析并生成新文件
-const trip = Trip.fromText(originalText);
+const trip = Tripez.fromText(originalText);
 
 // 输出中间YAML结果
 fs.writeFileSync(outputYamlPath, trip.toYaml());

@@ -15,7 +15,7 @@ function calcHoursBetween(start, end) {
   return Math.floor(hours + minutes / 60);
 }
 // 行程类
-export class Trip {
+export class Tripez {
   /**
    * @type {TripModel} 行程数据模型
    */
@@ -28,7 +28,7 @@ export class Trip {
   /**
    * 从文本格式解析行程
    * @param {string} text 行程文本
-   * @returns {Trip} 行程对象
+   * @returns {Tripez} 行程对象
    * @throws {Error} 如果文本格式无效
    */
   static fromText(text) {
@@ -36,7 +36,7 @@ export class Trip {
       throw new Error('Invalid input: text must be a non-empty string');
     }
 
-    const trip = new Trip();
+    const trip = new Tripez();
     const lines = text.split('\n');
     let currentDay = null;
     let currentDayItems = [];
@@ -114,7 +114,7 @@ export class Trip {
               let dest = trip.model.destinations.find((l) => l.name === d);
               if (!dest) {
                 dest = {
-                  id: Trip.generateId(),
+                  id: Tripez.generateId(),
                   name: d,
                 };
                 trip.model.destinations.push(dest);
@@ -122,7 +122,7 @@ export class Trip {
               return dest;
             });
             // 创建新地点
-            const locationId = Trip.generateId();
+            const locationId = Tripez.generateId();
             location = {
               id: locationId,
               name: mainLocation,
@@ -160,7 +160,7 @@ export class Trip {
               );
               if (!route) {
                 route = {
-                  id: Trip.generateId(),
+                  id: Tripez.generateId(),
                   name: `${lastLocation.name} → ${location.name}`,
                   startLocationId: lastLocation.id,
                   endLocationId: location.id,
@@ -173,7 +173,7 @@ export class Trip {
                 // check if route.distance is too different to lastRouteInfo.distance
                 if (Math.abs(route.distance - lastRouteInfo.distance) > route.distance * 0.05) {
                   // create another route for lastLocation → location because it's actually another route
-                  const routeId = Trip.generateId();
+                  const routeId = Tripez.generateId();
                   const newRoute = {
                     id: routeId,
                     name: `${lastLocation.name} → ${location.name}`,
@@ -351,13 +351,13 @@ export class Trip {
   // 静态序列号生成器
   static nextId = 0xcafebabe;
   static generateId() {
-    return ++Trip.nextId;
+    return ++Tripez.nextId;
   }
 
   /**
    * 从YAML格式解析行程
    * @param {string} yamlText YAML文本
-   * @returns {Trip} 行程对象
+   * @returns {Tripez} 行程对象
    * @throws {Error} 如果YAML格式无效或缺少必要字段
    */
   static fromYaml(yamlText) {
@@ -376,7 +376,7 @@ export class Trip {
       throw new Error('Invalid YAML: must contain a valid trip object');
     }
 
-    const trip = new Trip();
+    const trip = new Tripez();
 
     // 验证并加载数据
     const validateArray = (arr, name) => {
@@ -419,7 +419,7 @@ export class Trip {
       ...trip.model.scheduleDays.map((d) => d.id),
       ...trip.model.scheduleItems.map((i) => i.id)
     );
-    Trip.nextId = Math.max(Trip.nextId, maxId);
+    Tripez.nextId = Math.max(Tripez.nextId, maxId);
 
     return trip;
   }
@@ -491,7 +491,7 @@ export class Trip {
   _processDay(day, items) {
     // 创建ScheduleDay
     const scheduleDay = {
-      id: Trip.generateId(),
+      id: Tripez.generateId(),
       order: day.order,
       date: day.date,
       weekday: day.weekday,
@@ -503,7 +503,7 @@ export class Trip {
       // 直接使用传入的scheduleItem，只需添加id
       const scheduleItem = {
         ...item,
-        id: Trip.generateId(),
+        id: Tripez.generateId(),
       };
 
       scheduleDay.scheduleItemIds.push(scheduleItem.id);
