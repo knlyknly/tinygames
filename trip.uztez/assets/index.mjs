@@ -1,4 +1,4 @@
-import { ready } from '../../_tools/laml/ui/ready.mjs';
+import { ready } from '../../_tools/laml/web/ready.mjs';
 import AMapInitializer from './tools/amap-initializer.mjs';
 import { TripView } from './components/tripez-view.mjs';
 
