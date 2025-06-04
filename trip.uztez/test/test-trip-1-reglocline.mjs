@@ -1,4 +1,4 @@
-import { REG_LOCATION_LINE } from '../assets/core/tripez-io.mjs';
+import { REG_LOCATION_LINE } from '../assets/core/tripez-format.mjs';
 import assert from 'assert';
 
 // 测试用例

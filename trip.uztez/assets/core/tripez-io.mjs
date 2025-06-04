@@ -22,8 +22,11 @@ export class Tripez {
       throw new Error('Invalid input: text must be a non-empty string');
     }
 
+    // 标准化行尾，确保在Windows和MacOS上行为一致
+    const normalizedText = text.replace(/\r\n/g, '\n');
+    
     const trip = new Tripez();
-    const lines = text.split('\n');
+    const lines = normalizedText.split('\n');
     let currentDay = null;
     let currentDayItems = [];
     let lastLocation = null;
