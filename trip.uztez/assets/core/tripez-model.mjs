@@ -38,12 +38,12 @@
 /**
  * @typedef {Object} ScheduleItem
  * @property {number} id - 唯一标识符
- * @property {number} order - 顺序
  * @property {string|null} time - 时间
  * @property {number|null} locationId - 地点ID
  * @property {number|null} routeId - 路线ID
- * @property {number|null} destinationId - 目的地ID
- * @property {string|null} description - 描述
+ * @property {'forward'|'backward'|null} direction - 路线方向(仅route类型)
+ * @property {number|null} distance - 路线距离(米,仅route类型)
+ * @property {number|null} duration - 路线时长(分钟,仅route类型)
  * @property {number|null} stayTime - 停留时间
  */
 

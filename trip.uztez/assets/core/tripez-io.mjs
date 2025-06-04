@@ -2,6 +2,18 @@ import yaml from 'js-yaml';
 import TripModel from './tripez-model.mjs';
 // line format could be time-space-location-space*-destinations?-space*-↑altitude?-space*-destinations?-space*-(123km-45h)?
 export const REG_LOCATION_LINE = /^(\d{2}:\d{2})\s+([^↑(]+)(?:↑(\d+))?([^(]*)(?:\s*\((.*?)\))?$/;
+// 计算两个时间之间相差几个小时
+function calcHoursBetween(start, end) {
+  const startParts = start.split(':');
+  const endParts = end.split(':');
+  const startHours = parseInt(startParts[0]);
+  const startMinutes = parseInt(startParts[1]);
+  const endHours = parseInt(endParts[0]);
+  const endMinutes = parseInt(endParts[1]);
+  const hours = endHours - startHours;
+  const minutes = endMinutes - startMinutes;
+  return Math.floor(hours + minutes / 60);
+}
 // 行程类
 export class Trip {
   /**
@@ -71,7 +83,7 @@ export class Trip {
       }
 
       // 解析路线行
-      if (line.startsWith(' ↓↓↓ ')) {
+      if (line.startsWith('    ↓')) {
         const routeInfo = line.match(/\((\d+)km-(\d+(?:\.\d+)?)h\)/);
         if (routeInfo && lastLocation) {
           const [_, distanceStr, durationStr] = routeInfo;
@@ -115,13 +127,28 @@ export class Trip {
               id: locationId,
               name: mainLocation,
               altitude: altitude ? parseInt(altitude) : null,
-              destinationIds: dests.map((d) => d.id),
             };
+            if (dests?.length > 0) {
+              location.destinationIds = dests.map((d) => d.id);
+            }
             trip.model.locations.push(location);
           }
 
+          // 创建地点项
+          const scheduleItem = {
+            type: 'location',
+            locationId: location.id,
+            time: time,
+          };
+
           // 处理route
           if (lastLocation && lastRouteInfo) {
+            // 算出scheduleItem.lastScheduleItemOfLocationType.time之间相差的小时数
+            let hourDiff = calcHoursBetween(scheduleItem.time, lastScheduleItemOfLocationType.time);
+            // 如果相差的小时数大于lastRouteInfo的duration，那么认为多出来的部分为lastScheduleItem的stayTime
+            if (hourDiff > lastRouteInfo.duration) {
+              lastScheduleItemOfLocationType.stayTime = hourDiff - lastRouteInfo.duration;
+            }
             // 查找lastLocation和location之间已经存在的route
             let route = trip.model.routes.find(
               (r) => r.startLocationId === lastLocation.id && r.endLocationId === location.id
@@ -171,7 +198,9 @@ export class Trip {
             currentDayItems.push({
               type: 'route',
               routeId: route.id,
-              ...lastRouteInfo,
+              direction: route.startLocationId === lastLocation.id ? 'forward' : 'backward',
+              distance: lastRouteInfo.distance,
+              duration: lastRouteInfo.duration,
             });
 
             lastRouteInfo = null;
@@ -187,13 +216,6 @@ export class Trip {
             }
           }
 
-          // 创建地点项
-          const scheduleItem = {
-            type: 'location',
-            locationId: location.id,
-            time: time,
-            additionDescriptions: [],
-          };
           currentDayItems.push(scheduleItem);
           lastScheduleItemOfLocationType = scheduleItem;
           lastLocation = location;
@@ -203,6 +225,9 @@ export class Trip {
       // 解析补充说明
       if (line.match(/^\s{5}/)) {
         if (lastScheduleItemOfLocationType) {
+          if (!lastScheduleItemOfLocationType.additionDescriptions) {
+            lastScheduleItemOfLocationType.additionDescriptions = [];
+          }
           lastScheduleItemOfLocationType.additionDescriptions.push(line.trim());
         }
         continue;
@@ -223,6 +248,7 @@ export class Trip {
    */
   toText() {
     const lines = [];
+    const detailedMap = new Map(); // 记录已显示详细信息的locationId
 
     for (const day of this.model.scheduleDays) {
       // 获取当天的行程项
@@ -230,14 +256,11 @@ export class Trip {
         day.scheduleItemIds.includes(item.id)
       );
 
-      // 计算当天的总距离
+      // 计算当天的总距离（直接从scheduleItem获取）
       let totalDistance = 0;
       for (const item of dayItems) {
-        if (item.routeId) {
-          const route = this.model.routes.find((r) => r.id === item.routeId);
-          if (route && route.distance) {
-            totalDistance += route.distance;
-          }
+        if (item.distance) {
+          totalDistance += item.distance;
         }
       }
 
@@ -270,19 +293,27 @@ export class Trip {
           const location = this.model.locations.find((l) => l.id === item.locationId);
           if (location) {
             let locationLine = `${item.time} ${location.name}`;
-            if (location.altitude) {
-              locationLine += `↑${location.altitude}`;
+
+            // 第一次出现时显示目的地和海拔
+            if (!detailedMap.has(location.id)) {
+              // 添加目的地
+              if (location.destinationIds?.length > 0) {
+                const destinations = location.destinationIds
+                  .map((id) => this.model.destinations.find((d) => d.id === id))
+                  .filter(Boolean)
+                  .map((d) => d.name);
+                locationLine += '&' + destinations.join('&');
+              }
+
+              // 添加海拔
+              if (location.altitude) {
+                locationLine += `↑${location.altitude}`;
+              }
+
+              detailedMap.set(location.id, true);
             }
 
-            // 添加目的地
-            const destinations = this.model.destinations.filter((d) =>
-              location.destinations?.includes(d.id)
-            );
-            if (destinations.length > 0) {
-              locationLine += '&' + destinations.map((d) => d.name).join('&');
-            }
-
-            // 添加路线信息
+            // 添加路线信息（始终显示）
             const nextRoute = this.model.routes.find((r) => r.id === item.routeId);
             if (nextRoute) {
               locationLine += ` (${nextRoute.distance}km-${nextRoute.durationForward}h)`;
@@ -305,7 +336,7 @@ export class Trip {
             // 确保距离和时间是有效的数字
             const distance = !isNaN(route.distance) ? route.distance : 0;
             const duration = !isNaN(route.durationForward) ? route.durationForward : 0;
-            lines.push(` ↓↓↓  (${distance}km-${duration}h)`);
+            lines.push(`    ↓ (${distance}km-${duration}h)`);
           }
         }
       }
@@ -469,38 +500,14 @@ export class Trip {
 
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
+      // 直接使用传入的scheduleItem，只需添加id
+      const scheduleItem = {
+        ...item,
+        id: Trip.generateId(),
+      };
 
-      if (item.type === 'route') {
-        // 处理路线项
-        const routeScheduleItem = {
-          id: Trip.generateId(),
-          order: i,
-          time: null,
-          locationId: null,
-          routeId: item.routeId,
-          destinationId: null,
-          description: null,
-          stayTime: null,
-        };
-
-        scheduleDay.scheduleItemIds.push(routeScheduleItem.id);
-        this.model.scheduleItems.push(routeScheduleItem);
-      } else if (item.type === 'location') {
-        // 处理地点项
-        const scheduleItem = {
-          id: Trip.generateId(),
-          order: i,
-          time: item.time,
-          locationId: item.locationId,
-          routeId: null,
-          destinationId: null,
-          description: null,
-          stayTime: null,
-        };
-
-        scheduleDay.scheduleItemIds.push(scheduleItem.id);
-        this.model.scheduleItems.push(scheduleItem);
-      }
+      scheduleDay.scheduleItemIds.push(scheduleItem.id);
+      this.model.scheduleItems.push(scheduleItem);
     }
 
     this.model.scheduleDays.push(scheduleDay);
