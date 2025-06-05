@@ -4,7 +4,7 @@ import {
   REG_LOCATION_LINE,
   calcHoursBetween,
   toGeolocationText,
-  fromGeolocationText
+  fromGeolocationText,
 } from './tripez-format.mjs';
 // 行程类
 export class Tripez {
@@ -24,7 +24,7 @@ export class Tripez {
 
     // 标准化行尾，确保在Windows和MacOS上行为一致
     const normalizedText = text.replace(/\r\n/g, '\n');
-    
+
     const trip = new Tripez();
     const lines = normalizedText.split('\n');
     let currentDay = null;
@@ -45,6 +45,7 @@ export class Tripez {
         const geolocation = fromGeolocationText(line);
         if (geolocation) {
           geolocations.push(geolocation);
+          lastLocation = geolocation;
         }
         continue;
       }
@@ -252,19 +253,11 @@ export class Tripez {
           location = {
             id: Tripez.generateId(),
             name: geo.name,
-            altitude: geo.altitude || null,
-            latlng: geo.latlng || undefined,
           };
           trip.model.locations.push(location);
-        } else {
-          // 更新现有location
-          if (geo.altitude && !location.altitude) {
-            location.altitude = geo.altitude;
-          }
-          if (geo.latlng && !location.latlng) {
-            location.latlng = geo.latlng;
-          }
         }
+        // 更新location
+        Object.assign(location, geo);
       }
     }
 
@@ -400,7 +393,6 @@ export class Tripez {
     }
 
     if (geoLines.length > 0) {
-      lines.push('');
       lines.push('');
       lines.push('='.repeat(20)); // 分隔线
       lines.push(...geoLines);
