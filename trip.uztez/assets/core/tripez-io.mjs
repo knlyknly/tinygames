@@ -346,7 +346,7 @@ export class Tripez {
 
               // 添加海拔
               if (location.altitude) {
-                locationLine += `↑${location.altitude}`;
+                locationLine += `⩘${location.altitude}`;
               }
 
               detailedMap.set(location.id, true);

@@ -1,5 +1,5 @@
 // 正则表达式：匹配地点行格式
-export const REG_LOCATION_LINE = /^(\d{2}:\d{2})\s+([^↑(]+)(?:↑(\d+))?([^(]*)(?:\s*\((.*?)\))?$/;
+export const REG_LOCATION_LINE = /^(\d{2}:\d{2})\s+([^↑(⩘]+)(?:[↑⩘](\d+))?([^(]*)(?:\s*\((.*?)\))?$/;
 
 // 计算两个时间之间相差几个小时
 export function calcHoursBetween(start, end) {
@@ -40,7 +40,7 @@ export function fromGeolocationText(text) {
     if (icon === 'φ') {
       location.name = value;
     } else if (icon === '⩘') {
-      location.altitude = value;
+      location.altitude = parseInt(value);
     } else if (icon === '◑') {
       location.latlng = { ...(location.latlng || {}), longitude: value };
     } else if (icon === '◒') {
