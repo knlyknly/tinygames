@@ -1,5 +1,6 @@
 import yaml from 'js-yaml';
 import TripezModel from './tripez-model.mjs';
+import uuid from '../tools/uuid.mjs';
 import {
   REG_LOCATION_LINE,
   calcHoursBetween,
@@ -44,9 +45,12 @@ export class Tripez {
       // 解析日期行
       if (line.match(/^(?:[-]?\d+d|d\d+)\s+w\d-\d{4}/)) {
         if (currentDay) {
-          const { scheduleDay, scheduleItems } = Tripez._processDay(currentDay, currentDayItems);
-          model.scheduleDays.push(scheduleDay);
-          model.scheduleItems.push(...scheduleItems);
+          // 如果有scheduleItems，创建scheduleItemIds
+          if (currentDayItems.length > 0) {
+            currentDay.scheduleItemIds = currentDayItems.map(item => item.id);
+          }
+          model.scheduleDays.push(currentDay);
+          model.scheduleItems.push(...currentDayItems);
           currentDayItems = [];
         }
 
@@ -65,6 +69,7 @@ export class Tripez {
         }
 
         currentDay = {
+          id: uuid(),
           order: parseInt(dayInfo.replace('d', '')),
           date: weekDate.split('-')[1],
           weekday: parseInt(weekDate.split('-')[0].replace('w', '')),
@@ -107,7 +112,7 @@ export class Tripez {
               let dest = model.destinations.find((l) => l.name === d);
               if (!dest) {
                 dest = {
-                  id: Tripez.generateId(),
+                  id: uuid(),
                   name: d,
                 };
                 model.destinations.push(dest);
@@ -115,7 +120,7 @@ export class Tripez {
               return dest;
             });
             // 创建新地点
-            const locationId = Tripez.generateId();
+            const locationId = uuid();
             location = {
               id: locationId,
               name: mainLocation,
@@ -129,6 +134,7 @@ export class Tripez {
 
           // 创建地点项
           const scheduleItem = {
+            id: uuid(),
             type: 'location',
             locationId: location.id,
             time: time,
@@ -153,7 +159,7 @@ export class Tripez {
               );
               if (!route) {
                 route = {
-                  id: Tripez.generateId(),
+                  id: uuid(),
                   name: `${lastLocation.name} → ${location.name}`,
                   startLocationId: lastLocation.id,
                   endLocationId: location.id,
@@ -166,7 +172,7 @@ export class Tripez {
                 // check if route.distance is too different to lastRouteInfo.distance
                 if (Math.abs(route.distance - lastRouteInfo.distance) > route.distance * 0.05) {
                   // create another route for lastLocation → location because it's actually another route
-                  const routeId = Tripez.generateId();
+                  const routeId = uuid();
                   const newRoute = {
                     id: routeId,
                     name: `${lastLocation.name} → ${location.name}`,
@@ -189,6 +195,7 @@ export class Tripez {
 
             // 创建route类型的ScheduleItem
             currentDayItems.push({
+              id: uuid(),
               type: 'route',
               routeId: route.id,
               direction: route.startLocationId === lastLocation.id ? 'forward' : 'backward',
@@ -233,9 +240,12 @@ export class Tripez {
 
     // 处理最后一天
     if (currentDay) {
-      const { scheduleDay, scheduleItems } = Tripez._processDay(currentDay, currentDayItems);
-      model.scheduleDays.push(scheduleDay);
-      model.scheduleItems.push(...scheduleItems);
+      // 如果有scheduleItems，创建scheduleItemIds
+      if (currentDayItems.length > 0) {
+        currentDay.scheduleItemIds = currentDayItems.map(item => item.id);
+      }
+      model.scheduleDays.push(currentDay);
+      model.scheduleItems.push(...currentDayItems);
     }
 
     // 合并地理信息到locations
@@ -246,8 +256,8 @@ export class Tripez {
         if (!location) {
           // 创建新location
           location = {
-            id: Tripez.generateId(),
-            name: geo.name,
+                          id: uuid(),
+                          name: geo.name,
           };
           model.locations.push(location);
         }
@@ -397,12 +407,6 @@ export class Tripez {
     return lines.join('\n');
   }
 
-  // 静态序列号生成器
-  static nextId = 0xcafebabe;
-  static generateId() {
-    return ++Tripez.nextId;
-  }
-
   /**
    * 从YAML格式解析行程
    * @param {string} yamlText YAML文本
@@ -459,16 +463,6 @@ export class Tripez {
       validateArray(data.scheduleItems, 'scheduleItems');
       model.scheduleItems = data.scheduleItems;
     }
-
-    // 更新序列号生成器的起始值
-    const maxId = Math.max(
-      ...model.locations.map((l) => l.id),
-      ...model.destinations.map((d) => d.id),
-      ...model.routes.map((r) => r.id),
-      ...model.scheduleDays.map((d) => d.id),
-      ...model.scheduleItems.map((i) => i.id)
-    );
-    Tripez.nextId = Math.max(Tripez.nextId, maxId);
 
     return model;
   }
@@ -544,35 +538,5 @@ export class Tripez {
         }
       });
     });
-  }
-
-  // 静态方法：处理一天的行程数据
-  static _processDay(day, items) {
-    // 创建ScheduleDay
-    const scheduleDay = {
-      id: Tripez.generateId(),
-      order: day.order,
-      date: day.date,
-      weekday: day.weekday,
-      scheduleItemIds: [],
-    };
-
-    const scheduleItems = [];
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      // 直接使用传入的scheduleItem，只需添加id
-      const scheduleItem = {
-        ...item,
-        id: Tripez.generateId(),
-      };
-
-      scheduleDay.scheduleItemIds.push(scheduleItem.id);
-      scheduleItems.push(scheduleItem);
-    }
-
-    return {
-      scheduleDay,
-      scheduleItems
-    };
   }
 }
