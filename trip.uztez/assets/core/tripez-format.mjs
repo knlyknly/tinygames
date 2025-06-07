@@ -34,9 +34,9 @@ export function toGeolocationText(location) {
 export function fromGeolocationText(text) {
   const items = text.split(' ');
   const location = {};
-  for (let i = 0; i < items.length; i += 2) {
+  for (let i = 0; i < items.length; i++) {
     const icon = items[i].charAt(0);
-    const value = items[i].slice(1);
+    const value = items[i].substring(1);
     if (icon === 'φ') {
       location.name = value;
     } else if (icon === '⊼') {

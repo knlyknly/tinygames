@@ -4,6 +4,7 @@ locations:
     altitude: 512
     latlng:
       longitude: '104.050409'
+      latitude: '30.644724'
   - id: 3405691586
     name: 崇州市
     altitude: null
