@@ -1,7 +1,7 @@
 export default class GeoService {
   // 高德地图 API key，需要替换为您自己的 key
   constructor(apiKey) {
-    this.apiKey = apiKey || 'e425795b04aef45e57c9b0827af8fcbf';
+    this.apiKey = apiKey;
   }
 
   // 根据地址文本查询位置信息
