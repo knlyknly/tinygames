@@ -1,6 +1,5 @@
 import yaml from 'js-yaml';
 import TripezModel from './tripez-model.mjs';
-import uuid from '../tools/uuid.mjs';
 import hash from '../tools/hash.mjs';
 import {
   REG_LOCATION_LINE,
@@ -205,7 +204,7 @@ export class Tripez {
             }
 
             // 创建route类型的ScheduleItem
-            const scheduleItemSummary = `${route.name} ${currentDayInfo} ${lastScheduleItemOfLocationType.time}-${scheduleItem.time}`
+            const scheduleItemSummary = `${currentDayInfo} ${lastScheduleItemOfLocationType.time}-${scheduleItem.time} ${route.name}`;
             currentDayItems.push({
               id: hash(scheduleItemSummary),
               name: scheduleItemSummary,

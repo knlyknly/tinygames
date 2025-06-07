@@ -21,8 +21,8 @@ export function toGeolocationText(location) {
     items.push(`φ${location.name}`);
   }
   if (location.latlng) {
-    items.push(`◑${location.latlng.longitude}`);
-    items.push(`◒${location.latlng.latitude}`);
+    items.push(`◑${location.latlng.longitude || '0'}`);
+    items.push(`◒${location.latlng.latitude || '0'}`);
   }
   return items.join(' ');
 }
