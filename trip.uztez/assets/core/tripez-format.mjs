@@ -18,14 +18,14 @@ export function calcHoursBetween(start, end) {
 export function toGeolocationText(location) {
   const items = [];
   if (location.name) {
-    items.push(`φ ${location.name}`);
+    items.push(`φ${location.name}`);
   }
   if (location.altitude) {
-    items.push(`⩘ ${location.altitude}`);
+    items.push(`⊼${location.altitude}`);
   }
   if (location.latlng) {
-    items.push(`◑ ${location.latlng.longitude}`);
-    items.push(`◒ ${location.latlng.latitude}`);
+    items.push(`◑${location.latlng.longitude}`);
+    items.push(`◒${location.latlng.latitude}`);
   }
   return items.join(' ');
 }
@@ -34,12 +34,12 @@ export function toGeolocationText(location) {
 export function fromGeolocationText(text) {
   const items = text.split(' ');
   const location = {};
-  for (let i = 0; i < items.length; i += 2) {
-    const icon = items[i];
-    const value = items[i + 1];
+  for (let i = 0; i < items.length; i++) {
+    const icon = items[i].charAt(0);
+    const value = items[i].substring(1);
     if (icon === 'φ') {
       location.name = value;
-    } else if (icon === '⩘') {
+    } else if (icon === '⊼') {
       location.altitude = parseInt(value);
     } else if (icon === '◑') {
       location.latlng = { ...(location.latlng || {}), longitude: value };
