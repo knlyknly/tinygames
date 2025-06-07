@@ -52,7 +52,7 @@
  */
 
 // 数据模型类
-export class TripModel {
+export class TripezModel {
   constructor() {
     this.locations = []; // Location[]
     this.destinations = []; // Destination[]
@@ -62,4 +62,4 @@ export class TripModel {
   }
 }
 
-export default TripModel;
+export default TripezModel;

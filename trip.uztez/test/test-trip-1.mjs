@@ -16,16 +16,16 @@ const outputYamlPath = path.join(__dirname, '../assets/data-example/trip-1.yaml'
 const originalText = fs.readFileSync(inputPath, 'utf-8');
 
 // 解析并生成新文件
-const trip = Tripez.fromText(originalText);
+const model = Tripez.fromText(originalText);
 
 // 输出中间YAML结果
-fs.writeFileSync(outputYamlPath, trip.toYaml());
+fs.writeFileSync(outputYamlPath, Tripez.toYaml(model));
 
 // 将生成的文本写入新文件
-fs.writeFileSync(outputTextPath, trip.toText());
+fs.writeFileSync(outputTextPath, Tripez.toText(model));
 
 // 将紧凑模式的文本写入新文件
-fs.writeFileSync(outputCompactPath, trip.toText({compactMode: true}));
+fs.writeFileSync(outputCompactPath, Tripez.toText(model, { compactMode: true }));
 
 console.log('Test completed. Please check:');
 console.log(`- ${outputYamlPath}`);

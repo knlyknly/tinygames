@@ -1,22 +1,13 @@
 import yaml from 'js-yaml';
-import TripModel from './tripez-model.mjs';
+import TripezModel from './tripez-model.mjs';
 import {
   REG_LOCATION_LINE,
   calcHoursBetween,
   toGeolocationText,
-  fromGeolocationText
+  fromGeolocationText,
 } from './tripez-format.mjs';
-// 行程类
+// 行程工具类
 export class Tripez {
-  /**
-   * @type {TripModel} 行程数据模型
-   */
-  model;
-
-  constructor() {
-    this.model = new TripModel();
-  }
-
   static fromText(text) {
     if (!text || typeof text !== 'string') {
       throw new Error('Invalid input: text must be a non-empty string');
@@ -24,8 +15,8 @@ export class Tripez {
 
     // 标准化行尾，确保在Windows和MacOS上行为一致
     const normalizedText = text.replace(/\r\n/g, '\n');
-    
-    const trip = new Tripez();
+
+    const model = new TripezModel();
     const lines = normalizedText.split('\n');
     let currentDay = null;
     let currentDayItems = [];
@@ -45,6 +36,7 @@ export class Tripez {
         const geolocation = fromGeolocationText(line);
         if (geolocation) {
           geolocations.push(geolocation);
+          lastLocation = geolocation;
         }
         continue;
       }
@@ -52,7 +44,9 @@ export class Tripez {
       // 解析日期行
       if (line.match(/^(?:[-]?\d+d|d\d+)\s+w\d-\d{4}/)) {
         if (currentDay) {
-          trip._processDay(currentDay, currentDayItems);
+          const { scheduleDay, scheduleItems } = Tripez._processDay(currentDay, currentDayItems);
+          model.scheduleDays.push(scheduleDay);
+          model.scheduleItems.push(...scheduleItems);
           currentDayItems = [];
         }
 
@@ -105,18 +99,18 @@ export class Tripez {
             .map((s) => s.trim());
 
           // 检查是否已存在同名地点
-          let location = trip.model.locations.find((l) => l.name === mainLocation);
+          let location = model.locations.find((l) => l.name === mainLocation);
 
           if (!location) {
-            // find destinations from trip.model, create if not exist
+            // find destinations from model, create if not exist
             let dests = destinations.map((d) => {
-              let dest = trip.model.destinations.find((l) => l.name === d);
+              let dest = model.destinations.find((l) => l.name === d);
               if (!dest) {
                 dest = {
                   id: Tripez.generateId(),
                   name: d,
                 };
-                trip.model.destinations.push(dest);
+                model.destinations.push(dest);
               }
               return dest;
             });
@@ -130,7 +124,7 @@ export class Tripez {
             if (dests?.length > 0) {
               location.destinationIds = dests.map((d) => d.id);
             }
-            trip.model.locations.push(location);
+            model.locations.push(location);
           }
 
           // 创建地点项
@@ -149,12 +143,12 @@ export class Tripez {
               lastScheduleItemOfLocationType.stayTime = hourDiff - lastRouteInfo.duration;
             }
             // 查找lastLocation和location之间已经存在的route
-            let route = trip.model.routes.find(
+            let route = model.routes.find(
               (r) => r.startLocationId === lastLocation.id && r.endLocationId === location.id
             );
             // if the route doesn't exist, try find the backward route
             if (!route) {
-              route = trip.model.routes.find(
+              route = model.routes.find(
                 (r) => r.startLocationId === location.id && r.endLocationId === lastLocation.id
               );
               if (!route) {
@@ -167,7 +161,7 @@ export class Tripez {
                   durationForward: lastRouteInfo.duration,
                   durationBackward: lastRouteInfo.duration,
                 };
-                trip.model.routes.push(route);
+                model.routes.push(route);
               } else {
                 // check if route.distance is too different to lastRouteInfo.distance
                 if (Math.abs(route.distance - lastRouteInfo.distance) > route.distance * 0.05) {
@@ -182,7 +176,7 @@ export class Tripez {
                     durationForward: lastRouteInfo.duration,
                     durationBackward: lastRouteInfo.duration,
                   };
-                  trip.model.routes.push(newRoute);
+                  model.routes.push(newRoute);
                   route = newRoute;
                 } else {
                   route.durationBackward = lastRouteInfo.duration;
@@ -239,51 +233,46 @@ export class Tripez {
 
     // 处理最后一天
     if (currentDay) {
-      trip._processDay(currentDay, currentDayItems);
+      const { scheduleDay, scheduleItems } = Tripez._processDay(currentDay, currentDayItems);
+      model.scheduleDays.push(scheduleDay);
+      model.scheduleItems.push(...scheduleItems);
     }
 
     // 合并地理信息到locations
     for (const geo of geolocations) {
       if (geo.name) {
         // 查找同名location
-        let location = trip.model.locations.find((l) => l.name === geo.name);
+        let location = model.locations.find((l) => l.name === geo.name);
         if (!location) {
           // 创建新location
           location = {
             id: Tripez.generateId(),
             name: geo.name,
-            altitude: geo.altitude || null,
-            latlng: geo.latlng || undefined,
           };
-          trip.model.locations.push(location);
-        } else {
-          // 更新现有location
-          if (geo.altitude && !location.altitude) {
-            location.altitude = geo.altitude;
-          }
-          if (geo.latlng && !location.latlng) {
-            location.latlng = geo.latlng;
-          }
+          model.locations.push(location);
         }
+        // 更新location
+        Object.assign(location, geo);
       }
     }
 
-    return trip;
+    return model;
   }
 
   /**
-   * 将行程转换为文本格式
+   * 将TripezModel转换为文本格式
+   * @param {TripezModel} model TripezModel实例
    * @param {Object} [options] 输出选项
    * @param {boolean} [options.compactMode=false] 是否使用紧凑模式
    * @returns {string} 行程文本
    */
-  toText(options = {}) {
+  static toText(model, options = {}) {
     const lines = [];
     const detailedMap = new Map(); // 记录已显示详细信息的locationId
 
-    for (const day of this.model.scheduleDays) {
+    for (const day of model.scheduleDays) {
       // 获取当天的行程项
-      const dayItems = this.model.scheduleItems.filter((item) =>
+      const dayItems = model.scheduleItems.filter((item) =>
         day.scheduleItemIds.includes(item.id)
       );
 
@@ -322,7 +311,7 @@ export class Tripez {
         const item = dayItems[i];
         if (item.locationId) {
           // 处理地点
-          const location = this.model.locations.find((l) => l.id === item.locationId);
+          const location = model.locations.find((l) => l.id === item.locationId);
           if (location) {
             let locationLine = `${item.time} ${location.name}`;
 
@@ -345,7 +334,7 @@ export class Tripez {
               // 添加目的地
               if (location.destinationIds?.length > 0) {
                 const destinations = location.destinationIds
-                  .map((id) => this.model.destinations.find((d) => d.id === id))
+                  .map((id) => model.destinations.find((d) => d.id === id))
                   .filter(Boolean)
                   .map((d) => d.name);
                 locationLine += '&' + destinations.join('&');
@@ -353,7 +342,7 @@ export class Tripez {
 
               // 添加海拔
               if (location.altitude) {
-                locationLine += `↑${location.altitude}`;
+                locationLine += `⩘${location.altitude}`;
               }
 
               detailedMap.set(location.id, true);
@@ -377,7 +366,7 @@ export class Tripez {
           }
         } else if (item.routeId) {
           // 处理路线
-          const route = this.model.routes.find((r) => r.id === item.routeId);
+          const route = model.routes.find((r) => r.id === item.routeId);
           if (route) {
             // 确保距离和时间是有效的数字
             const distance = !isNaN(route.distance) ? route.distance : 0;
@@ -393,14 +382,13 @@ export class Tripez {
 
     // 收集并添加地理信息
     const geoLines = [];
-    for (const loc of this.model.locations) {
+    for (const loc of model.locations) {
       if (loc.latlng) {
         geoLines.push(toGeolocationText(loc));
       }
     }
 
     if (geoLines.length > 0) {
-      lines.push('');
       lines.push('');
       lines.push('='.repeat(20)); // 分隔线
       lines.push(...geoLines);
@@ -418,7 +406,7 @@ export class Tripez {
   /**
    * 从YAML格式解析行程
    * @param {string} yamlText YAML文本
-   * @returns {Tripez} 行程对象
+   * @returns {TripezModel} TripezModel实例
    * @throws {Error} 如果YAML格式无效或缺少必要字段
    */
   static fromYaml(yamlText) {
@@ -437,7 +425,7 @@ export class Tripez {
       throw new Error('Invalid YAML: must contain a valid trip object');
     }
 
-    const trip = new Tripez();
+    const model = new TripezModel();
 
     // 验证并加载数据
     const validateArray = (arr, name) => {
@@ -453,46 +441,47 @@ export class Tripez {
 
     if (data.locations) {
       validateArray(data.locations, 'locations');
-      trip.model.locations = data.locations;
+      model.locations = data.locations;
     }
     if (data.destinations) {
       validateArray(data.destinations, 'destinations');
-      trip.model.destinations = data.destinations;
+      model.destinations = data.destinations;
     }
     if (data.routes) {
       validateArray(data.routes, 'routes');
-      trip.model.routes = data.routes;
+      model.routes = data.routes;
     }
     if (data.scheduleDays) {
       validateArray(data.scheduleDays, 'scheduleDays');
-      trip.model.scheduleDays = data.scheduleDays;
+      model.scheduleDays = data.scheduleDays;
     }
     if (data.scheduleItems) {
       validateArray(data.scheduleItems, 'scheduleItems');
-      trip.model.scheduleItems = data.scheduleItems;
+      model.scheduleItems = data.scheduleItems;
     }
 
     // 更新序列号生成器的起始值
     const maxId = Math.max(
-      ...trip.model.locations.map((l) => l.id),
-      ...trip.model.destinations.map((d) => d.id),
-      ...trip.model.routes.map((r) => r.id),
-      ...trip.model.scheduleDays.map((d) => d.id),
-      ...trip.model.scheduleItems.map((i) => i.id)
+      ...model.locations.map((l) => l.id),
+      ...model.destinations.map((d) => d.id),
+      ...model.routes.map((r) => r.id),
+      ...model.scheduleDays.map((d) => d.id),
+      ...model.scheduleItems.map((i) => i.id)
     );
     Tripez.nextId = Math.max(Tripez.nextId, maxId);
 
-    return trip;
+    return model;
   }
 
   /**
-   * 将行程转换为YAML格式
+   * 将TripezModel转换为YAML格式
+   * @param {TripezModel} model TripezModel实例
    * @returns {string} YAML文本
    */
-  toYaml() {
+  static toYaml(model) {
     try {
       // 准备locations数据，确保latlng字段正确序列化
-      const locations = this.model.locations.map((loc) => {
+      const locations = model.locations.map((loc) => {
         const { latlng, ...rest } = loc;
         if (latlng) {
           return { ...rest, latlng };
@@ -503,10 +492,10 @@ export class Tripez {
       return yaml.dump(
         {
           locations,
-          destinations: this.model.destinations,
-          routes: this.model.routes,
-          scheduleDays: this.model.scheduleDays,
-          scheduleItems: this.model.scheduleItems,
+          destinations: model.destinations,
+          routes: model.routes,
+          scheduleDays: model.scheduleDays,
+          scheduleItems: model.scheduleItems,
         },
         {
           indent: 2,
@@ -557,8 +546,8 @@ export class Tripez {
     });
   }
 
-  // 私有方法：处理一天的行程数据
-  _processDay(day, items) {
+  // 静态方法：处理一天的行程数据
+  static _processDay(day, items) {
     // 创建ScheduleDay
     const scheduleDay = {
       id: Tripez.generateId(),
@@ -568,6 +557,7 @@ export class Tripez {
       scheduleItemIds: [],
     };
 
+    const scheduleItems = [];
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       // 直接使用传入的scheduleItem，只需添加id
@@ -577,9 +567,12 @@ export class Tripez {
       };
 
       scheduleDay.scheduleItemIds.push(scheduleItem.id);
-      this.model.scheduleItems.push(scheduleItem);
+      scheduleItems.push(scheduleItem);
     }
 
-    this.model.scheduleDays.push(scheduleDay);
+    return {
+      scheduleDay,
+      scheduleItems
+    };
   }
 }
