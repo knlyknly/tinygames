@@ -1,11 +1,15 @@
 import yaml from 'js-yaml';
 import TripezModel from './tripez-model.mjs';
 import uuid from '../tools/uuid.mjs';
+import hash from '../tools/hash.mjs';
 import {
   REG_LOCATION_LINE,
   calcHoursBetween,
   toGeolocationText,
   fromGeolocationText,
+  toDayOrderText,
+  toScheduleDayText,
+  toScheduleItemText,
 } from './tripez-format.mjs';
 // 行程工具类
 export class Tripez {
@@ -24,6 +28,8 @@ export class Tripez {
     let lastLocation = null;
     let lastRouteInfo = null;
     let lastScheduleItemOfLocationType = null;
+    let currentDayInfo = null;
+    let currentWeekDate = null;
     const geolocations = []; // 存储解析到的地理信息
 
     for (let i = 0; i < lines.length; i++) {
@@ -47,7 +53,7 @@ export class Tripez {
         if (currentDay) {
           // 如果有scheduleItems，创建scheduleItemIds
           if (currentDayItems.length > 0) {
-            currentDay.scheduleItemIds = currentDayItems.map(item => item.id);
+            currentDay.scheduleItemIds = currentDayItems.map((item) => item.id);
           }
           model.scheduleDays.push(currentDay);
           model.scheduleItems.push(...currentDayItems);
@@ -55,8 +61,8 @@ export class Tripez {
         }
 
         const parts = line.split(' ').filter((part) => part.trim());
-        const dayInfo = parts[0];
-        const weekDate = parts[1];
+        currentDayInfo = parts[0];
+        currentWeekDate = parts[1];
         let distance = 0;
 
         // 检查是否有距离信息
@@ -69,10 +75,11 @@ export class Tripez {
         }
 
         currentDay = {
-          id: uuid(),
-          order: parseInt(dayInfo.replace('d', '')),
-          date: weekDate.split('-')[1],
-          weekday: parseInt(weekDate.split('-')[0].replace('w', '')),
+          id: hash(currentDayInfo),
+          name: `${currentDayInfo} ${currentWeekDate}`,
+          order: parseInt(currentDayInfo.replace('d', '')),
+          date: currentWeekDate.split('-')[1],
+          weekday: parseInt(currentWeekDate.split('-')[0].replace('w', '')),
           distance: distance,
         };
         lastLocation = null;
@@ -112,7 +119,7 @@ export class Tripez {
               let dest = model.destinations.find((l) => l.name === d);
               if (!dest) {
                 dest = {
-                  id: uuid(),
+                  id: hash(d),
                   name: d,
                 };
                 model.destinations.push(dest);
@@ -120,12 +127,13 @@ export class Tripez {
               return dest;
             });
             // 创建新地点
-            const locationId = uuid();
             location = {
-              id: locationId,
+              id: hash(mainLocation),
               name: mainLocation,
-              altitude: altitude ? parseInt(altitude) : null,
             };
+            if (altitude >= 0) {
+              location.altitude = altitude * 1;
+            }
             if (dests?.length > 0) {
               location.destinationIds = dests.map((d) => d.id);
             }
@@ -133,8 +141,10 @@ export class Tripez {
           }
 
           // 创建地点项
+          const scheduleItemSummary = `${currentDayInfo} ${time} ${location.name}`;
           const scheduleItem = {
-            id: uuid(),
+            id: hash(scheduleItemSummary),
+            name: scheduleItemSummary,
             type: 'location',
             locationId: location.id,
             time: time,
@@ -143,7 +153,7 @@ export class Tripez {
           // 处理route
           if (lastLocation && lastRouteInfo) {
             // 算出scheduleItem.lastScheduleItemOfLocationType.time之间相差的小时数
-            let hourDiff = calcHoursBetween(scheduleItem.time, lastScheduleItemOfLocationType.time);
+            let hourDiff = calcHoursBetween(lastScheduleItemOfLocationType.time, scheduleItem.time);
             // 如果相差的小时数大于lastRouteInfo的duration，那么认为多出来的部分为lastScheduleItem的stayTime
             if (hourDiff > lastRouteInfo.duration) {
               lastScheduleItemOfLocationType.stayTime = hourDiff - lastRouteInfo.duration;
@@ -152,50 +162,53 @@ export class Tripez {
             let route = model.routes.find(
               (r) => r.startLocationId === lastLocation.id && r.endLocationId === location.id
             );
-            // if the route doesn't exist, try find the backward route
-            if (!route) {
+            // check if route exists
+            if (route) {
+              // update the duration
+              route.durationForward = lastRouteInfo.duration;
+            } else {
+              // if the route doesn't exist, try find the backward route
               route = model.routes.find(
                 (r) => r.startLocationId === location.id && r.endLocationId === lastLocation.id
               );
-              if (!route) {
+              // check if backward route exists
+              if (route) {
+                // check if possibly same route, if route.distance is too different to lastRouteInfo.distance
+                let possiblySameRoute =
+                  Math.abs(route.distance - lastRouteInfo.distance) < route.distance * 0.05;
+                if (possiblySameRoute) {
+                  route.durationBackward = lastRouteInfo.duration;
+                } else {
+                  // create another route for lastLocation → location because it's actually another route
+                  const newRoute = {
+                    id: hash(`${lastLocation.name} → ${location.name}`),
+                    name: `${lastLocation.name} → ${location.name}`,
+                    startLocationId: location.id,
+                    endLocationId: lastLocation.id,
+                    distance: lastRouteInfo.distance,
+                    durationForward: lastRouteInfo.duration,
+                  };
+                  model.routes.push(newRoute);
+                  route = newRoute;
+                }
+              } else {
                 route = {
-                  id: uuid(),
+                  id: hash(`${lastLocation.name} → ${location.name}`),
                   name: `${lastLocation.name} → ${location.name}`,
                   startLocationId: lastLocation.id,
                   endLocationId: location.id,
                   distance: lastRouteInfo.distance,
                   durationForward: lastRouteInfo.duration,
-                  durationBackward: lastRouteInfo.duration,
                 };
                 model.routes.push(route);
-              } else {
-                // check if route.distance is too different to lastRouteInfo.distance
-                if (Math.abs(route.distance - lastRouteInfo.distance) > route.distance * 0.05) {
-                  // create another route for lastLocation → location because it's actually another route
-                  const routeId = uuid();
-                  const newRoute = {
-                    id: routeId,
-                    name: `${lastLocation.name} → ${location.name}`,
-                    startLocationId: lastLocation.id,
-                    endLocationId: location.id,
-                    distance: lastRouteInfo.distance,
-                    durationForward: lastRouteInfo.duration,
-                    durationBackward: lastRouteInfo.duration,
-                  };
-                  model.routes.push(newRoute);
-                  route = newRoute;
-                } else {
-                  route.durationBackward = lastRouteInfo.duration;
-                }
               }
-            } else {
-              // update the duration
-              route.durationForward = lastRouteInfo.duration;
             }
 
             // 创建route类型的ScheduleItem
+            const scheduleItemSummary = `${route.name} ${currentDayInfo} ${lastScheduleItemOfLocationType.time}-${scheduleItem.time}`
             currentDayItems.push({
-              id: uuid(),
+              id: hash(scheduleItemSummary),
+              name: scheduleItemSummary,
               type: 'route',
               routeId: route.id,
               direction: route.startLocationId === lastLocation.id ? 'forward' : 'backward',
@@ -242,7 +255,7 @@ export class Tripez {
     if (currentDay) {
       // 如果有scheduleItems，创建scheduleItemIds
       if (currentDayItems.length > 0) {
-        currentDay.scheduleItemIds = currentDayItems.map(item => item.id);
+        currentDay.scheduleItemIds = currentDayItems.map((item) => item.id);
       }
       model.scheduleDays.push(currentDay);
       model.scheduleItems.push(...currentDayItems);
@@ -256,8 +269,8 @@ export class Tripez {
         if (!location) {
           // 创建新location
           location = {
-                          id: uuid(),
-                          name: geo.name,
+            id: hash(geo.name),
+            name: geo.name,
           };
           model.locations.push(location);
         }
@@ -276,15 +289,14 @@ export class Tripez {
    * @param {boolean} [options.compactMode=false] 是否使用紧凑模式
    * @returns {string} 行程文本
    */
+
   static toText(model, options = {}) {
     const lines = [];
     const detailedMap = new Map(); // 记录已显示详细信息的locationId
 
     for (const day of model.scheduleDays) {
       // 获取当天的行程项
-      const dayItems = model.scheduleItems.filter((item) =>
-        day.scheduleItemIds.includes(item.id)
-      );
+      const dayItems = model.scheduleItems.filter((item) => day.scheduleItemIds.includes(item.id));
 
       // 计算当天的总距离（直接从scheduleItem获取）
       let totalDistance = 0;
@@ -295,95 +307,22 @@ export class Tripez {
       }
 
       // 添加日期行
-      let dayLine;
-      if (day.order >= 0) {
-        // 正数天数，格式为 "d1", "d2", ...
-        dayLine = `d${day.order}`;
-      } else {
-        // 负数天数，格式为 "-2d", "-1d", ...
-        // 注意：这里不能直接使用 day.order，因为它可能是字符串
-        const order = parseInt(day.order);
-        dayLine = `${order}d`;
-      }
-      // 使用原始的星期信息
-      const weekday = typeof day.weekday === 'number' ? `w${day.weekday}` : 'w0';
-      const date = day.date || '';
-      dayLine = `${dayLine} ${weekday}-${date}`;
-      if (totalDistance > 0) {
-        dayLine += ` ${totalDistance}km`;
-      }
-      lines.push(dayLine);
+      lines.push(toScheduleDayText(day, totalDistance));
 
       // 添加分隔行
       lines.push('='.repeat(20));
 
       for (let i = 0; i < dayItems.length; i++) {
         const item = dayItems[i];
-        if (item.locationId) {
-          // 处理地点
-          const location = model.locations.find((l) => l.id === item.locationId);
-          if (location) {
-            let locationLine = `${item.time} ${location.name}`;
-
-            // 检查是否满足紧凑模式条件
-            const hasNoMuchExtraInfo =
-              (location.altitude ? 1 : 0) + (location.destinationIds?.length || 0) <= 1;
-            const willHideExtraInfo = detailedMap.has(location.id);
-            let compactRouteText = '';
-
-            if (options.compactMode && (hasNoMuchExtraInfo || willHideExtraInfo)) {
-              // 紧凑模式：检查下一个项是否为route类型
-              const nextItem = dayItems[i + 1];
-              if (nextItem && nextItem.type === 'route') {
-                compactRouteText = `(${nextItem.distance}km-${nextItem.duration}h)`;
-              }
-            }
-
-            // 第一次出现时显示目的地和海拔
-            if (!detailedMap.has(location.id)) {
-              // 添加目的地
-              if (location.destinationIds?.length > 0) {
-                const destinations = location.destinationIds
-                  .map((id) => model.destinations.find((d) => d.id === id))
-                  .filter(Boolean)
-                  .map((d) => d.name);
-                locationLine += '&' + destinations.join('&');
-              }
-
-              // 添加海拔
-              if (location.altitude) {
-                locationLine += `⩘${location.altitude}`;
-              }
-
-              detailedMap.set(location.id, true);
-            }
-
-            if (compactRouteText) {
-              locationLine += compactRouteText;
-              // 跳过下一个route项的处理
-              i++;
-            }
-
-            lines.push(locationLine);
-
-            // 添加描述
-            if (item.additionDescriptions) {
-              for (const desc of item.additionDescriptions) {
-                // 保留原始缩进格式
-                lines.push(`      ${desc}`);
-              }
-            }
-          }
-        } else if (item.routeId) {
-          // 处理路线
-          const route = model.routes.find((r) => r.id === item.routeId);
-          if (route) {
-            // 确保距离和时间是有效的数字
-            const distance = !isNaN(route.distance) ? route.distance : 0;
-            const duration = !isNaN(route.durationForward) ? route.durationForward : 0;
-            lines.push(`    ↓ (${distance}km-${duration}h)`);
-          }
-        }
+        const context = {
+          detailedMap,
+          options,
+          dayItems,
+          index: i
+        };
+        const { lines: itemLines, newIndex } = toScheduleItemText(item, model, context);
+        lines.push(...itemLines);
+        i = newIndex;
       }
 
       // 添加空行
