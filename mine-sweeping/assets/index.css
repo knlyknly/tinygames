@@ -88,3 +88,20 @@
 .board.fail td.choosed .icon {
   background-color: #ffafaf;
 }
+
+/* preload the icons to avoid the loading delay at the first click */
+body:after {
+  content: ' ';
+  background-image: url(flag.png), url(mine.png);
+  background-size: 100%;
+  position: fixed;
+  right: 100%;
+  bottom: 100%;
+  width: 100px;
+  height: 100px;
+  z-index: -1;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s ease-in-out;
+}
