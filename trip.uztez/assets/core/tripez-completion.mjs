@@ -79,11 +79,6 @@ export const completeDaysDates = (days) => {
 
   // 补全每一天的日期信息
   return days.map(dayItem => {
-    // 如果已有日期信息，保留原值
-    if (dayItem.date !== undefined) {
-      return dayItem;
-    }
-
     // 计算与参考天的差距，考虑跨越day0的情况
     let dayDiff = dayItem.order - referenceDay.order;
     
@@ -184,3 +179,4 @@ export const forceOrderDays = (days, sinceIndex = undefined) => {
 
   return result;
 };
+

@@ -789,9 +789,9 @@ scheduleDays:
       - 26686536999e677361508cef97ca76b3
   - id: e53125275854402400f74fd6ab3f7659
     order: 3
-    date: '0728'
+    date: '0729'
     weekday: 1
-    name: d3 w1-0728
+    name: d3 w1-0729
     scheduleItemIds:
       - 1ee7a2b795338fb8f7c8d6343d6a8978
       - 8e4e3ed708550e92214147824b0f2dec
