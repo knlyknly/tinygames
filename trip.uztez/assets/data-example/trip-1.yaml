@@ -723,11 +723,11 @@ routes:
     durationForward: 2
 scheduleDays:
   - id: 948e0cbce5a99e1e3401c0bb075368dd
-    name: '-2d w4-0724'
     order: -2
     date: '0724'
     weekday: 4
     distance: 247
+    name: '-2d w4-0724'
     scheduleItemIds:
       - a2a3011e2d126235959c9f1cbf4ce37d
       - 7dd9088d27cc039ce05ab18843837f44
@@ -737,11 +737,11 @@ scheduleDays:
       - 00d6f00312afcf6e97ac0415a6436c77
       - abc6dd222bcf13ff8ff5498bb1ac24a1
   - id: 9702fc9c0f04d91d2b2060319f8f7ba6
-    name: '-1d w5-0725'
     order: -1
     date: '0725'
     weekday: 5
     distance: 130
+    name: '-1d w5-0725'
     scheduleItemIds:
       - fd6064bff4c29b1fac68cc23d3972587
       - ccdcc822d2f5d07db7579fd56807973b
@@ -751,11 +751,11 @@ scheduleDays:
       - bffcd2cc83139ebc03b0f7e07668fb04
       - 54851280a813f300625617956fcacce0
   - id: 9948c645c094247794f4c7acdbeb2bb6
-    name: d1 w6-0726
     order: 1
     date: '0726'
     weekday: 6
     distance: 362
+    name: d1 w6-0726
     scheduleItemIds:
       - 89f1b475e576f2ea0180f2b990fb022a
       - de7a0d906d44200cc3941824a23db05c
@@ -767,11 +767,10 @@ scheduleDays:
       - 69e8e0c52732994f0b5272b785589ec3
       - 885741a84b68b635ee6913eda2c84ce1
   - id: b25b0651e4b6e887e5194135d3692631
-    name: d2 w0-0727
     order: 2
     date: '0727'
     weekday: 0
-    distance: 0
+    name: d2 w0-0727
     scheduleItemIds:
       - f6b643403b5a565ef2f311f6d566cf5a
       - 2a7270aa4e4d580a6b5463dc699e09cd
@@ -789,11 +788,10 @@ scheduleDays:
       - 9a2fd3f966f52abaa008562199b8aecd
       - 26686536999e677361508cef97ca76b3
   - id: e53125275854402400f74fd6ab3f7659
-    name: d3 w1-0728
     order: 3
     date: '0728'
     weekday: 1
-    distance: 0
+    name: d3 w1-0728
     scheduleItemIds:
       - 1ee7a2b795338fb8f7c8d6343d6a8978
       - 8e4e3ed708550e92214147824b0f2dec
@@ -813,11 +811,8 @@ scheduleDays:
       - 8049f7d2cc4eaaa8bb903f69303250cf
       - 1820c19f499a161181b966baccca7d54
   - id: ae11976937537e4c1206237dea035331
-    name: d4 w2-0729
     order: 4
-    date: '0729'
-    weekday: 2
-    distance: 0
+    name: d4
     scheduleItemIds:
       - afe4237e5bb42e8e5f0df21f58e2bc22
       - 73353b8c8d3bb63e8c5edb003031f2fb
@@ -837,11 +832,10 @@ scheduleDays:
       - a580a4410449fa9746d24596bcf64305
       - 8c20ce8c36d577b58acf9e6b7c9bb42f
   - id: b9884d9c846186c2a5426d7f46393de8
-    name: d5 w3-0730
     order: 5
     date: '0730'
     weekday: 3
-    distance: 0
+    name: d5 w3-0730
     scheduleItemIds:
       - 4b58ddd72994edbbed166a433a505861
       - 1d461dedaea91bb46908497b2c026151
@@ -857,11 +851,10 @@ scheduleDays:
       - e0f3d0a1694f25de050bb1dba45887f6
       - 1174b838458136690dc70f456bebe7d8
   - id: 45f9901d0370bc0facb9220619e6cbd7
-    name: d6 w4-0731
     order: 6
     date: '0731'
     weekday: 4
-    distance: 0
+    name: d6 w4-0731
     scheduleItemIds:
       - ddcba521b4b7d440f54b5225942cd17d
       - d8171b27a42b62af2624e93b9a373992
@@ -873,11 +866,10 @@ scheduleDays:
       - d2ea156317773a2acd001a52088859a0
       - 18b81bedabda78cda7d31d03494bfbb0
   - id: fa56b8fc724c2a681736c0d122336b98
-    name: d7 w5-0801
     order: 7
     date: '0801'
     weekday: 5
-    distance: 0
+    name: d7 w5-0801
     scheduleItemIds:
       - 63d453bb3327c99e3be0af9c320247e3
       - 6579c013b189c5dc3fbadd6d3e627d27
@@ -894,11 +886,10 @@ scheduleDays:
       - 8cf3d903b63d35b7fa8d89b55fe4cb73
       - 50cb47aa7cc5f70941ff8f344ee9121c
   - id: 83c2d09a5dd1d1c5f4f7f484450be380
-    name: d8 w6-0802
     order: 8
     date: '0802'
     weekday: 6
-    distance: 0
+    name: d8 w6-0802
     scheduleItemIds:
       - 1dc10f7b5ca7276f1cff1f63dc67abaa
       - b31c8290e54745dfa46fb1c8a7f8aa7a
@@ -914,11 +905,10 @@ scheduleDays:
       - dbeecfa59e9dd23b8a9130e290263f37
       - 9e8d7ff75632a032c987e5faf1a30d82
   - id: 87de66479aea0306221cb868869748ec
-    name: d9 w0-0803
     order: 9
     date: '0803'
     weekday: 0
-    distance: 0
+    name: d9 w0-0803
     scheduleItemIds:
       - 00914c87255725866216a2ca65aec595
       - a250ccae1a10179b5851fccf658306c2
@@ -934,11 +924,10 @@ scheduleDays:
       - ac1324d68d565655e4b03d3d2edc8391
       - 4aa2f0f5c7b20cc522aa86dce9d1dec0
   - id: 1f7737302a7894ee3ec19d62230238ae
-    name: d10 w1-0804
     order: 10
     date: '0804'
     weekday: 1
-    distance: 0
+    name: d10 w1-0804
     scheduleItemIds:
       - 55bedd4a08f265e7806b54b05afb0113
       - fb3e675e1f211b412731ed67e78be940
@@ -951,11 +940,10 @@ scheduleDays:
       - 3af482d4fd0e40c61226abd76e61d843
       - 763854efdefc6eccc7f33be7ca4de7f7
   - id: 41012ddde92340324f2588ba57878686
-    name: d11 w2-0805
     order: 11
     date: '0805'
     weekday: 2
-    distance: 0
+    name: d11 w2-0805
     scheduleItemIds:
       - 1e3bf8f3e80c9955154c567d47a4df52
       - 37db90c2fd642be2d233dbe73872dceb
@@ -969,11 +957,10 @@ scheduleDays:
       - 14610624f6d148ef7f6ff89b5997f874
       - 564543d4cee793daf79f0f3a83df0cbe
   - id: 209014ef5d519d8f9e9ab107d554e96b
-    name: d12 w3-0806
     order: 12
     date: '0806'
     weekday: 3
-    distance: 0
+    name: d12 w3-0806
     scheduleItemIds:
       - 940e2b6335e65d0a80c06e6cfb7fc236
       - fd8a8932b9ce76cf21a9d681dbc57978
@@ -988,11 +975,10 @@ scheduleDays:
       - 3bdb87f68af95a40e16e594ce23016e1
       - e826be9c5395ef0baa0e8cb092555748
   - id: 5099dbb9bce2aa857d5c3fd3d88db83d
-    name: d13 w4-0807
     order: 13
     date: '0807'
     weekday: 4
-    distance: 0
+    name: d13 w4-0807
     scheduleItemIds:
       - 2445bfb79cd8f37be7a59265aa7580c8
       - df8a04c7bdf8b7d5b903391d4ef01388
@@ -1006,11 +992,10 @@ scheduleDays:
       - 663bdae1ec5f90fee55b4b16083b806f
       - afc60b4b59095b5827ca542b1c8ebf2e
   - id: 50b05158007666ea639217e9ed49acee
-    name: d14 w5-0808
     order: 14
     date: '0808'
     weekday: 5
-    distance: 0
+    name: d14 w5-0808
     scheduleItemIds:
       - ba54a7388d528525bae6b70c3f2fd306
       - ad474e8d71eee6e4f1f092094d3d8774

@@ -4,6 +4,7 @@ import {
   REG_LOCATION_LINE,
   calcHoursBetween,
   fromGeolocationText,
+  fromScheduleDayText,
 } from './tripez-format.mjs';
 
 /**
@@ -48,7 +49,7 @@ export function fromText(text) {
     }
 
     // 解析日期行
-    if (line.match(/^(?:[-]?\d+d|d\d+)\s+w\d-\d{4}/)) {
+    if (line.match(/^(?:[-]?\d+d|d\d+)/)) {
       if (currentDay) {
         // 如果有scheduleItems，创建scheduleItemIds
         if (currentDayItems.length > 0) {
@@ -59,28 +60,10 @@ export function fromText(text) {
         currentDayItems = [];
       }
 
-      const parts = line.split(' ').filter((part) => part.trim());
-      currentDayInfo = parts[0];
-      currentWeekDate = parts[1];
-      let distance = 0;
-
-      // 检查是否有距离信息
-      const distancePart = parts.find((part) => part.includes('km'));
-      if (distancePart) {
-        const distanceMatch = distancePart.match(/(\d+)km/);
-        if (distanceMatch) {
-          distance = parseInt(distanceMatch[1]);
-        }
-      }
-
-      currentDay = {
-        id: hash(currentDayInfo),
-        name: `${currentDayInfo} ${currentWeekDate}`,
-        order: parseInt(currentDayInfo.replace('d', '')),
-        date: currentWeekDate.split('-')[1],
-        weekday: parseInt(currentWeekDate.split('-')[0].replace('w', '')),
-        distance: distance,
-      };
+      // 使用fromScheduleDayText解析日期行
+      currentDay = fromScheduleDayText(line);
+      currentDayInfo = currentDay.name.split(' ')[0]; // 获取day number部分
+      currentWeekDate = currentDay.date ? `w${currentDay.weekday}-${currentDay.date}` : null;
       lastLocation = null;
       lastRouteInfo = null;
       continue;
