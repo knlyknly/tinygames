@@ -3,19 +3,45 @@ import {
   toScheduleDayText,
   toScheduleItemText,
 } from './tripez-format.mjs';
+import { completeDays, forceOrderDays } from './tripez-completion.mjs';
 
 /**
  * 将TripezModel转换为文本格式
  * @param {TripezModel} model TripezModel实例
  * @param {Object} [options] 输出选项
  * @param {boolean} [options.compactMode=false] 是否使用紧凑模式
+ * @param {boolean} [options.forceDaysContinuous=false] 是否强制天数连续
  * @returns {string} 行程文本
  */
 export function toText(model, options = {}) {
   const lines = [];
   const detailedMap = new Map(); // 记录已显示详细信息的locationId
+  
+  // 处理scheduleDays，确保天数连续并补全日期和星期信息
+  let scheduleDays = [...model.scheduleDays];
+  
+  // 如果需要强制天数连续
+  if (options.forceDaysContinuous) {
+    scheduleDays = forceOrderDays(scheduleDays);
+    // 更新每一天的name字段以反映新的order
+    scheduleDays = scheduleDays.map(day => {
+      const newDayInfo = day.order > 0 ? `d${day.order}` : `${day.order}d`;
+      const nameParts = day.name.split(' ');
+      if (nameParts[0] !== newDayInfo) {
+        nameParts[0] = newDayInfo;
+        return {
+          ...day,
+          name: nameParts.join(' ')
+        };
+      }
+      return day;
+    });
+  }
+  
+  // 补全日期和星期信息
+  scheduleDays = completeDays(scheduleDays);
 
-  for (const day of model.scheduleDays) {
+  for (const day of scheduleDays) {
     // 获取当天的行程项
     const dayItems = model.scheduleItems.filter((item) => day.scheduleItemIds.includes(item.id));
 

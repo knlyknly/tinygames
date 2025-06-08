@@ -974,36 +974,34 @@ scheduleDays:
       - e79a4efa45d36a2b4766c6f7d45b5c96
       - 3bdb87f68af95a40e16e594ce23016e1
       - e826be9c5395ef0baa0e8cb092555748
-  - id: 5099dbb9bce2aa857d5c3fd3d88db83d
-    order: 13
-    date: '0807'
-    weekday: 4
-    name: d13 w4-0807
-    scheduleItemIds:
-      - 2445bfb79cd8f37be7a59265aa7580c8
-      - df8a04c7bdf8b7d5b903391d4ef01388
-      - 93580975fbd7a08da2fa7845ef2d02d1
-      - ce98c06dc788a6787d2bb589db9e8890
-      - 7f9f0b3c29cdb9cf2e100d6331e81fa5
-      - c44891f5eab79618f56f8ad203132f6f
-      - e5ddb3e368636b574c974e13c54d759a
-      - a1ce6add58d3a0882b59c1a40bd72017
-      - 4e336edb2f277c846caf48c09f35fe6f
-      - 663bdae1ec5f90fee55b4b16083b806f
-      - afc60b4b59095b5827ca542b1c8ebf2e
   - id: 50b05158007666ea639217e9ed49acee
     order: 14
+    name: d14
+    scheduleItemIds:
+      - ade66328a205a75ff37ecfe986060df3
+      - 8d37f75fa0ae80e486d61c0ea7ef3d45
+      - 2a78f286a53573f00c0cbb5b626ecf09
+      - 5d8228107b6d3f4299faf9dcec7596df
+      - 0cba36fcc06c5ee4e413f0faf7901f54
+      - 3010fbeab0a28992769e02704afd33eb
+      - 4986046288f1da14ceb1cca822aa06ab
+      - a3f9da570a37468740f74074782c896b
+      - 4151e7193457c6acf3a4e4e8fcf72554
+      - 20e2e60d95967a0483cc0cea10f9dd7b
+      - 191ae3b9927626624517d77b11da292e
+  - id: facb303d3a998c2f7f7b2551e7446c38
+    order: 15
     date: '0808'
     weekday: 5
-    name: d14 w5-0808
+    name: d15 w5-0808
     scheduleItemIds:
-      - ba54a7388d528525bae6b70c3f2fd306
-      - ad474e8d71eee6e4f1f092094d3d8774
-      - 80b592f43d56322fff0036366e96b056
-      - e3d4efe666efd98fcbedde3055d1ec3e
-      - 8b340f3eb84d938b76a756ec1ea107fa
-      - f6a6f93762ae89c54d1ee543abad52d4
-      - 468037013e313742ff70f13ca820bd17
+      - 226d4d0d730d366590daed9fe6be7048
+      - 0a58669b9eec0a9a27fb76fb455392da
+      - 5ef239bef3ed4cfddd3388c76ec0d296
+      - c4c952bb3d77678797825ed0326f2423
+      - 18490412413bd8e14e2c02e3900f671a
+      - 2ee7d57e9ef70b69b0626581e7860863
+      - 3f6954db9a2285a3ed9b7c89ee1fc992
 scheduleItems:
   - id: a2a3011e2d126235959c9f1cbf4ce37d
     name: '-2d 18:00 成都市'
@@ -2092,124 +2090,124 @@ scheduleItems:
     time: '20:00'
     additionDescriptions:
       - ★ 等日落
-  - id: 2445bfb79cd8f37be7a59265aa7580c8
-    name: d13 06:00 珠峰大本营
+  - id: ade66328a205a75ff37ecfe986060df3
+    name: d14 06:00 珠峰大本营
     type: location
     locationId: 1a128415b49f1c2325e33da131f61c25
     time: '06:00'
     additionDescriptions:
       - ★ 等日出
-  - id: df8a04c7bdf8b7d5b903391d4ef01388
-    name: d13 09:00 珠峰大本营
+  - id: 8d37f75fa0ae80e486d61c0ea7ef3d45
+    name: d14 09:00 珠峰大本营
     type: location
     locationId: 1a128415b49f1c2325e33da131f61c25
     time: '09:00'
     additionDescriptions:
       - ★ 乘坐大巴
-  - id: 93580975fbd7a08da2fa7845ef2d02d1
-    name: d13 10:00 珠峰大本营停车点
+  - id: 2a78f286a53573f00c0cbb5b626ecf09
+    name: d14 10:00 珠峰大本营停车点
     type: location
     locationId: 16c1f7b0f239f41207ef3bd7aaad25e9
     time: '10:00'
-  - id: ce98c06dc788a6787d2bb589db9e8890
-    name: d13 10:00-11:00 加乌拉山口 → 珠峰大本营停车点
+  - id: 5d8228107b6d3f4299faf9dcec7596df
+    name: d14 10:00-11:00 加乌拉山口 → 珠峰大本营停车点
     type: route
     routeId: e86dbca6bd4ac3dd6a62728e41bc9c7f
     direction: backward
     distance: 28
     duration: 1
-  - id: 7f9f0b3c29cdb9cf2e100d6331e81fa5
-    name: d13 11:00 加乌拉山口
+  - id: 0cba36fcc06c5ee4e413f0faf7901f54
+    name: d14 11:00 加乌拉山口
     type: location
     locationId: 6ddcc0f4a00d16ef54c0a32b8fa5b22c
     time: '11:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: c44891f5eab79618f56f8ad203132f6f
-    name: d13 11:00-12:00 加乌拉山口 → 定日县
+  - id: 3010fbeab0a28992769e02704afd33eb
+    name: d14 11:00-12:00 加乌拉山口 → 定日县
     type: route
     routeId: 88d05cebb9d3617237d52a39bebb5d31
     direction: forward
     distance: 40
     duration: 1
-  - id: e5ddb3e368636b574c974e13c54d759a
-    name: d13 12:00 定日县
+  - id: 4986046288f1da14ceb1cca822aa06ab
+    name: d14 12:00 定日县
     type: location
     locationId: addd9ec30f995701b1cb0a82d2eb8021
     time: '12:00'
     additionDescriptions:
       - φ 右转179km奇林峡
-  - id: a1ce6add58d3a0882b59c1a40bd72017
-    name: d13 12:00-15:00 定日县 → 318国道5000km纪念碑
+  - id: a3f9da570a37468740f74074782c896b
+    name: d14 12:00-15:00 定日县 → 318国道5000km纪念碑
     type: route
     routeId: 742465b158fdc5254fdd8cebcb712d9d
     direction: forward
     distance: 139
     duration: 3
-  - id: 4e336edb2f277c846caf48c09f35fe6f
-    name: d13 15:00 318国道5000km纪念碑
+  - id: 4151e7193457c6acf3a4e4e8fcf72554
+    name: d14 15:00 318国道5000km纪念碑
     type: location
     locationId: 8b5c3b9392b1abe556784c6baa2725ba
     time: '15:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: 663bdae1ec5f90fee55b4b16083b806f
-    name: d13 15:00-17:00 318国道5000km纪念碑 → 日喀则市
+  - id: 20e2e60d95967a0483cc0cea10f9dd7b
+    name: d14 15:00-17:00 318国道5000km纪念碑 → 日喀则市
     type: route
     routeId: 3463d11c9d2823a9c777bb60c6d74a14
     direction: forward
     distance: 99
     duration: 2
-  - id: afc60b4b59095b5827ca542b1c8ebf2e
-    name: d13 17:00 日喀则市
+  - id: 191ae3b9927626624517d77b11da292e
+    name: d14 17:00 日喀则市
     type: location
     locationId: 18c2c334620232cd502712277a20b529
     time: '17:00'
-  - id: ba54a7388d528525bae6b70c3f2fd306
-    name: d14 08:00 日喀则市
+  - id: 226d4d0d730d366590daed9fe6be7048
+    name: d15 08:00 日喀则市
     type: location
     locationId: 18c2c334620232cd502712277a20b529
     time: '08:00'
     stayTime: 1
-  - id: ad474e8d71eee6e4f1f092094d3d8774
-    name: d14 08:00-12:00 日喀则市 → 卡若拉冰川
+  - id: 0a58669b9eec0a9a27fb76fb455392da
+    name: d15 08:00-12:00 日喀则市 → 卡若拉冰川
     type: route
     routeId: 57cbce7f28961d8cf44839f51f73d299
     direction: forward
     distance: 165
     duration: 3
-  - id: 80b592f43d56322fff0036366e96b056
-    name: d14 12:00 卡若拉冰川
+  - id: 5ef239bef3ed4cfddd3388c76ec0d296
+    name: d15 12:00 卡若拉冰川
     type: location
     locationId: 990806d6c224471d2d8de429a85af8a8
     time: '12:00'
     additionDescriptions:
       - ★ 拍摄视频
     stayTime: 1
-  - id: e3d4efe666efd98fcbedde3055d1ec3e
-    name: d14 12:00-14:00 卡若拉冰川 → 羊卓雍错
+  - id: c4c952bb3d77678797825ed0326f2423
+    name: d15 12:00-14:00 卡若拉冰川 → 羊卓雍错
     type: route
     routeId: 406eb9f319d7c9641bf1a5cfe9da41a0
     direction: forward
     distance: 68
     duration: 1
-  - id: 8b340f3eb84d938b76a756ec1ea107fa
-    name: d14 14:00 羊卓雍错
+  - id: 18490412413bd8e14e2c02e3900f671a
+    name: d15 14:00 羊卓雍错
     type: location
     locationId: 1dbdb2d6bcc7fde04906c38edb4a1dd2
     time: '14:00'
     additionDescriptions:
       - ★ 拍摄视频
     stayTime: 1
-  - id: f6a6f93762ae89c54d1ee543abad52d4
-    name: d14 14:00-17:00 羊卓雍错 → 拉萨
+  - id: 2ee7d57e9ef70b69b0626581e7860863
+    name: d15 14:00-17:00 羊卓雍错 → 拉萨
     type: route
     routeId: e8228d2303c4dd1c05407885d62fe5db
     direction: forward
     distance: 108
     duration: 2
-  - id: 468037013e313742ff70f13ca820bd17
-    name: d14 17:00 拉萨
+  - id: 3f6954db9a2285a3ed9b7c89ee1fc992
+    name: d15 17:00 拉萨
     type: location
     locationId: c289438c5f921d1675ea8b1501902d85
     time: '17:00'
