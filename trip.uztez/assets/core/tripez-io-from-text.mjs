@@ -19,7 +19,7 @@ export function fromText(text) {
   }
 
   // 标准化行尾，确保在Windows和MacOS上行为一致
-  const normalizedText = text.replace(/\r\n/g, '\n');
+  const normalizedText = text.replace(/\r\n/g, '\n').replace('（', '(').replace('）', ')');
 
   const model = new TripezModel();
   const lines = normalizedText.split('\n');
