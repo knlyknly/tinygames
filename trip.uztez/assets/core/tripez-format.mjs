@@ -1,7 +1,7 @@
 import hash from '../tools/hash.mjs';
 
 // 正则表达式：匹配地点行格式
-export const REG_LOCATION_LINE = /^(\d{2}:\d{2})\s+([^↑(⩘]+)(?:[↑⩘](\d+))?([^(]*)(?:\s*\((.*?)\))?$/;
+export const REG_LOCATION_LINE = /^(\d{2}:\d{2})\s+([^↑(⊼]+)(?:[↑⊼](\d+))?([^(]*)(?:\s*\((.*?)\))?$/;
 
 // 计算两个时间之间相差几个小时
 export function calcHoursBetween(start, end) {
@@ -193,7 +193,7 @@ export function toScheduleItemText(item, model, context) {
 
         // 添加海拔
         if (location.altitude) {
-          locationLine += `⩘${location.altitude}`;
+          locationLine += `⊼${location.altitude}`;
         }
 
         context.detailedMap.set(location.id, true);
