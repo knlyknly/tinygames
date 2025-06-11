@@ -73,9 +73,9 @@ const testCases = [
             routeInfo: '59km-1h'
         }
     },
-    // 测试新的海拔标记 ⩘
+    // 测试新的海拔标记 ⊼
     {
-        input: '20:00 理塘⩘3000&亚丁村(35km-1.5h)',
+        input: '20:00 理塘⊼3000&亚丁村(35km-1.5h)',
         expected: {
             time: '20:00',
             location: '理塘',
@@ -85,7 +85,7 @@ const testCases = [
         }
     },
     {
-        input: '18:00 成都⩘512',
+        input: '18:00 成都⊼512',
         expected: {
             time: '18:00',
             location: '成都',
@@ -95,7 +95,7 @@ const testCases = [
         }
     },
     {
-        input: '23:00 泸定县⩘1321&泸定桥&大渡河',
+        input: '23:00 泸定县⊼1321&泸定桥&大渡河',
         expected: {
             time: '23:00',
             location: '泸定县',

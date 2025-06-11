@@ -180,3 +180,139 @@ export const forceOrderDays = (days, sinceIndex = undefined) => {
   return result;
 };
 
+/**
+ * 补全locations的经纬度信息
+ * @param {Array} locations - 地点数组
+ * @param {Function} queryLatLng - 异步函数，输入地名和locations，返回{latitude, longitude}
+ * @param {Object} options - 配置选项
+ * @param {number} [options.queryFrequency=2] - 查询频率（次/秒）
+ * @param {Function} [options.progressListener] - 进度监听回调函数
+ * @returns {Promise<Array>} 补全经纬度后的locations数组
+ */
+export const completeLocations = async (locations, queryLatLng, options = {}) => {
+  if (!Array.isArray(locations) || locations.length === 0) {
+    return locations;
+  }
+
+  // 设置默认选项
+  const {
+    queryFrequency = 2,
+    progressListener = () => {}
+  } = options;
+
+  // 计算查询间隔时间（毫秒）
+  const queryInterval = Math.ceil(1000 / queryFrequency);
+
+  // 找出所有需要补全经纬度的地点
+  const locationsToUpdate = locations.filter(loc => !loc.latlng);
+  const totalCount = locationsToUpdate.length;
+
+  // 如果没有需要更新的地点，直接返回
+  if (totalCount === 0) {
+    return locations;
+  }
+
+  // 创建一个新数组来存储结果
+  const result = [...locations];
+
+  // 用于控制查询频率的辅助函数
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+  // 记录上次查询的时间
+  let lastQueryTime = 0;
+
+  // 依次处理每个需要更新的地点
+  try {
+    for (let i = 0; i < locationsToUpdate.length; i++) {
+      const location = locationsToUpdate[i];
+      
+      // 计算需要等待的时间
+      const now = Date.now();
+      const timeSinceLastQuery = now - lastQueryTime;
+      if (timeSinceLastQuery < queryInterval) {
+        await delay(queryInterval - timeSinceLastQuery);
+      }
+
+      try {
+        // 查询经纬度
+        const coordinates = await queryLatLng(location.name, locations);
+        
+        // 更新地点信息
+        const index = result.findIndex(loc => loc.id === location.id);
+        if (index !== -1) {
+          result[index] = {
+            ...result[index],
+            latlng: coordinates
+          };
+        }
+
+        // 更新上次查询时间
+        lastQueryTime = Date.now();
+
+        // 通知成功结果
+        progressListener({
+          completed: i === locationsToUpdate.length - 1, // 只有在最后一个请求时才为true
+          progress: i + 1,
+          total: totalCount
+        });
+      } catch (error) {
+        // 构造详细的错误对象
+        const errorDetail = {
+          message: error.message,
+          name: error.name,
+          stack: error.stack,
+          phase: 'query',
+          location: location.name,
+          context: {
+            currentIndex: i,
+            totalLocations: totalCount,
+            failedLocation: location
+          }
+        };
+
+        // 将错误详情的字段复制到error对象上
+        error.phase = errorDetail.phase;
+        error.location = errorDetail.location;
+        error.context = errorDetail.context;
+
+        // 通知错误，包含详细的错误信息
+        progressListener({
+          completed: true, // 错误发生时表示操作结束
+          progress: i + 1,
+          total: totalCount,
+          current: location,
+          error: error
+        });
+        
+        throw error;
+      }
+    }
+  } catch (error) {
+    // 如果在循环外部发生错误且尚未通知，确保通知进度监听器
+    if (!error.notified) {
+      // 如果错误没有phase属性，设置为'general'
+      if (!error.phase) {
+        error.phase = 'general';
+        error.context = {
+          totalLocations: totalCount,
+          ...error.context
+        };
+      }
+
+      progressListener({
+        completed: true, // 错误发生时表示操作结束
+        progress: 0,
+        total: totalCount,
+        current: null,
+        error: error
+      });
+      
+      error.notified = true;
+    }
+    
+    // 重新抛出错误
+    throw error;
+  }
+
+  return result;
+};
