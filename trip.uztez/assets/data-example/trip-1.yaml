@@ -55,6 +55,8 @@ locations:
   - id: e9de7dd4fee790157824c72fd69824c4
     name: 姊妹湖
     altitude: 4486
+  - id: 10f43064ccadabeecf64d742edbad28c
+    name: 措普沟
   - id: fc338386719af80fbfa9941ee7331ebe
     name: 巴塘县
     altitude: 2580
@@ -350,12 +352,18 @@ routes:
     endLocationId: e9de7dd4fee790157824c72fd69824c4
     distance: 14
     durationForward: 1
-  - id: baac18be1c989031e8e688a3eb64bf41
-    name: 姊妹湖 → 巴塘县
+  - id: de7bad4cd84061939eda220dbfa5909b
+    name: 姊妹湖 → 措普沟
     startLocationId: e9de7dd4fee790157824c72fd69824c4
+    endLocationId: 10f43064ccadabeecf64d742edbad28c
+    distance: 28
+    durationForward: 1
+  - id: d114f2c06df31eba19f4a4b7ef25a1d9
+    name: 措普沟 → 巴塘县
+    startLocationId: 10f43064ccadabeecf64d742edbad28c
     endLocationId: fc338386719af80fbfa9941ee7331ebe
-    distance: 78
-    durationForward: 2
+    distance: 50
+    durationForward: 1
   - id: be0e0aa50fa374efd6715cacf7fe7142
     name: 巴塘县 → 金沙江大桥
     startLocationId: fc338386719af80fbfa9941ee7331ebe
@@ -785,8 +793,10 @@ scheduleDays:
       - ce1fcb15aadfaa3401020ecb9dec2ec7
       - 9d5dab9e3ed527803cd3af3e47558fa7
       - d7ff1662d066de2ebe8668b3c20c4581
-      - 9a2fd3f966f52abaa008562199b8aecd
-      - 26686536999e677361508cef97ca76b3
+      - 90e6c87990b836b8a62a98ad32b66942
+      - d013aec4819059c0308b187838022638
+      - 47f32b0bb4f3cf69a879621e7ae36af0
+      - 6bb8c8c78a5bdf68d167f8a38ddefd4b
   - id: e53125275854402400f74fd6ab3f7659
     order: 3
     date: '0729'
@@ -1229,18 +1239,32 @@ scheduleItems:
     time: '17:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: 9a2fd3f966f52abaa008562199b8aecd
-    name: d2 17:00-19:00 姊妹湖 → 巴塘县
+    stayTime: 1
+  - id: 90e6c87990b836b8a62a98ad32b66942
+    name: d2 17:00-19:00 姊妹湖 → 措普沟
     type: route
-    routeId: baac18be1c989031e8e688a3eb64bf41
+    routeId: de7bad4cd84061939eda220dbfa5909b
     direction: forward
-    distance: 78
-    duration: 2
-  - id: 26686536999e677361508cef97ca76b3
-    name: d2 19:00 巴塘县
+    distance: 28
+    duration: 1
+  - id: d013aec4819059c0308b187838022638
+    name: d2 19:00 措普沟
+    type: location
+    locationId: 10f43064ccadabeecf64d742edbad28c
+    time: '19:00'
+    stayTime: 1
+  - id: 47f32b0bb4f3cf69a879621e7ae36af0
+    name: d2 19:00-21:00 措普沟 → 巴塘县
+    type: route
+    routeId: d114f2c06df31eba19f4a4b7ef25a1d9
+    direction: forward
+    distance: 50
+    duration: 1
+  - id: 6bb8c8c78a5bdf68d167f8a38ddefd4b
+    name: d2 21:00 巴塘县
     type: location
     locationId: fc338386719af80fbfa9941ee7331ebe
-    time: '19:00'
+    time: '21:00'
   - id: 1ee7a2b795338fb8f7c8d6343d6a8978
     name: d3 08:00 巴塘县
     type: location
