@@ -765,15 +765,15 @@ scheduleDays:
     distance: 130
     name: d1 w5-0725
     scheduleItemIds:
-      - 89f1b475e576f2ea0180f2b990fb022a
-      - de7a0d906d44200cc3941824a23db05c
-      - 2dee29461dbf1f512feb7ecd95da9b4d
-      - d831fe029c2ffd07e37d254964141d7d
-      - 6df44eacabd2ca9484b7a7c5959e67f3
-      - d2c5011708db509c7470e1a3648a8c34
-      - a76c34c5cea97b2130eb0c0ab294cfdf
-      - 69e8e0c52732994f0b5272b785589ec3
-      - 885741a84b68b635ee6913eda2c84ce1
+      - 0bff9245eb7a2fb398b7b98d75abcc9b
+      - 72690f77725e9502b83742e0afbfac81
+      - 375f486e863d7081755b53e145dead49
+      - 9dd7aeac21502e429f63d1918f4beebc
+      - 9cbca2d8f5f4d95e0287de34e5c946a4
+      - aae13f73ab5b3b10722be5a29d1830cf
+      - e1ae6410ccf9fcde2781b6799ed4a7ee
+      - e32b85797b463ac7b2cb2915032c3f8d
+      - 3b59778e7b65ae6730282b8869d8b176
   - id: b25b0651e4b6e887e5194135d3692631
     order: 2
     date: '0726'
@@ -1103,62 +1103,64 @@ scheduleItems:
     type: location
     locationId: 0ef2f18846f48bad68270b56d1f28965
     time: '23:00'
-  - id: 89f1b475e576f2ea0180f2b990fb022a
-    name: d1 08:00 新都桥
+  - id: 0bff9245eb7a2fb398b7b98d75abcc9b
+    name: d1 05:00 新都桥
     type: location
     locationId: 0ef2f18846f48bad68270b56d1f28965
-    time: '08:00'
-  - id: de7a0d906d44200cc3941824a23db05c
-    name: d1 08:00-12:00 新都桥 → 子梅垭口
+    time: '05:00'
+    additionDescriptions:
+      - ★ 路上有分时段放行，8点前和12-14点可入
+  - id: 72690f77725e9502b83742e0afbfac81
+    name: d1 05:00-09:00 新都桥 → 子梅垭口
     type: route
     routeId: b6b684ba04299acb3c6b95e9a028b441
     direction: forward
     distance: 140
     duration: 4
-  - id: 2dee29461dbf1f512feb7ecd95da9b4d
-    name: d1 12:00 子梅垭口
+  - id: 375f486e863d7081755b53e145dead49
+    name: d1 09:00 子梅垭口
     type: location
     locationId: 87846a58297e9e0e688510430db96ffe
-    time: '12:00'
+    time: '09:00'
     additionDescriptions:
       - ★ 拍摄视频
     stayTime: 1
-  - id: d831fe029c2ffd07e37d254964141d7d
-    name: d1 12:00-17:00 新都桥 → 子梅垭口
+  - id: 9dd7aeac21502e429f63d1918f4beebc
+    name: d1 09:00-14:00 新都桥 → 子梅垭口
     type: route
     routeId: b6b684ba04299acb3c6b95e9a028b441
     direction: backward
     distance: 140
     duration: 4
-  - id: 6df44eacabd2ca9484b7a7c5959e67f3
-    name: d1 17:00 新都桥
+  - id: 9cbca2d8f5f4d95e0287de34e5c946a4
+    name: d1 14:00 新都桥
     type: location
     locationId: 0ef2f18846f48bad68270b56d1f28965
-    time: '17:00'
-  - id: d2c5011708db509c7470e1a3648a8c34
-    name: d1 17:00-18:00 新都桥 → 高尔寺山
+    time: '14:00'
+  - id: aae13f73ab5b3b10722be5a29d1830cf
+    name: d1 14:00-15:00 新都桥 → 高尔寺山
     type: route
     routeId: 17bb75ca2caaa503ab35aa6b9cff2300
     direction: forward
     distance: 25
     duration: 1
-  - id: a76c34c5cea97b2130eb0c0ab294cfdf
-    name: d1 18:00 高尔寺山
+  - id: e1ae6410ccf9fcde2781b6799ed4a7ee
+    name: d1 15:00 高尔寺山
     type: location
     locationId: fd4bf3d1978e6699ab7143a9ac26e715
-    time: '18:00'
-  - id: 69e8e0c52732994f0b5272b785589ec3
-    name: d1 18:00-19:00 高尔寺山 → 雅江县
+    time: '15:00'
+  - id: e32b85797b463ac7b2cb2915032c3f8d
+    name: d1 15:00-16:00 高尔寺山 → 雅江县
     type: route
     routeId: 00431d1a00740fc172f3a08eab0fb5a2
     direction: forward
     distance: 57
     duration: 2
-  - id: 885741a84b68b635ee6913eda2c84ce1
-    name: d1 19:00 雅江县
+  - id: 3b59778e7b65ae6730282b8869d8b176
+    name: d1 16:00 雅江县
     type: location
     locationId: 860bebe67ca02dd2b01be626edac8de9
-    time: '19:00'
+    time: '16:00'
   - id: f6b643403b5a565ef2f311f6d566cf5a
     name: d2 08:00 雅江县
     type: location
