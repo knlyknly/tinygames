@@ -43,7 +43,7 @@ export function toText(model, options = {}) {
 
   for (const day of scheduleDays) {
     // 获取当天的行程项
-    const dayItems = model.scheduleItems.filter((item) => day.scheduleItemIds.includes(item.id));
+    const dayItems = model.scheduleItems.filter((item) => day.scheduleItemIds?.includes(item.id));
 
     // 计算当天的总距离（直接从scheduleItem获取）
     let totalDistance = 0;

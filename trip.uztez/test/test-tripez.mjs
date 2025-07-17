@@ -22,12 +22,13 @@ const model = Tripez.fromText(originalText);
 fs.writeFileSync(outputYamlPath, Tripez.toYaml(model));
 
 // 将生成的文本写入新文件
-fs.writeFileSync(outputTextPath, Tripez.toText(model));
+fs.writeFileSync(outputTextPath, Tripez.toText(model, {
+  forceDaysContinuous: true 
+}));
 
 // 将紧凑模式的文本写入新文件（强制天数连续）
 fs.writeFileSync(outputCompactPath, Tripez.toText(model, { 
-  compactMode: true,
-  forceDaysContinuous: true 
+  compactMode: true
 }));
 
 console.log('Test completed. Please check:');

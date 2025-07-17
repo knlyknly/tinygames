@@ -138,13 +138,9 @@ locations:
     altitude: 4300
   - id: 1cc533dfaa8260532b82b78fb1acd6a6
     name: 纳木湖乡
-  - id: bc5cd8ad89baec3e7d307b35ffd29a46
-    name: 扎西半岛
+  - id: 7e824b274d9d330c3b47e2a0c43002c0
+    name: 圣象天门景区
     altitude: 4718
-    destinationIds:
-      - 56c89922840781c22c9f1061036ac6a5
-  - id: 512b68ff550ea29108dcf8d1005cd810
-    name: 圣象天门
   - id: 64d750f23585a4e990e289604624b966
     name: 班戈县
     altitude: 4750
@@ -160,8 +156,11 @@ locations:
     altitude: 5000
   - id: 761069c2a93e4ac9d5b90aef3926b327
     name: 当惹雍错
-  - id: a0c6485b05faed1d6354557edb6fa1a6
-    name: 扎日南木错观景台
+  - id: 0aa0fbf7dae9f4f31afaa4bc252366f6
+    name: 措勤县姊妹湖
+  - id: 619f0f47c93dc58baec81a53bfbf5502
+    name: 扎日南木错
+    altitude: 4700
   - id: 7574507e83a23184b19ed8a778878951
     name: 措勤县
     altitude: 4700
@@ -173,6 +172,14 @@ locations:
   - id: 14643746b7cf6a4c796a7c22a1959509
     name: 萨嘎县
     altitude: 4600
+  - id: 2e47c94d51e6874b5aaeb35d36d1ad28
+    name: 如角乡（30km-2h）
+    altitude: 4600
+  - id: 38ad63d0b1c46f172733ab1a4bcbc5d0
+    name: 国王峰观景点
+    altitude: 5400
+  - id: 1914235223a0c89ebc5fe4839739c629
+    name: 如角乡
   - id: d45a53864f2562ad58547db2f4806b88
     name: 仲巴县
     altitude: 4772
@@ -188,8 +195,6 @@ locations:
     name: 冈仁波齐大本营
   - id: 239c5b958719b47863b66468cfdd17c4
     name: 玛旁雍错观景台
-  - id: 246f812977b851ce9db9de3554170358
-    name: 普拉喜琼
   - id: 186031fed13bf0a0c7a4374a42f465aa
     name: 吉隆县
     altitude: 4000
@@ -252,8 +257,6 @@ destinations:
     name: 南迦巴瓦观景台
   - id: 0da3f7c95b444b9f4c04283e37f63b55
     name: 南迦巴瓦
-  - id: 56c89922840781c22c9f1061036ac6a5
-    name: 纳木错
   - id: 5c22bf7e03a513f59752ef776b84594f
     name: 大地之树
   - id: c638db40cb28036781b5924846036899
@@ -509,22 +512,15 @@ routes:
     endLocationId: 1cc533dfaa8260532b82b78fb1acd6a6
     distance: 38
     durationForward: 1
-  - id: 9f5c53701129ab9bbb0f4122b8398dee
-    name: 纳木湖乡 → 扎西半岛
+  - id: ccb1cb419826fb4d82c7770d7de85fad
+    name: 纳木湖乡 → 圣象天门景区
     startLocationId: 1cc533dfaa8260532b82b78fb1acd6a6
-    endLocationId: bc5cd8ad89baec3e7d307b35ffd29a46
+    endLocationId: 7e824b274d9d330c3b47e2a0c43002c0
     distance: 30
-    durationForward: 1
-    durationBackward: 1
-  - id: 5622b606e1491dd4c8ea74c0d882265d
-    name: 纳木湖乡 → 圣象天门
-    startLocationId: 1cc533dfaa8260532b82b78fb1acd6a6
-    endLocationId: 512b68ff550ea29108dcf8d1005cd810
-    distance: 111
     durationForward: 3
-  - id: 44e4fda3047b40abe79d3f4951eb1236
-    name: 圣象天门 → 班戈县
-    startLocationId: 512b68ff550ea29108dcf8d1005cd810
+  - id: e77de7a4296fddde2bf486b6a96e1394
+    name: 圣象天门景区 → 班戈县
+    startLocationId: 7e824b274d9d330c3b47e2a0c43002c0
     endLocationId: 64d750f23585a4e990e289604624b966
     distance: 134
     durationForward: 3
@@ -552,18 +548,24 @@ routes:
     endLocationId: 761069c2a93e4ac9d5b90aef3926b327
     distance: 118
     durationForward: 2
-  - id: fe30998285470bc47d9808eb3189e680
-    name: 当惹雍错 → 扎日南木错观景台
+  - id: e4695a6292da555e88fe4943fd78755e
+    name: 当惹雍错 → 措勤县姊妹湖
     startLocationId: 761069c2a93e4ac9d5b90aef3926b327
-    endLocationId: a0c6485b05faed1d6354557edb6fa1a6
+    endLocationId: 0aa0fbf7dae9f4f31afaa4bc252366f6
     distance: 149
-    durationForward: 4
-  - id: 133d9710e7ac436f5fa5e300ca9e9f82
-    name: 扎日南木错观景台 → 措勤县
-    startLocationId: a0c6485b05faed1d6354557edb6fa1a6
-    endLocationId: 7574507e83a23184b19ed8a778878951
+    durationForward: 5
+  - id: b28d1639ebab53ce01f63924f369b7ae
+    name: 措勤县姊妹湖 → 扎日南木错
+    startLocationId: 0aa0fbf7dae9f4f31afaa4bc252366f6
+    endLocationId: 619f0f47c93dc58baec81a53bfbf5502
     distance: 60
-    durationForward: 1
+    durationForward: 2
+  - id: 660f1e0f72e87427bea8031bae5440ab
+    name: 扎日南木错 → 措勤县
+    startLocationId: 619f0f47c93dc58baec81a53bfbf5502
+    endLocationId: 7574507e83a23184b19ed8a778878951
+    distance: 126
+    durationForward: 4
   - id: bd56bbe7edb7bf8b03a20c6180e1bcf7
     name: 措勤县 → 桑木拉达坂
     startLocationId: 7574507e83a23184b19ed8a778878951
@@ -582,12 +584,24 @@ routes:
     endLocationId: 14643746b7cf6a4c796a7c22a1959509
     distance: 80
     durationForward: 1
-  - id: d2db9ed0d8492be1a3a5893e71ccdfeb
-    name: 萨嘎县 → 仲巴县
+  - id: be5d14742679306f90a48e3010289762
+    name: 萨嘎县 → 如角乡（30km-2h）
     startLocationId: 14643746b7cf6a4c796a7c22a1959509
+    endLocationId: 2e47c94d51e6874b5aaeb35d36d1ad28
+    distance: 61
+    durationForward: 1
+  - id: 79c7bb592e8ce10cec72be43ffd0b8a2
+    name: 国王峰观景点 → 如角乡
+    startLocationId: 38ad63d0b1c46f172733ab1a4bcbc5d0
+    endLocationId: 1914235223a0c89ebc5fe4839739c629
+    distance: 30
+    durationForward: 2
+  - id: 08d183215f0bad2408ce93e0793bebc7
+    name: 如角乡 → 仲巴县
+    startLocationId: 1914235223a0c89ebc5fe4839739c629
     endLocationId: d45a53864f2562ad58547db2f4806b88
-    distance: 167
-    durationForward: 3
+    distance: 110
+    durationForward: 2
   - id: c124871a80a7f1cfce315b010eb9b0fa
     name: 仲巴县 → 五彩沙漠
     startLocationId: d45a53864f2562ad58547db2f4806b88
@@ -630,18 +644,12 @@ routes:
     endLocationId: d45a53864f2562ad58547db2f4806b88
     distance: 287
     durationForward: 4
-  - id: d765ad1ce4fa3136627203c4efdb1831
-    name: 仲巴县 → 普拉喜琼
+  - id: 3f026f98b56c747327dd8ac0004069fc
+    name: 仲巴县 → 萨嘎县
     startLocationId: d45a53864f2562ad58547db2f4806b88
-    endLocationId: 246f812977b851ce9db9de3554170358
-    distance: 138
-    durationForward: 4
-  - id: 0fd498b5ec1dd63234a674eb35682578
-    name: 普拉喜琼 → 萨嘎县
-    startLocationId: 246f812977b851ce9db9de3554170358
     endLocationId: 14643746b7cf6a4c796a7c22a1959509
-    distance: 87
-    durationForward: 2
+    distance: 165
+    durationForward: 3
   - id: f842cdf8cce3efc2917678aa046bccd4
     name: 萨嘎县 → 吉隆县
     startLocationId: 14643746b7cf6a4c796a7c22a1959509
@@ -730,40 +738,32 @@ routes:
     distance: 108
     durationForward: 2
 scheduleDays:
-  - id: 948e0cbce5a99e1e3401c0bb075368dd
-    order: -2
+  - id: 9948c645c094247794f4c7acdbeb2bb6
+    order: 1
     date: '0724'
     weekday: 4
     distance: 247
-    name: '-2d w4-0724'
+    name: d1 w4-0724
     scheduleItemIds:
-      - a2a3011e2d126235959c9f1cbf4ce37d
-      - 7dd9088d27cc039ce05ab18843837f44
-      - bd7d10797402f3f98f3d67f1d442016c
-      - 571e9b8ad3faf10dc8fac2f7f1061edf
-      - ba2172d70ebf8c1a4b4f85b676bd6fad
-      - 00d6f00312afcf6e97ac0415a6436c77
-      - abc6dd222bcf13ff8ff5498bb1ac24a1
-  - id: 9702fc9c0f04d91d2b2060319f8f7ba6
-    order: -1
+      - d3103b748352b062a179e21df50b3da9
+      - dae6aab1f232be827ebe60005de99825
+      - 44735b63a08e05c29a9762f54c764eca
+      - 4c330b441c451362c4ea4449a9aa42e5
+      - 56dfc04e443ec4744dbf5658be63bf2a
+      - 1d2061369b6c744d386ed0469aa40ac2
+      - 35ed96421660589c6b6f38dcef25a509
+      - 4172825579610ea89b9476f259fd388a
+      - b222dcd30bf20c417efbb7c437870a35
+      - 7a111829f204dd29ee3c16f8cf038428
+      - 1a26264af257ecb0201d08c64167e719
+      - 8f86d95c08f997d8e5656b0761235e18
+      - a38d4b12816f15c2d383c5515fd0f807
+  - id: 9948c645c094247794f4c7acdbeb2bb6
+    order: 1
     date: '0725'
     weekday: 5
     distance: 130
-    name: '-1d w5-0725'
-    scheduleItemIds:
-      - fd6064bff4c29b1fac68cc23d3972587
-      - ccdcc822d2f5d07db7579fd56807973b
-      - abaf210f492fdd25d6e0acc78d7991f9
-      - f515f76eb01bd794defd32560211712b
-      - dcfaf1be2e5d6b1aa05168f567967d70
-      - bffcd2cc83139ebc03b0f7e07668fb04
-      - 54851280a813f300625617956fcacce0
-  - id: 9948c645c094247794f4c7acdbeb2bb6
-    order: 1
-    date: '0726'
-    weekday: 6
-    distance: 362
-    name: d1 w6-0726
+    name: d1 w5-0725
     scheduleItemIds:
       - 89f1b475e576f2ea0180f2b990fb022a
       - de7a0d906d44200cc3941824a23db05c
@@ -776,9 +776,10 @@ scheduleDays:
       - 885741a84b68b635ee6913eda2c84ce1
   - id: b25b0651e4b6e887e5194135d3692631
     order: 2
-    date: '0727'
-    weekday: 0
-    name: d2 w0-0727
+    date: '0726'
+    weekday: 6
+    distance: 362
+    name: d2 w6-0726
     scheduleItemIds:
       - f6b643403b5a565ef2f311f6d566cf5a
       - 2a7270aa4e4d580a6b5463dc699e09cd
@@ -797,142 +798,153 @@ scheduleDays:
       - d013aec4819059c0308b187838022638
       - 47f32b0bb4f3cf69a879621e7ae36af0
       - 6bb8c8c78a5bdf68d167f8a38ddefd4b
+  - id: b25b0651e4b6e887e5194135d3692631
+    order: 2
+    date: '0727'
+    weekday: 0
+    name: d2 w0-0727
+    scheduleItemIds:
+      - 43243e0141d7cb53d739338c6a475333
+      - 13474669f6d9442a71d8449fe68b12ba
+      - 01b2c0ef1dec10badc1af1eb8cf7448b
+      - c3fb0e833ce1ca27eca07a60eeed7042
+      - 456296577b7f280a4bd707906b7eb3bd
+      - 2e202b2cbd29d86edf74024ac1b28e79
+      - 15df6733f2f639cbb8aa6b3792a0ed84
+      - 2b41c9f131fb747446ad6b5b66c6eadf
+      - 522058545641c339af0e367060386321
+      - 8e1adf82697c80c7161575acd8e041db
+      - b4762e58bfd7e3f082fb016152015a09
+      - 7209d06373972a0b32475fa92a8c78b0
+      - 44a15bb40a3076491f01f2460974f3e2
+      - f01425a6f98cfa95745621e7aa182675
+      - ab2e3011c88e9280d46d1f492e17000e
+      - b9485f9940ea7732fda7675f3154026b
+      - 5e931186aba4fe73cf483f0a8ae7c131
   - id: e53125275854402400f74fd6ab3f7659
     order: 3
     date: '0729'
     weekday: 1
     name: d3 w1-0729
     scheduleItemIds:
-      - 1ee7a2b795338fb8f7c8d6343d6a8978
-      - 8e4e3ed708550e92214147824b0f2dec
-      - 995b859027838ab6ddc892de8e7c8a2e
-      - 8614fd3c006343345b854c3805b0c7f4
-      - c89c258136aff22d26b384659e0de2aa
-      - 3e24ee701fa0246ecc7d224086d51442
-      - 0dce020094e1066619e1932734e6a3a7
-      - 31ec19e2480d6a6997b168d8fe996bd2
-      - 64e9a13da78f043dd88395faab3386e3
-      - ca8049cf71b521cc05641fd9e6a39f3a
-      - 4ce8f42cdd5d9c418ee03167e927baaf
-      - 95f5b66baecdbf26963a8e318b77e1ae
-      - 4bb04680274460005cfdfbcc69ebde19
-      - 6f20be62334f8bc4fbade3f3002133ff
-      - 087540d3bdc116761ad5d61d45965b0d
-      - 8049f7d2cc4eaaa8bb903f69303250cf
-      - 1820c19f499a161181b966baccca7d54
+      - 189deca7f22645f2d1aa6acfa05da9e6
+      - bbb560d2fb71e122c21ccaccb7b1c9c3
+      - e273c09df6a6400604fccdefe9922f0f
+      - 4895545a91fd063cde274ad2c21b7890
+      - 47e751f28c9a6a79e0f1c17bfc4e5cfb
+      - 2cc6fcce7456f9b4012c6cb0b1a980f4
+      - 3cbfd06e4ca80ac4351c27535266a6af
+      - 0483d86549b7ccf09a0a4b23ac72cb4b
+      - cbcbdabd5daedb37251d31bac47a08c0
+      - 42ad81df89fa0a8996ea766e8e150d46
+      - dfe7d7b28fa65cc6a8d786d19c90ee40
+      - 1b1fd56ac64dfe2d8313c5fdb9b36f50
+      - 4d380ef9854bf331cdf01a2788a6d97d
+      - e9ce45f0d970254465adb3b71ced81a8
+      - d52fc32e06170d169bdf38fce1df81e1
+      - e13095a8c66d876815fed7b0237f578b
+      - 1388cd4dba2ec46d23879a24ed764d45
   - id: ae11976937537e4c1206237dea035331
     order: 4
     name: d4
     scheduleItemIds:
-      - afe4237e5bb42e8e5f0df21f58e2bc22
-      - 73353b8c8d3bb63e8c5edb003031f2fb
-      - 9cb3129d0bdfca4cb0e91d9829bfd43f
-      - 76ac5a95301e38cdfc45dc5421f9314a
-      - 6b36f6e0ee0996343a9ca8e74c53587b
-      - 45e6204a11034880c111fc9cda99b601
-      - 6efda1fd330a16c30d168ec37c3ce64e
-      - ea95aad26c1c19bfae33df5b748c0fd8
-      - dc1cac3b4f7dd8d0a544c43c02e489cd
-      - 3a574f0eabefc249a96ac0dd5dea5427
-      - 18b21d709a275244644d1a54d88e6e2e
-      - 2cf819dc928d1f32c1a7ef3519ae762b
-      - 783ea2d396fee034734bf47aa4eadb93
-      - 4278acacfcb6fd39df1b458f88f0ec50
-      - f5107f291be7b4b99fcd1d15ef0f2546
-      - a580a4410449fa9746d24596bcf64305
-      - 8c20ce8c36d577b58acf9e6b7c9bb42f
+      - 70272ad7b5bb5f9c2fa47446ef9519bc
+      - 14ff078b8f4264851d1e1ed594d53fa6
+      - 2fb281e850f1e176be730ea9219dfeef
+      - 0a1a321e32d96fd47724d3b8c244e53a
+      - 5ac1c950ea6f52b84df86ee558bafe19
+      - 9a4021ef2f9c19a9cf5c36550521ccc5
+      - 1b85b1b37d7ff0249c281dda4a502af6
+      - b4ac4a35a1e2e2ce8e9ea579af0c6b17
+      - a0757232d8506cbd0b58b25ac4d48899
+      - 32b3cfa3c567411df2f934db0d22cb77
+      - 73df4ce8d8db8126b536633d1550a589
+      - f3036b374b6f60f894b621333efb4dfb
+      - aeee15ccc726f2745e1dab8a3a535d39
   - id: b9884d9c846186c2a5426d7f46393de8
     order: 5
     date: '0730'
     weekday: 3
     name: d5 w3-0730
     scheduleItemIds:
-      - 4b58ddd72994edbbed166a433a505861
-      - 1d461dedaea91bb46908497b2c026151
-      - 6b4eb4cb2e7e7d34d8921fcd6bc0c0cc
-      - 0a09690411ddb389b0065c2cf23ef18c
-      - 00924691c35297574b560274187efe04
-      - 4e5422b27d1e0745a61db1a65aac6530
-      - 77e9eb629afad6b47febc321a41f9c0b
-      - 0e2f28d61f9258d81867cff72d7ae64e
-      - 505a653eab04d661a9e6f37fdf109c71
-      - aaf172fbdf8f75783a02e8bfeac70cbf
-      - ae5896d21ecf5910303b4679e9cdc453
-      - e0f3d0a1694f25de050bb1dba45887f6
-      - 1174b838458136690dc70f456bebe7d8
+      - dbe0f12184be3b8cd4bb4d0babf141f7
+      - 848d72ed23da7ab7ee5de27e8e25245b
+      - 0ab20f5dfb0ca3bd5e87e860284d5f60
+      - bbed7d32cf6166e9c8c07560939106d7
+      - 7d9f2d8690292bc48c8de4755572f0dd
+      - 6688b40f3d716ce9a5f8a3a2e837e465
+      - ca21cac777789c397792fdc0a967f310
+      - ba2fed9a9ace8c1962ca6201c6ac2309
+      - e695bc4752deffb2dfcce628b29a7d35
   - id: 45f9901d0370bc0facb9220619e6cbd7
     order: 6
     date: '0731'
     weekday: 4
     name: d6 w4-0731
     scheduleItemIds:
-      - ddcba521b4b7d440f54b5225942cd17d
-      - d8171b27a42b62af2624e93b9a373992
-      - 391152b786a803b51247d8e09aebfc1d
-      - 60ce65c82db0f3c5ad54fd82f66fe205
-      - 7dfe0b0d43f2fb7b8e99196dc169c7cc
-      - 419874def6a1aef2b9d95a8278f9256d
-      - 9b0289e631373fcbac0d8b48ef817214
-      - d2ea156317773a2acd001a52088859a0
-      - 18b81bedabda78cda7d31d03494bfbb0
+      - 76041e4ee396887ab00a255ab47a2f1a
+      - 6d2d6ba2095b1dc7d2898c7ae89f1c9b
+      - abc8f3d5b2d1aabf4b61c4ed3f7c0fc0
+      - 98769a705aa27d12a37219e870850303
+      - 81c4a1f3a3bc4c87d52f7c2f5a92f203
+      - ed63f37a7ff97ef738b4da4c3d82e4e2
+      - 9427a35e84d35145e1f3c63c10ddc5c2
+      - 5e0866358250ef171ff5e8d331484158
+      - 18c74e287335e254859f2263aed88b5b
+      - 7a9859b736ba885bc09a9acae19226b5
   - id: fa56b8fc724c2a681736c0d122336b98
     order: 7
     date: '0801'
     weekday: 5
     name: d7 w5-0801
     scheduleItemIds:
-      - 63d453bb3327c99e3be0af9c320247e3
-      - 6579c013b189c5dc3fbadd6d3e627d27
-      - d7d6815f4a9ffd3351ceaa68b7b0ea0f
-      - c8d78829ee92a08afbecda72ad2cae0f
-      - 505af77f551576cd5a7602558167c415
-      - 2c6f6cccd48668ba9f4bfd912903eec0
-      - fb656d329a59353eda51de3b9696e967
-      - 6273dbaf0be90dfa1452c5541ee242a9
-      - 3e075ae74419e1bfb82b38b4da8271d1
-      - 879813c325ad2b2035714a1776c76477
-      - 867fe21d413718f030bd9135691f0399
-      - dd6cfe7a3cd67c78e6c783001909d649
-      - 8cf3d903b63d35b7fa8d89b55fe4cb73
-      - 50cb47aa7cc5f70941ff8f344ee9121c
+      - cd7b139af18c6ee415735055853fcbc1
+      - 8601e04911cc58b59cb31afa3bfa3a8b
+      - 38b6bc4f8fcc9b644d63e09c0027bf24
+      - 9b252162d28c98a690523786100b023b
+      - d8d81631a8845b9db0088f109dd15fdf
+      - 892a282169911224ded3a314b5a17661
+      - 54e6f91e3130959feaae3c914424d55f
+      - cf84304f2c6178ab5ced37d24dd2f958
+      - 73a0cda419a76520e487328d77159424
   - id: 83c2d09a5dd1d1c5f4f7f484450be380
     order: 8
     date: '0802'
     weekday: 6
     name: d8 w6-0802
     scheduleItemIds:
-      - 1dc10f7b5ca7276f1cff1f63dc67abaa
-      - b31c8290e54745dfa46fb1c8a7f8aa7a
-      - f80597e9d9515162446993eb7c6edf29
-      - a4eebf05f31e090eadc5a9fbf62f5ce3
-      - 8300716cf42e4d56df0eeb194ffecbb4
-      - 5279d914d878ea7ac8ddafff6b24a197
-      - 7b3a0b3fc3d032fb4b4a8c6e33b05c17
-      - 25404a0154fa22924263be088ebefe32
-      - 6c74e40019422d2e9b295661ed2be518
-      - eebe0db0b26f4028025efabbd117578f
-      - 6c2f49fdaaf0fc7fba073ddac3dc7b9a
-      - dbeecfa59e9dd23b8a9130e290263f37
-      - 9e8d7ff75632a032c987e5faf1a30d82
+      - 658ef5ac1dd6a1a82856c9188af36b2d
+      - ef2c54b37e17760f656e3a77f2dc6da3
+      - bdda262673d7e4b5c1ed1ba4244f1c7d
+      - 902b2c6a55318f3b5f1bf2e76ddd482a
+      - a9eff490a47993b62c41f3d044a340c4
+      - 6568c976744da20706fb7ce8cbeb4e39
+      - dce76c7853f943234b33a29dbc79388b
+      - 27934ccf1ea9e30e580f923f9be8e0b7
+      - 84ac696df91709ad431bce2624e941bc
+      - c6a48533dfa9591c4ee0098d6aaa4d88
   - id: 87de66479aea0306221cb868869748ec
     order: 9
     date: '0803'
     weekday: 0
     name: d9 w0-0803
     scheduleItemIds:
-      - 00914c87255725866216a2ca65aec595
-      - a250ccae1a10179b5851fccf658306c2
-      - 71d26c60c5f3c7f211dff817b86362fe
-      - d4ec1331c8aede534813031fb7d407ca
-      - dfa07d67b49c7bdada2b43402f635aa7
-      - dc220e174e6461abd4ceea1b13a67b75
-      - e8d4b9d283b7f7e62003efe92f570135
-      - 9e6a40823e8ffcf1bab77f6b1a0bab9b
-      - c39b894f38c1e483d3e56b29474cb137
-      - 20dd894bd8d159f9add0b96805b68292
+      - 86586641a2882794bd16fb78903bd1df
+      - d852dcc989f61d6560e812c17a2ddc41
+      - 9b7d2e9b42d6fd66b912ceb87efbd734
+      - 7c2970ede630f88dfd2a4b3b53acaa00
+      - 70321e5858ce1cb8fd6a31e9396914eb
+      - 97d6ebe1a3363e6216fad2cc94c9c83e
+      - a454bd62cf8cfe7d0607a58275615e3b
+      - 26e120281bab3dee68e7bb7403c41be8
+      - 6468289cd61dd58b99e0dd5c7d56ff53
+      - 14faa40f250d37cbbdb50c128da86822
+      - 8ebd64124103dd24ff8f731dce25b1d0
+      - 51bb0e73ec86dcfd27fb3287b2d2b014
+      - e42e83c9e2c93b58f1147586950a00ca
       - c694229a36ad8ada885d0c4ed9d64892
-      - ac1324d68d565655e4b03d3d2edc8391
-      - 4aa2f0f5c7b20cc522aa86dce9d1dec0
+      - 9fb2cf04e48607fbe287788a51dc372c
+      - d3c764044d0877848031e3665a88400d
   - id: 1f7737302a7894ee3ec19d62230238ae
     order: 10
     date: '0804'
@@ -945,27 +957,25 @@ scheduleDays:
       - 035152247c439c3e9de45fc1942b346e
       - cc2d781f658234f726d8b26bd3a2080d
       - a5de720be1f01e4995bbcc57974540ad
-      - 94a546831ba29147b7f974129a88e095
-      - c144f176ae2df7769cb3e1709b1237e5
-      - 3af482d4fd0e40c61226abd76e61d843
-      - 763854efdefc6eccc7f33be7ca4de7f7
+      - 80338189e1118525e7332fb706d93828
+      - b68b3224467c860a80169ff57d3b3176
+      - baf4a365795035f8dbe3d6aa757f9131
+      - d950e6f5222f862ef4f1347e12f495af
+      - 3e7d3050c830410beb38fab3c49cffb4
+      - 13b2f6cdb6b0e7e7120e684c81542305
   - id: 41012ddde92340324f2588ba57878686
     order: 11
     date: '0805'
     weekday: 2
     name: d11 w2-0805
     scheduleItemIds:
-      - 1e3bf8f3e80c9955154c567d47a4df52
-      - 37db90c2fd642be2d233dbe73872dceb
-      - bf8379d3518b65679b94754bcfb513be
-      - 4b79d137d76e916d0cc28eebbe4801d1
+      - 448ebe7987a361fbd417b2f7ea24eb0b
+      - bfd96f1b8950b3d98528676ed3c755ae
+      - 85f9308e3aa49835a1bfe9edf250327b
+      - 1b2d2c91c003666361c749658dbe339a
       - 1b97c99dbd5803cf4361bbea5c7163a6
-      - 09e93d55a770dab6e18a85c2ec7ca4af
-      - 94b9d53ce5c694d44089b8877b3b11ec
-      - 5762613a2e019647127033dc5c82b858
-      - 5b553a27e5a852c74d3b39f95f3f42a4
-      - 14610624f6d148ef7f6ff89b5997f874
-      - 564543d4cee793daf79f0f3a83df0cbe
+      - 1ecaf29ace58d8627f77b815274806e2
+      - 532e2e5bba112fa6b793e729e187b1d7
   - id: 209014ef5d519d8f9e9ab107d554e96b
     order: 12
     date: '0806'
@@ -1013,91 +1023,86 @@ scheduleDays:
       - 2ee7d57e9ef70b69b0626581e7860863
       - 3f6954db9a2285a3ed9b7c89ee1fc992
 scheduleItems:
-  - id: a2a3011e2d126235959c9f1cbf4ce37d
-    name: '-2d 18:00 成都市'
+  - id: d3103b748352b062a179e21df50b3da9
+    name: d1 14:00 成都市
     type: location
     locationId: 8dc00d5ecdeb091b801ccdb195cd947f
-    time: '18:00'
-  - id: 7dd9088d27cc039ce05ab18843837f44
-    name: '-2d 18:00-19:00 成都市 → 崇州市'
+    time: '14:00'
+  - id: dae6aab1f232be827ebe60005de99825
+    name: d1 14:00-15:00 成都市 → 崇州市
     type: route
     routeId: d51783132ba784feff3879fb59237e14
     direction: forward
     distance: 43
     duration: 1
-  - id: bd7d10797402f3f98f3d67f1d442016c
-    name: '-2d 19:00 崇州市'
+  - id: 44735b63a08e05c29a9762f54c764eca
+    name: d1 15:00 崇州市
     type: location
     locationId: 940add755cf8fdf873fa95167e5bec8a
-    time: '19:00'
+    time: '15:00'
     additionDescriptions:
       - ★ 拍摄视频
-    stayTime: 1
-  - id: 571e9b8ad3faf10dc8fac2f7f1061edf
-    name: '-2d 19:00-21:00 崇州市 → 雅安市'
+    stayTime: 2
+  - id: 4c330b441c451362c4ea4449a9aa42e5
+    name: d1 15:00-18:00 崇州市 → 雅安市
     type: route
     routeId: a54bcdccca9efb380222282a01adc481
     direction: forward
     distance: 104
     duration: 1
-  - id: ba2172d70ebf8c1a4b4f85b676bd6fad
-    name: '-2d 21:00 雅安市'
+  - id: 56dfc04e443ec4744dbf5658be63bf2a
+    name: d1 18:00 雅安市
     type: location
     locationId: 324528637806c975aa3ae813b107077a
-    time: '21:00'
-  - id: 00d6f00312afcf6e97ac0415a6436c77
-    name: '-2d 21:00-23:00 雅安市 → 泸定县'
+    time: '18:00'
+  - id: 1d2061369b6c744d386ed0469aa40ac2
+    name: d1 18:00-20:00 雅安市 → 泸定县
     type: route
     routeId: bd16439cce81cb80fa5ad1d425afb993
     direction: forward
     distance: 100
     duration: 2
-  - id: abc6dd222bcf13ff8ff5498bb1ac24a1
-    name: '-2d 23:00 泸定县'
+  - id: 35ed96421660589c6b6f38dcef25a509
+    name: d1 20:00 泸定县
     type: location
     locationId: f37b0088ff401c57c2beb8f407406741
-    time: '23:00'
-  - id: fd6064bff4c29b1fac68cc23d3972587
-    name: '-1d 18:00 泸定县'
-    type: location
-    locationId: f37b0088ff401c57c2beb8f407406741
-    time: '18:00'
-  - id: ccdcc822d2f5d07db7579fd56807973b
-    name: '-1d 18:00-19:00 泸定县 → 康定市'
+    time: '20:00'
+  - id: 4172825579610ea89b9476f259fd388a
+    name: d1 20:00-21:00 泸定县 → 康定市
     type: route
     routeId: 14d1e6fc998cc37b2d658c1de2b60474
     direction: forward
     distance: 60
     duration: 1
-  - id: abaf210f492fdd25d6e0acc78d7991f9
-    name: '-1d 19:00 康定市'
+  - id: b222dcd30bf20c417efbb7c437870a35
+    name: d1 21:00 康定市
     type: location
     locationId: d87181a0ad23cbeb8780d17f369b1fa9
-    time: '19:00'
-  - id: f515f76eb01bd794defd32560211712b
-    name: '-1d 19:00-20:00 康定市 → 折多山'
+    time: '21:00'
+  - id: 7a111829f204dd29ee3c16f8cf038428
+    name: d1 21:00-22:00 康定市 → 折多山
     type: route
     routeId: 62c0df24c1265c729d529485040cb6b1
     direction: forward
     distance: 34
     duration: 1
-  - id: dcfaf1be2e5d6b1aa05168f567967d70
-    name: '-1d 20:00 折多山'
+  - id: 1a26264af257ecb0201d08c64167e719
+    name: d1 22:00 折多山
     type: location
     locationId: 59879eba47bb9ada2920f8b771b42d5b
-    time: '20:00'
-  - id: bffcd2cc83139ebc03b0f7e07668fb04
-    name: '-1d 20:00-21:00 折多山 → 新都桥'
+    time: '22:00'
+  - id: 8f86d95c08f997d8e5656b0761235e18
+    name: d1 22:00-23:00 折多山 → 新都桥
     type: route
     routeId: a57a245ca7108e9e8efca5518887971b
     direction: forward
     distance: 36
     duration: 1
-  - id: 54851280a813f300625617956fcacce0
-    name: '-1d 21:00 新都桥'
+  - id: a38d4b12816f15c2d383c5515fd0f807
+    name: d1 23:00 新都桥
     type: location
     locationId: 0ef2f18846f48bad68270b56d1f28965
-    time: '21:00'
+    time: '23:00'
   - id: 89f1b475e576f2ea0180f2b990fb022a
     name: d1 08:00 新都桥
     type: location
@@ -1265,208 +1270,208 @@ scheduleItems:
     type: location
     locationId: fc338386719af80fbfa9941ee7331ebe
     time: '21:00'
-  - id: 1ee7a2b795338fb8f7c8d6343d6a8978
-    name: d3 08:00 巴塘县
+    additionDescriptions:
+      - ★ 预约圣象天门(微信：游藏游)
+  - id: 43243e0141d7cb53d739338c6a475333
+    name: d2 08:00 巴塘县
     type: location
     locationId: fc338386719af80fbfa9941ee7331ebe
     time: '08:00'
-  - id: 8e4e3ed708550e92214147824b0f2dec
-    name: d3 08:00-09:00 巴塘县 → 金沙江大桥
+  - id: 13474669f6d9442a71d8449fe68b12ba
+    name: d2 08:00-09:00 巴塘县 → 金沙江大桥
     type: route
     routeId: be0e0aa50fa374efd6715cacf7fe7142
     direction: forward
     distance: 39
     duration: 1
-  - id: 995b859027838ab6ddc892de8e7c8a2e
-    name: d3 09:00 金沙江大桥
+  - id: 01b2c0ef1dec10badc1af1eb8cf7448b
+    name: d2 09:00 金沙江大桥
     type: location
     locationId: 0ddea0ae34261ec98708053b27c56dfd
     time: '09:00'
     additionDescriptions:
       - ★ 拍摄视频，省界
     stayTime: 1
-  - id: 8614fd3c006343345b854c3805b0c7f4
-    name: d3 09:00-11:00 金沙江大桥 → 宗巴拉山
+  - id: c3fb0e833ce1ca27eca07a60eeed7042
+    name: d2 09:00-11:00 金沙江大桥 → 宗巴拉山
     type: route
     routeId: fc3152949c141cdadf19a4ce30605632
     direction: forward
     distance: 59
     duration: 1
-  - id: c89c258136aff22d26b384659e0de2aa
-    name: d3 11:00 宗巴拉山
+  - id: 456296577b7f280a4bd707906b7eb3bd
+    name: d2 11:00 宗巴拉山
     type: location
     locationId: 05ed9f2f14ad63d76099e23bedb5d78c
     time: '11:00'
-  - id: 3e24ee701fa0246ecc7d224086d51442
-    name: d3 11:00-12:00 宗巴拉山 → 芒康县
+  - id: 2e202b2cbd29d86edf74024ac1b28e79
+    name: d2 11:00-12:00 宗巴拉山 → 芒康县
     type: route
     routeId: 19c5136d78b299786db0a8cfbc006c7d
     direction: forward
     distance: 10
     duration: 1
-  - id: 0dce020094e1066619e1932734e6a3a7
-    name: d3 12:00 芒康县
+  - id: 15df6733f2f639cbb8aa6b3792a0ed84
+    name: d2 12:00 芒康县
     type: location
     locationId: 7237255e2d6a3840f1bedaf532e15b13
     time: '12:00'
     additionDescriptions:
       - φ 左转130km澜沧江大峡谷
-  - id: 31ec19e2480d6a6997b168d8fe996bd2
-    name: d3 12:00-13:00 芒康县 → 拉乌山
+  - id: 2b41c9f131fb747446ad6b5b66c6eadf
+    name: d2 12:00-13:00 芒康县 → 拉乌山
     type: route
     routeId: 76cb313de97840b00858c4c0bc5a5e1d
     direction: forward
     distance: 15
     duration: 1
-  - id: 64e9a13da78f043dd88395faab3386e3
-    name: d3 13:00 拉乌山
+  - id: 522058545641c339af0e367060386321
+    name: d2 13:00 拉乌山
     type: location
     locationId: 2d1f2d84dd04c0b45017afeff1d15429
     time: '13:00'
     stayTime: 1
-  - id: ca8049cf71b521cc05641fd9e6a39f3a
-    name: d3 13:00-15:00 拉乌山 → 如美镇
+  - id: 8e1adf82697c80c7161575acd8e041db
+    name: d2 13:00-15:00 拉乌山 → 如美镇
     type: route
     routeId: 7de644cc10860b9ba4389e337e2f0c16
     direction: forward
     distance: 36
     duration: 1
-  - id: 4ce8f42cdd5d9c418ee03167e927baaf
-    name: d3 15:00 如美镇
+  - id: b4762e58bfd7e3f082fb016152015a09
+    name: d2 15:00 如美镇
     type: location
     locationId: dc77e1cdd44f9e461c1b22ae8331ea72
     time: '15:00'
-  - id: 95f5b66baecdbf26963a8e318b77e1ae
-    name: d3 15:00-16:00 如美镇 → 觉巴山隧道
+  - id: 7209d06373972a0b32475fa92a8c78b0
+    name: d2 15:00-16:00 如美镇 → 觉巴山隧道
     type: route
     routeId: de8c338d2f6ca23c8a636c2209a41ed2
     direction: forward
     distance: 11
     duration: 1
-  - id: 4bb04680274460005cfdfbcc69ebde19
-    name: d3 16:00 觉巴山隧道
+  - id: 44a15bb40a3076491f01f2460974f3e2
+    name: d2 16:00 觉巴山隧道
     type: location
     locationId: c85457bd78936b03fae4b2c474b73f3b
     time: '16:00'
-  - id: 6f20be62334f8bc4fbade3f3002133ff
-    name: d3 16:00-17:00 觉巴山隧道 → 东达山
+  - id: f01425a6f98cfa95745621e7aa182675
+    name: d2 16:00-17:00 觉巴山隧道 → 东达山
     type: route
     routeId: 820b21fa949af3850b9cc082f161f7aa
     direction: forward
     distance: 44
     duration: 1
-  - id: 087540d3bdc116761ad5d61d45965b0d
-    name: d3 17:00 东达山
+  - id: ab2e3011c88e9280d46d1f492e17000e
+    name: d2 17:00 东达山
     type: location
     locationId: 4df9223251c159ae1a726316e6bd788f
     time: '17:00'
     additionDescriptions:
       - ★ 拍摄视频，川藏线最高达坂
     stayTime: 1
-  - id: 8049f7d2cc4eaaa8bb903f69303250cf
-    name: d3 17:00-19:00 东达山 → 左贡县
+  - id: b9485f9940ea7732fda7675f3154026b
+    name: d2 17:00-19:00 东达山 → 左贡县
     type: route
     routeId: bdf38164eb067b96fbcdc75befe5793e
     direction: forward
     distance: 34
     duration: 1
-  - id: 1820c19f499a161181b966baccca7d54
-    name: d3 19:00 左贡县
+  - id: 5e931186aba4fe73cf483f0a8ae7c131
+    name: d2 19:00 左贡县
     type: location
     locationId: 9479e5d51842e26b3fb34d8a015b065c
     time: '19:00'
-    additionDescriptions:
-      - ★ 预约圣象天门(微信：游藏游)
-  - id: afe4237e5bb42e8e5f0df21f58e2bc22
-    name: d4 07:00 左贡县
+  - id: 189deca7f22645f2d1aa6acfa05da9e6
+    name: d3 07:00 左贡县
     type: location
     locationId: 9479e5d51842e26b3fb34d8a015b065c
     time: '07:00'
-  - id: 73353b8c8d3bb63e8c5edb003031f2fb
-    name: d4 07:00-09:00 左贡县 → 邦达镇
+  - id: bbb560d2fb71e122c21ccaccb7b1c9c3
+    name: d3 07:00-09:00 左贡县 → 邦达镇
     type: route
     routeId: bda2de87debdd8f6c432c945b3ea0b05
     direction: forward
     distance: 104
     duration: 2
-  - id: 9cb3129d0bdfca4cb0e91d9829bfd43f
-    name: d4 09:00 邦达镇
+  - id: e273c09df6a6400604fccdefe9922f0f
+    name: d3 09:00 邦达镇
     type: location
     locationId: c6c8a8eb110d4a6d3b020a740bacf058
     time: '09:00'
-  - id: 76ac5a95301e38cdfc45dc5421f9314a
-    name: d4 09:00-10:00 邦达镇 → 业拉山怒江72拐
+  - id: 4895545a91fd063cde274ad2c21b7890
+    name: d3 09:00-10:00 邦达镇 → 业拉山怒江72拐
     type: route
     routeId: d8bd391e9a3e37063a9d36f9b9c462c7
     direction: forward
     distance: 13
     duration: 1
-  - id: 6b36f6e0ee0996343a9ca8e74c53587b
-    name: d4 10:00 业拉山怒江72拐
+  - id: 47e751f28c9a6a79e0f1c17bfc4e5cfb
+    name: d3 10:00 业拉山怒江72拐
     type: location
     locationId: 6d0c320ecdc602c090bf255c450507ab
     time: '10:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: 45e6204a11034880c111fc9cda99b601
-    name: d4 10:00-12:00 业拉山怒江72拐 → 怒江大桥
+  - id: 2cc6fcce7456f9b4012c6cb0b1a980f4
+    name: d3 10:00-12:00 业拉山怒江72拐 → 怒江大桥
     type: route
     routeId: 3cc570546b452d182a408528e30ac251
     direction: forward
     distance: 44
     duration: 2
-  - id: 6efda1fd330a16c30d168ec37c3ce64e
-    name: d4 12:00 怒江大桥
+  - id: 3cbfd06e4ca80ac4351c27535266a6af
+    name: d3 12:00 怒江大桥
     type: location
     locationId: 493c6c92567b90e6ff40f0d45bafc11a
     time: '12:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: ea95aad26c1c19bfae33df5b748c0fd8
-    name: d4 12:00-13:00 怒江大桥 → 八宿县
+  - id: 0483d86549b7ccf09a0a4b23ac72cb4b
+    name: d3 12:00-13:00 怒江大桥 → 八宿县
     type: route
     routeId: 652bbd4e476990063e736546c15d3e8b
     direction: forward
     distance: 38
     duration: 1
-  - id: dc1cac3b4f7dd8d0a544c43c02e489cd
-    name: d4 13:00 八宿县
+  - id: cbcbdabd5daedb37251d31bac47a08c0
+    name: d3 13:00 八宿县
     type: location
     locationId: 39183dcea920afe5463530f72f283533
     time: '13:00'
-  - id: 3a574f0eabefc249a96ac0dd5dea5427
-    name: d4 13:00-14:00 八宿县 → 吉达乡
+  - id: 42ad81df89fa0a8996ea766e8e150d46
+    name: d3 13:00-14:00 八宿县 → 吉达乡
     type: route
     routeId: cf46ecd24d598fe44cb51b8f080ae14e
     direction: forward
     distance: 37
     duration: 1
-  - id: 18b21d709a275244644d1a54d88e6e2e
-    name: d4 14:00 吉达乡
+  - id: dfe7d7b28fa65cc6a8d786d19c90ee40
+    name: d3 14:00 吉达乡
     type: location
     locationId: a56c6595cb2b99d10f524691013c9bd3
     time: '14:00'
-  - id: 2cf819dc928d1f32c1a7ef3519ae762b
-    name: d4 14:00-15:00 吉达乡 → 安久拉山
+  - id: 1b1fd56ac64dfe2d8313c5fdb9b36f50
+    name: d3 14:00-15:00 吉达乡 → 安久拉山
     type: route
     routeId: e4456635c768d90a5a6db5bbfd388cd5
     direction: forward
     distance: 30
     duration: 1
-  - id: 783ea2d396fee034734bf47aa4eadb93
-    name: d4 15:00 安久拉山
+  - id: 4d380ef9854bf331cdf01a2788a6d97d
+    name: d3 15:00 安久拉山
     type: location
     locationId: fddb30beff25546f17846c70dc36d89f
     time: '15:00'
-  - id: 4278acacfcb6fd39df1b458f88f0ec50
-    name: d4 15:00-16:00 安久拉山 → 然乌湖
+  - id: e9ce45f0d970254465adb3b71ced81a8
+    name: d3 15:00-16:00 安久拉山 → 然乌湖
     type: route
     routeId: 2da9010f4b529ab6c5a290e22a3b89f9
     direction: forward
     distance: 26
     duration: 1
-  - id: f5107f291be7b4b99fcd1d15ef0f2546
-    name: d4 16:00 然乌湖
+  - id: d52fc32e06170d169bdf38fce1df81e1
+    name: d3 16:00 然乌湖
     type: location
     locationId: 421772e8e7d75a2893777a8c9e45b920
     time: '16:00'
@@ -1474,404 +1479,450 @@ scheduleItems:
       - φ 上然乌 仁龙巴冰川 来古冰川
       - φ 米堆冰川 朗秋冰川 嘎隆拉冰川
     stayTime: 1
-  - id: a580a4410449fa9746d24596bcf64305
-    name: d4 16:00-20:00 然乌湖 → 波密县
+  - id: e13095a8c66d876815fed7b0237f578b
+    name: d3 16:00-20:00 然乌湖 → 波密县
     type: route
     routeId: ef82ba908170a2103f0b3475d204b40b
     direction: forward
     distance: 137
     duration: 3
-  - id: 8c20ce8c36d577b58acf9e6b7c9bb42f
-    name: d4 20:00 波密县
+  - id: 1388cd4dba2ec46d23879a24ed764d45
+    name: d3 20:00 波密县
     type: location
     locationId: e76e2756eee2e76e59d2b8f066b7fef2
     time: '20:00'
-  - id: 4b58ddd72994edbbed166a433a505861
-    name: d5 08:00 波密县
+  - id: 70272ad7b5bb5f9c2fa47446ef9519bc
+    name: d4 08:00 波密县
     type: location
     locationId: e76e2756eee2e76e59d2b8f066b7fef2
     time: '08:00'
-  - id: 1d461dedaea91bb46908497b2c026151
-    name: d5 08:00-09:00 波密县 → 318-4k
+  - id: 14ff078b8f4264851d1e1ed594d53fa6
+    name: d4 08:00-09:00 波密县 → 318-4k
     type: route
     routeId: 47f636376360d3d3c90d60c56c97ef1a
     direction: forward
     distance: 54
     duration: 1
-  - id: 6b4eb4cb2e7e7d34d8921fcd6bc0c0cc
-    name: d5 09:00 318-4k
+  - id: 2fb281e850f1e176be730ea9219dfeef
+    name: d4 09:00 318-4k
     type: location
     locationId: a35f9675491a8040a8e9309cb822f1fc
     time: '09:00'
     stayTime: 1
-  - id: 0a09690411ddb389b0065c2cf23ef18c
-    name: d5 09:00-12:00 318-4k → 鲁朗镇
+  - id: 0a1a321e32d96fd47724d3b8c244e53a
+    name: d4 09:00-12:00 318-4k → 鲁朗镇
     type: route
     routeId: 8c659a40899b501d9d8baebbce04a90a
     direction: forward
     distance: 103
     duration: 2
-  - id: 00924691c35297574b560274187efe04
-    name: d5 12:00 鲁朗镇
+  - id: 5ac1c950ea6f52b84df86ee558bafe19
+    name: d4 12:00 鲁朗镇
     type: location
     locationId: 7b31884ea88f5ff2bbf9c303f3e9405a
     time: '12:00'
-  - id: 4e5422b27d1e0745a61db1a65aac6530
-    name: d5 12:00-13:00 鲁朗镇 → 色季拉山
+  - id: 9a4021ef2f9c19a9cf5c36550521ccc5
+    name: d4 12:00-13:00 鲁朗镇 → 色季拉山
     type: route
     routeId: a09dc3b28a5f907873afa7ef2fcbd9e7
     direction: forward
     distance: 23
     duration: 1
-  - id: 77e9eb629afad6b47febc321a41f9c0b
-    name: d5 13:00 色季拉山
+  - id: 1b85b1b37d7ff0249c281dda4a502af6
+    name: d4 13:00 色季拉山
     type: location
     locationId: 0ce56e96a1ba8517ab81621044e3fff5
     time: '13:00'
     additionDescriptions:
       - ★ 拍摄视频
     stayTime: 1
-  - id: 0e2f28d61f9258d81867cff72d7ae64e
-    name: d5 13:00-15:00 色季拉山 → 林芝市
+  - id: b4ac4a35a1e2e2ce8e9ea579af0c6b17
+    name: d4 13:00-15:00 色季拉山 → 林芝市
     type: route
     routeId: 2cfe8bbbdd718b2f83d315ff1fda9a81
     direction: forward
     distance: 47
     duration: 1
-  - id: 505a653eab04d661a9e6f37fdf109c71
-    name: d5 15:00 林芝市
+  - id: a0757232d8506cbd0b58b25ac4d48899
+    name: d4 15:00 林芝市
     type: location
     locationId: c3ac3bab37cb3719df16e29abb6bc3ff
     time: '15:00'
     stayTime: 1
-  - id: aaf172fbdf8f75783a02e8bfeac70cbf
-    name: d5 15:00-18:00 林芝市 → 索松村
+  - id: 32b3cfa3c567411df2f934db0d22cb77
+    name: d4 15:00-18:00 林芝市 → 索松村
     type: route
     routeId: 7daa8ef286eec98eab70aefde46982f6
     direction: forward
     distance: 93
     duration: 2
-  - id: ae5896d21ecf5910303b4679e9cdc453
-    name: d5 18:00 索松村
+  - id: 73df4ce8d8db8126b536633d1550a589
+    name: d4 18:00 索松村
     type: location
     locationId: b3cefef3a5d32fd9e96edb585e2813f4
     time: '18:00'
     additionDescriptions:
       - ★ 拍摄视频
     stayTime: 1
-  - id: e0f3d0a1694f25de050bb1dba45887f6
-    name: d5 18:00-21:00 林芝市 → 索松村
+  - id: f3036b374b6f60f894b621333efb4dfb
+    name: d4 18:00-21:00 林芝市 → 索松村
     type: route
     routeId: 7daa8ef286eec98eab70aefde46982f6
     direction: backward
     distance: 93
     duration: 2
-  - id: 1174b838458136690dc70f456bebe7d8
-    name: d5 21:00 林芝市
+  - id: aeee15ccc726f2745e1dab8a3a535d39
+    name: d4 21:00 林芝市
     type: location
     locationId: c3ac3bab37cb3719df16e29abb6bc3ff
     time: '21:00'
     additionDescriptions:
       - ★ 预约纳木错扎西半岛(微信)
-  - id: ddcba521b4b7d440f54b5225942cd17d
-    name: d6 08:00 林芝市
+  - id: dbe0f12184be3b8cd4bb4d0babf141f7
+    name: d5 08:00 林芝市
     type: location
     locationId: c3ac3bab37cb3719df16e29abb6bc3ff
     time: '08:00'
     stayTime: 1
-  - id: d8171b27a42b62af2624e93b9a373992
-    name: d6 08:00-11:00 林芝市 → 巴松措
+  - id: 848d72ed23da7ab7ee5de27e8e25245b
+    name: d5 08:00-11:00 林芝市 → 巴松措
     type: route
     routeId: 515e28ebc5e13f155e80a13f652ceb3a
     direction: forward
     distance: 119
     duration: 2
-  - id: 391152b786a803b51247d8e09aebfc1d
-    name: d6 11:00 巴松措
+  - id: 0ab20f5dfb0ca3bd5e87e860284d5f60
+    name: d5 11:00 巴松措
     type: location
     locationId: c6e365842931d4cc64c924017844b37f
     time: '11:00'
     additionDescriptions:
       - ★ 拍摄视频
     stayTime: 2
-  - id: 60ce65c82db0f3c5ad54fd82f66fe205
-    name: d6 11:00-19:00 巴松措 → 当雄县
+  - id: bbed7d32cf6166e9c8c07560939106d7
+    name: d5 11:00-19:00 巴松措 → 当雄县
     type: route
     routeId: 40184f8d770102dd21782167ac8b5592
     direction: forward
     distance: 460
     duration: 6
-  - id: 7dfe0b0d43f2fb7b8e99196dc169c7cc
-    name: d6 19:00 当雄县
+  - id: 7d9f2d8690292bc48c8de4755572f0dd
+    name: d5 19:00 当雄县
     type: location
     locationId: d2c1c8244133b7bd5b502963951f3ef5
     time: '19:00'
-  - id: 419874def6a1aef2b9d95a8278f9256d
-    name: d6 19:00-20:00 当雄县 → 纳木湖乡
+  - id: 6688b40f3d716ce9a5f8a3a2e837e465
+    name: d5 19:00-20:00 当雄县 → 纳木湖乡
     type: route
     routeId: 3452920b4cad16dfdb60e4db900b02f7
     direction: forward
     distance: 38
     duration: 1
-  - id: 9b0289e631373fcbac0d8b48ef817214
-    name: d6 20:00 纳木湖乡
+  - id: ca21cac777789c397792fdc0a967f310
+    name: d5 20:00 纳木湖乡
     type: location
     locationId: 1cc533dfaa8260532b82b78fb1acd6a6
     time: '20:00'
-  - id: d2ea156317773a2acd001a52088859a0
-    name: d6 20:00-21:00 纳木湖乡 → 扎西半岛
+    stayTime: 1
+  - id: ba2fed9a9ace8c1962ca6201c6ac2309
+    name: d5 20:00-24:00 纳木湖乡 → 圣象天门景区
     type: route
-    routeId: 9f5c53701129ab9bbb0f4122b8398dee
+    routeId: ccb1cb419826fb4d82c7770d7de85fad
     direction: forward
     distance: 30
-    duration: 1
-  - id: 18b81bedabda78cda7d31d03494bfbb0
-    name: d6 21:00 扎西半岛
+    duration: 3
+  - id: e695bc4752deffb2dfcce628b29a7d35
+    name: d5 24:00 圣象天门景区
     type: location
-    locationId: bc5cd8ad89baec3e7d307b35ffd29a46
-    time: '21:00'
+    locationId: 7e824b274d9d330c3b47e2a0c43002c0
+    time: '24:00'
     additionDescriptions:
-      - ★ 等日落
-  - id: 63d453bb3327c99e3be0af9c320247e3
-    name: d7 06:00 扎西半岛
+      - ★ 景区帐篷或露营
+  - id: 76041e4ee396887ab00a255ab47a2f1a
+    name: d6 05:00 圣象天门景区
     type: location
-    locationId: bc5cd8ad89baec3e7d307b35ffd29a46
-    time: '06:00'
+    locationId: 7e824b274d9d330c3b47e2a0c43002c0
+    time: '05:00'
     additionDescriptions:
       - ★ 等日出
-  - id: 6579c013b189c5dc3fbadd6d3e627d27
-    name: d7 07:00 扎西半岛
+  - id: 6d2d6ba2095b1dc7d2898c7ae89f1c9b
+    name: d6 09:00 圣象天门景区
     type: location
-    locationId: bc5cd8ad89baec3e7d307b35ffd29a46
-    time: '07:00'
-  - id: d7d6815f4a9ffd3351ceaa68b7b0ea0f
-    name: d7 07:00-08:00 纳木湖乡 → 扎西半岛
-    type: route
-    routeId: 9f5c53701129ab9bbb0f4122b8398dee
-    direction: backward
-    distance: 30
-    duration: 1
-  - id: c8d78829ee92a08afbecda72ad2cae0f
-    name: d7 08:00 纳木湖乡
-    type: location
-    locationId: 1cc533dfaa8260532b82b78fb1acd6a6
-    time: '08:00'
-  - id: 505af77f551576cd5a7602558167c415
-    name: d7 08:00-11:00 纳木湖乡 → 圣象天门
-    type: route
-    routeId: 5622b606e1491dd4c8ea74c0d882265d
-    direction: forward
-    distance: 111
-    duration: 3
-  - id: 2c6f6cccd48668ba9f4bfd912903eec0
-    name: d7 11:00 圣象天门
-    type: location
-    locationId: 512b68ff550ea29108dcf8d1005cd810
-    time: '11:00'
+    locationId: 7e824b274d9d330c3b47e2a0c43002c0
+    time: '09:00'
     additionDescriptions:
       - ★ 拍摄视频
-    stayTime: 2
-  - id: fb656d329a59353eda51de3b9696e967
-    name: d7 11:00-16:00 圣象天门 → 班戈县
+  - id: abc8f3d5b2d1aabf4b61c4ed3f7c0fc0
+    name: d6 09:00-12:00 圣象天门景区 → 班戈县
     type: route
-    routeId: 44e4fda3047b40abe79d3f4951eb1236
+    routeId: e77de7a4296fddde2bf486b6a96e1394
     direction: forward
     distance: 134
     duration: 3
-  - id: 6273dbaf0be90dfa1452c5541ee242a9
-    name: d7 16:00 班戈县
+  - id: 98769a705aa27d12a37219e870850303
+    name: d6 12:00 班戈县
     type: location
     locationId: 64d750f23585a4e990e289604624b966
-    time: '16:00'
-  - id: 3e075ae74419e1bfb82b38b4da8271d1
-    name: d7 16:00-18:00 班戈县 → 色林错
+    time: '12:00'
+    stayTime: 1
+  - id: 81c4a1f3a3bc4c87d52f7c2f5a92f203
+    name: d6 12:00-15:00 班戈县 → 色林错
     type: route
     routeId: 9ff227e54eabfb05f64bb1656bd40fff
     direction: forward
     distance: 159
     duration: 2
-  - id: 879813c325ad2b2035714a1776c76477
-    name: d7 18:00 色林错
+  - id: ed63f37a7ff97ef738b4da4c3d82e4e2
+    name: d6 15:00 色林错
     type: location
     locationId: f9e071cd712386fbe2e448514d318610
-    time: '18:00'
+    time: '15:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: 867fe21d413718f030bd9135691f0399
-    name: d7 18:00-21:00 色林错 → 达则错
+    stayTime: 1
+  - id: 9427a35e84d35145e1f3c63c10ddc5c2
+    name: d6 15:00-19:00 色林错 → 达则错
     type: route
     routeId: 2502521f673a56fc2b9c1486752da960
     direction: forward
     distance: 143
     duration: 3
-  - id: dd6cfe7a3cd67c78e6c783001909d649
-    name: d7 21:00 达则错
+  - id: 5e0866358250ef171ff5e8d331484158
+    name: d6 19:00 达则错
     type: location
     locationId: 2600cfbb4f57a6c9c08443143dafabd8
-    time: '21:00'
+    time: '19:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: 8cf3d903b63d35b7fa8d89b55fe4cb73
-    name: d7 21:00-22:00 达则错 → 尼玛县
+    stayTime: 1
+  - id: 18c74e287335e254859f2263aed88b5b
+    name: d6 19:00-21:00 达则错 → 尼玛县
     type: route
     routeId: 5ee2127439a6c28281dd8838758f789c
     direction: forward
     distance: 32
     duration: 1
-  - id: 50cb47aa7cc5f70941ff8f344ee9121c
-    name: d7 22:00 尼玛县
+  - id: 7a9859b736ba885bc09a9acae19226b5
+    name: d6 21:00 尼玛县
     type: location
     locationId: fa7471c81631b915e609f1ab03d0a781
-    time: '22:00'
-  - id: 1dc10f7b5ca7276f1cff1f63dc67abaa
-    name: d8 07:00 尼玛县
+    time: '21:00'
+    additionDescriptions:
+      - ★ 寻找搭伴-阿里中线/当惹雍错/扎错南线）
+  - id: cd7b139af18c6ee415735055853fcbc1
+    name: d7 07:00 尼玛县
     type: location
     locationId: fa7471c81631b915e609f1ab03d0a781
     time: '07:00'
     stayTime: 1
-  - id: b31c8290e54745dfa46fb1c8a7f8aa7a
-    name: d8 07:00-10:00 尼玛县 → 当惹雍错
+  - id: 8601e04911cc58b59cb31afa3bfa3a8b
+    name: d7 07:00-10:00 尼玛县 → 当惹雍错
     type: route
     routeId: 49517a0f91f3f38f286197eef618f3e4
     direction: forward
     distance: 118
     duration: 2
-  - id: f80597e9d9515162446993eb7c6edf29
-    name: d8 10:00 当惹雍错
+  - id: 38b6bc4f8fcc9b644d63e09c0027bf24
+    name: d7 10:00 当惹雍错
     type: location
     locationId: 761069c2a93e4ac9d5b90aef3926b327
     time: '10:00'
     additionDescriptions:
       - ★ 拍摄视频
-    stayTime: 1
-  - id: a4eebf05f31e090eadc5a9fbf62f5ce3
-    name: d8 10:00-15:00 当惹雍错 → 扎日南木错观景台
+  - id: 9b252162d28c98a690523786100b023b
+    name: d7 10:00-15:00 当惹雍错 → 措勤县姊妹湖
     type: route
-    routeId: fe30998285470bc47d9808eb3189e680
+    routeId: e4695a6292da555e88fe4943fd78755e
     direction: forward
     distance: 149
-    duration: 4
-  - id: 8300716cf42e4d56df0eeb194ffecbb4
-    name: d8 15:00 扎日南木错观景台
+    duration: 5
+  - id: d8d81631a8845b9db0088f109dd15fdf
+    name: d7 15:00 措勤县姊妹湖
     type: location
-    locationId: a0c6485b05faed1d6354557edb6fa1a6
+    locationId: 0aa0fbf7dae9f4f31afaa4bc252366f6
     time: '15:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: 5279d914d878ea7ac8ddafff6b24a197
-    name: d8 15:00-16:00 扎日南木错观景台 → 措勤县
+    stayTime: 1
+  - id: 892a282169911224ded3a314b5a17661
+    name: d7 15:00-18:00 措勤县姊妹湖 → 扎日南木错
     type: route
-    routeId: 133d9710e7ac436f5fa5e300ca9e9f82
+    routeId: b28d1639ebab53ce01f63924f369b7ae
     direction: forward
     distance: 60
-    duration: 1
-  - id: 7b3a0b3fc3d032fb4b4a8c6e33b05c17
-    name: d8 16:00 措勤县
+    duration: 2
+  - id: 54e6f91e3130959feaae3c914424d55f
+    name: d7 18:00 扎日南木错
+    type: location
+    locationId: 619f0f47c93dc58baec81a53bfbf5502
+    time: '18:00'
+    additionDescriptions:
+      - ★ 拍摄视频
+  - id: cf84304f2c6178ab5ced37d24dd2f958
+    name: d7 18:00-22:00 扎日南木错 → 措勤县
+    type: route
+    routeId: 660f1e0f72e87427bea8031bae5440ab
+    direction: forward
+    distance: 126
+    duration: 4
+  - id: 73a0cda419a76520e487328d77159424
+    name: d7 22:00 措勤县
     type: location
     locationId: 7574507e83a23184b19ed8a778878951
-    time: '16:00'
-  - id: 25404a0154fa22924263be088ebefe32
-    name: d8 16:00-18:00 措勤县 → 桑木拉达坂
+    time: '22:00'
+    additionDescriptions:
+      - ★ 寻找搭伴-国王峰
+  - id: 658ef5ac1dd6a1a82856c9188af36b2d
+    name: d8 08:00 措勤县
+    type: location
+    locationId: 7574507e83a23184b19ed8a778878951
+    time: '08:00'
+    stayTime: 1
+  - id: ef2c54b37e17760f656e3a77f2dc6da3
+    name: d8 08:00-11:00 措勤县 → 桑木拉达坂
     type: route
     routeId: bd56bbe7edb7bf8b03a20c6180e1bcf7
     direction: forward
     distance: 126
     duration: 2
-  - id: 6c74e40019422d2e9b295661ed2be518
-    name: d8 18:00 桑木拉达坂
+  - id: bdda262673d7e4b5c1ed1ba4244f1c7d
+    name: d8 11:00 桑木拉达坂
     type: location
     locationId: 917f600b6ced7692f5d6e12e7dea76c1
-    time: '18:00'
+    time: '11:00'
     additionDescriptions:
       - ★ 拍摄视频，国道最高点
-  - id: eebe0db0b26f4028025efabbd117578f
-    name: d8 18:00-19:00 桑木拉达坂 → 达格架喷泉
+    stayTime: 1
+  - id: 902b2c6a55318f3b5f1bf2e76ddd482a
+    name: d8 11:00-13:00 桑木拉达坂 → 达格架喷泉
     type: route
     routeId: 0302b86ba47f252c46a9e32038cdca10
     direction: forward
     distance: 82
     duration: 1
-  - id: 6c2f49fdaaf0fc7fba073ddac3dc7b9a
-    name: d8 19:00 达格架喷泉
+  - id: a9eff490a47993b62c41f3d044a340c4
+    name: d8 13:00 达格架喷泉
     type: location
     locationId: 62da5ebc787d8ec2b7dd9ea1914e7e54
-    time: '19:00'
+    time: '13:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: dbeecfa59e9dd23b8a9130e290263f37
-    name: d8 19:00-20:00 达格架喷泉 → 萨嘎县
+    stayTime: 1
+  - id: 6568c976744da20706fb7ce8cbeb4e39
+    name: d8 13:00-15:00 达格架喷泉 → 萨嘎县
     type: route
     routeId: f4b0441c713ee225c84e0784ec21cb5f
     direction: forward
     distance: 80
     duration: 1
-  - id: 9e8d7ff75632a032c987e5faf1a30d82
-    name: d8 20:00 萨嘎县
+  - id: dce76c7853f943234b33a29dbc79388b
+    name: d8 15:00 萨嘎县
     type: location
     locationId: 14643746b7cf6a4c796a7c22a1959509
-    time: '20:00'
-  - id: 00914c87255725866216a2ca65aec595
-    name: d9 08:00 萨嘎县
-    type: location
-    locationId: 14643746b7cf6a4c796a7c22a1959509
-    time: '08:00'
-  - id: a250ccae1a10179b5851fccf658306c2
-    name: d9 08:00-11:00 萨嘎县 → 仲巴县
+    time: '15:00'
+    additionDescriptions:
+      - ★ 寻找搭伴-国王峰
+    stayTime: 2
+  - id: 27934ccf1ea9e30e580f923f9be8e0b7
+    name: d8 15:00-18:00 萨嘎县 → 如角乡（30km-2h）
     type: route
-    routeId: d2db9ed0d8492be1a3a5893e71ccdfeb
+    routeId: be5d14742679306f90a48e3010289762
     direction: forward
-    distance: 167
-    duration: 3
-  - id: 71d26c60c5f3c7f211dff817b86362fe
-    name: d9 11:00 仲巴县
+    distance: 61
+    duration: 1
+  - id: 84ac696df91709ad431bce2624e941bc
+    name: d8 18:00 如角乡（30km-2h）
+    type: location
+    locationId: 2e47c94d51e6874b5aaeb35d36d1ad28
+    time: '18:00'
+  - id: c6a48533dfa9591c4ee0098d6aaa4d88
+    name: d8 20:00 国王峰观景点
+    type: location
+    locationId: 38ad63d0b1c46f172733ab1a4bcbc5d0
+    time: '20:00'
+    additionDescriptions:
+      - ★ 露营
+  - id: 86586641a2882794bd16fb78903bd1df
+    name: d9 06:00 国王峰观景点
+    type: location
+    locationId: 38ad63d0b1c46f172733ab1a4bcbc5d0
+    time: '06:00'
+    additionDescriptions:
+      - ★ 等日出
+  - id: d852dcc989f61d6560e812c17a2ddc41
+    name: d9 07:00 国王峰观景点
+    type: location
+    locationId: 38ad63d0b1c46f172733ab1a4bcbc5d0
+    time: '07:00'
+  - id: 9b7d2e9b42d6fd66b912ceb87efbd734
+    name: d9 07:00-09:00 国王峰观景点 → 如角乡
+    type: route
+    routeId: 79c7bb592e8ce10cec72be43ffd0b8a2
+    direction: forward
+    distance: 30
+    duration: 2
+  - id: 7c2970ede630f88dfd2a4b3b53acaa00
+    name: d9 09:00 如角乡
+    type: location
+    locationId: 1914235223a0c89ebc5fe4839739c629
+    time: '09:00'
+    stayTime: 1
+  - id: 70321e5858ce1cb8fd6a31e9396914eb
+    name: d9 09:00-12:00 如角乡 → 仲巴县
+    type: route
+    routeId: 08d183215f0bad2408ce93e0793bebc7
+    direction: forward
+    distance: 110
+    duration: 2
+  - id: 97d6ebe1a3363e6216fad2cc94c9c83e
+    name: d9 12:00 仲巴县
     type: location
     locationId: d45a53864f2562ad58547db2f4806b88
-    time: '11:00'
+    time: '12:00'
     stayTime: 1
-  - id: d4ec1331c8aede534813031fb7d407ca
-    name: d9 11:00-13:00 仲巴县 → 五彩沙漠
+  - id: a454bd62cf8cfe7d0607a58275615e3b
+    name: d9 12:00-14:00 仲巴县 → 五彩沙漠
     type: route
     routeId: c124871a80a7f1cfce315b010eb9b0fa
     direction: forward
     distance: 32
     duration: 1
-  - id: dfa07d67b49c7bdada2b43402f635aa7
-    name: d9 13:00 五彩沙漠
+  - id: 26e120281bab3dee68e7bb7403c41be8
+    name: d9 14:00 五彩沙漠
     type: location
     locationId: 29c859c2dde5b0bfca5ac3595e9c4dad
-    time: '13:00'
-  - id: dc220e174e6461abd4ceea1b13a67b75
-    name: d9 13:00-16:00 五彩沙漠 → 公珠错
+    time: '14:00'
+  - id: 6468289cd61dd58b99e0dd5c7d56ff53
+    name: d9 14:00-17:00 五彩沙漠 → 公珠错
     type: route
     routeId: 8ae72d6492b9f2e265d757a8228a4de0
     direction: forward
     distance: 200
     duration: 3
-  - id: e8d4b9d283b7f7e62003efe92f570135
-    name: d9 16:00 公珠错
+  - id: 14faa40f250d37cbbdb50c128da86822
+    name: d9 17:00 公珠错
     type: location
     locationId: 667a98d3c6104e4ee9a541a4d1e33daa
-    time: '16:00'
+    time: '17:00'
     additionDescriptions:
       - φ 左转110km杰玛央宗冰川
     stayTime: 1
-  - id: 9e6a40823e8ffcf1bab77f6b1a0bab9b
-    name: d9 16:00-19:00 公珠错 → 冈仁波齐最佳机位
+  - id: 8ebd64124103dd24ff8f731dce25b1d0
+    name: d9 17:00-20:00 公珠错 → 冈仁波齐最佳机位
     type: route
     routeId: e762d6e94e1d827f1e3bfe80ced980f5
     direction: forward
     distance: 131
     duration: 2
-  - id: c39b894f38c1e483d3e56b29474cb137
-    name: d9 19:00 冈仁波齐最佳机位
+  - id: 51bb0e73ec86dcfd27fb3287b2d2b014
+    name: d9 20:00 冈仁波齐最佳机位
     type: location
     locationId: 132323e5437c2927a0a3f9c653abc786
-    time: '19:00'
+    time: '20:00'
     additionDescriptions:
       - ★ 拍摄视频
-    stayTime: 1
-  - id: 20dd894bd8d159f9add0b96805b68292
-    name: d9 19:00-21:00 冈仁波齐最佳机位 → 拉昂错最佳机位
+  - id: e42e83c9e2c93b58f1147586950a00ca
+    name: d9 20:00-21:00 冈仁波齐最佳机位 → 拉昂错最佳机位
     type: route
     routeId: cb54c9caf1bef1c302779225802d67fa
     direction: forward
@@ -1884,18 +1935,19 @@ scheduleItems:
     time: '21:00'
     additionDescriptions:
       - ★ 拍摄视频
-  - id: ac1324d68d565655e4b03d3d2edc8391
-    name: d9 21:00-22:00 拉昂错最佳机位 → 冈仁波齐大本营
+    stayTime: 1
+  - id: 9fb2cf04e48607fbe287788a51dc372c
+    name: d9 21:00-23:00 拉昂错最佳机位 → 冈仁波齐大本营
     type: route
     routeId: 670d3790afabf8df1d46dce8fa8edc6f
     direction: forward
     distance: 34
     duration: 1
-  - id: 4aa2f0f5c7b20cc522aa86dce9d1dec0
-    name: d9 22:00 冈仁波齐大本营
+  - id: d3c764044d0877848031e3665a88400d
+    name: d9 23:00 冈仁波齐大本营
     type: location
     locationId: a49528acd8d7b8aa127d2a50d02cf246
-    time: '22:00'
+    time: '23:00'
     additionDescriptions:
       - ★ 等日落
   - id: 55bedd4a08f265e7806b54b05afb0113
@@ -1937,100 +1989,88 @@ scheduleItems:
     type: location
     locationId: d45a53864f2562ad58547db2f4806b88
     time: '14:00'
-  - id: 94a546831ba29147b7f974129a88e095
-    name: d10 14:00-18:00 仲巴县 → 普拉喜琼
+    stayTime: 1
+  - id: 80338189e1118525e7332fb706d93828
+    name: d10 14:00-18:00 仲巴县 → 萨嘎县
     type: route
-    routeId: d765ad1ce4fa3136627203c4efdb1831
+    routeId: 3f026f98b56c747327dd8ac0004069fc
     direction: forward
-    distance: 138
-    duration: 4
-  - id: c144f176ae2df7769cb3e1709b1237e5
-    name: d10 18:00 普拉喜琼
+    distance: 165
+    duration: 3
+  - id: b68b3224467c860a80169ff57d3b3176
+    name: d10 18:00 萨嘎县
     type: location
-    locationId: 246f812977b851ce9db9de3554170358
+    locationId: 14643746b7cf6a4c796a7c22a1959509
     time: '18:00'
-    stayTime: 2
-  - id: 3af482d4fd0e40c61226abd76e61d843
-    name: d10 18:00-22:00 普拉喜琼 → 萨嘎县
-    type: route
-    routeId: 0fd498b5ec1dd63234a674eb35682578
-    direction: forward
-    distance: 87
-    duration: 2
-  - id: 763854efdefc6eccc7f33be7ca4de7f7
-    name: d10 22:00 萨嘎县
-    type: location
-    locationId: 14643746b7cf6a4c796a7c22a1959509
-    time: '22:00'
-  - id: 1e3bf8f3e80c9955154c567d47a4df52
-    name: d11 08:00 萨嘎县
-    type: location
-    locationId: 14643746b7cf6a4c796a7c22a1959509
-    time: '08:00'
-  - id: 37db90c2fd642be2d233dbe73872dceb
-    name: d11 08:00-10:00 萨嘎县 → 吉隆县
+  - id: baf4a365795035f8dbe3d6aa757f9131
+    name: d10 18:00-20:00 萨嘎县 → 吉隆县
     type: route
     routeId: f842cdf8cce3efc2917678aa046bccd4
     direction: forward
     distance: 91
     duration: 2
-  - id: bf8379d3518b65679b94754bcfb513be
-    name: d11 10:00 吉隆县
+  - id: d950e6f5222f862ef4f1347e12f495af
+    name: d10 20:00 吉隆县
     type: location
     locationId: 186031fed13bf0a0c7a4374a42f465aa
-    time: '10:00'
-  - id: 4b79d137d76e916d0cc28eebbe4801d1
-    name: d11 10:00-13:00 吉隆县 → 贡当乡
+    time: '20:00'
+  - id: 3e7d3050c830410beb38fab3c49cffb4
+    name: d10 20:00-23:00 吉隆县 → 贡当乡
     type: route
     routeId: 1f1c438c57fc6c355fea381db410f19b
     direction: forward
     distance: 107
     duration: 3
+  - id: 13b2f6cdb6b0e7e7120e684c81542305
+    name: d10 23:00 贡当乡
+    type: location
+    locationId: e774c76dd486ac5b173ef53a78456a77
+    time: '23:00'
+  - id: 448ebe7987a361fbd417b2f7ea24eb0b
+    name: d11 09:00 贡当乡
+    type: location
+    locationId: e774c76dd486ac5b173ef53a78456a77
+    time: '09:00'
+  - id: bfd96f1b8950b3d98528676ed3c755ae
+    name: d11 09:00-10:00 贡当乡 → 贡当乡大断崖
+    type: route
+    routeId: 0df23f06d6ea93e31c5fd37626796a6c
+    direction: forward
+    distance: 20
+    duration: 1
+  - id: 85f9308e3aa49835a1bfe9edf250327b
+    name: d11 10:00 贡当乡大断崖
+    type: location
+    locationId: 57ca2ea4388314ae16637b5b5c2b152a
+    time: '10:00'
+    additionDescriptions:
+      - ★ 拍摄视频-可能要排队
+    stayTime: 2
+  - id: 1b2d2c91c003666361c749658dbe339a
+    name: d11 10:00-13:00 贡当乡 → 贡当乡大断崖
+    type: route
+    routeId: 0df23f06d6ea93e31c5fd37626796a6c
+    direction: backward
+    distance: 20
+    duration: 1
   - id: 1b97c99dbd5803cf4361bbea5c7163a6
     name: d11 13:00 贡当乡
     type: location
     locationId: e774c76dd486ac5b173ef53a78456a77
     time: '13:00'
-    stayTime: 1
-  - id: 09e93d55a770dab6e18a85c2ec7ca4af
-    name: d11 13:00-15:00 贡当乡 → 贡当乡大断崖
-    type: route
-    routeId: 0df23f06d6ea93e31c5fd37626796a6c
-    direction: forward
-    distance: 20
-    duration: 1
-  - id: 94b9d53ce5c694d44089b8877b3b11ec
-    name: d11 15:00 贡当乡大断崖
-    type: location
-    locationId: 57ca2ea4388314ae16637b5b5c2b152a
-    time: '15:00'
-    additionDescriptions:
-      - ★ 拍摄视频
-  - id: 5762613a2e019647127033dc5c82b858
-    name: d11 15:00-16:00 贡当乡 → 贡当乡大断崖
-    type: route
-    routeId: 0df23f06d6ea93e31c5fd37626796a6c
-    direction: backward
-    distance: 20
-    duration: 1
-  - id: 5b553a27e5a852c74d3b39f95f3f42a4
-    name: d11 16:00 贡当乡
-    type: location
-    locationId: e774c76dd486ac5b173ef53a78456a77
-    time: '16:00'
-    stayTime: 1
-  - id: 14610624f6d148ef7f6ff89b5997f874
-    name: d11 16:00-20:00 吉隆县 → 贡当乡
+    stayTime: 2
+  - id: 1ecaf29ace58d8627f77b815274806e2
+    name: d11 13:00-18:00 吉隆县 → 贡当乡
     type: route
     routeId: 1f1c438c57fc6c355fea381db410f19b
     direction: backward
     distance: 107
     duration: 3
-  - id: 564543d4cee793daf79f0f3a83df0cbe
-    name: d11 20:00 吉隆县
+  - id: 532e2e5bba112fa6b793e729e187b1d7
+    name: d11 18:00 吉隆县
     type: location
     locationId: 186031fed13bf0a0c7a4374a42f465aa
-    time: '20:00'
+    time: '18:00'
   - id: 940e2b6335e65d0a80c06e6cfb7fc236
     name: d12 09:00 吉隆县
     type: location
