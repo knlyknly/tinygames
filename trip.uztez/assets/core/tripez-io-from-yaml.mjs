@@ -1,4 +1,4 @@
-import yaml from 'js-yaml';
+import yaml from '../tools/yaml.mjs';
 import TripezModel from './tripez-model.mjs';
 
 /**

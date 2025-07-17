@@ -1,4 +1,4 @@
-import yaml from 'js-yaml';
+import yaml from '../tools/yaml.mjs';
 
 /**
  * 将TripezModel转换为YAML格式

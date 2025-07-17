@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip编辑器</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button id="trips-manager-btn" title="管理行程">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </button>
+            <div id="trips-manager" class="dropdown hidden">
+                <div class="dropdown-header">
+                    <h3>行程管理</h3>
+                    <button id="add-trip-btn" title="新增行程">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                </div>
+                <ul id="trips-list"></ul>
+            </div>
+        </div>
+        <div class="header-center">
+            <h1 id="current-trip-name">未选择行程</h1>
+        </div>
+        <div class="header-right">
+            <button id="format-btn" title="格式化文本">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10H3"></path>
+                    <path d="M21 6H3"></path>
+                    <path d="M21 14H3"></path>
+                    <path d="M21 18H3"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+    <main>
+        <textarea id="trip-editor" placeholder="在此输入行程内容..."></textarea>
+    </main>
+
+    <!-- 模态框 -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">新增行程</h2>
+            <input type="text" id="modal-input" placeholder="输入行程名称">
+            <div class="modal-buttons">
+                <button id="modal-cancel">取消</button>
+                <button id="modal-confirm">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="index.mjs"></script>
+</body>
+</html>
